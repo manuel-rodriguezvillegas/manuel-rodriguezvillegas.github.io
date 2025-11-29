@@ -86,11 +86,11 @@ const portfolioDataTranslations = {
     en: {
         experience: [
             {
-                title: "LLM Research Assistant",
+                title: "Teaching Assistant",
                 company: "Comillas Pontifical University",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – Apr 2026",
-                description: "I'm currently working as a Research Assistant at my university, exploring the latest open-source Large Language Models (LLMs) and investigating their potential for real-world applications.",
+                description: "I'm currently working as a Teaching Assistant at my university, exploring the latest open-source Large Language Models (LLMs) and investigating their potential for real-world applications.",
                 link: "https://www.comillas.edu/en/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -179,7 +179,16 @@ const portfolioDataTranslations = {
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
                 imageId: "hackathon"
-            },            
+            },     
+            {
+                title: "Image Processing via Calculus of Variations",
+                tech: "Python, Calculus of Variations, Image Processing",
+                description: "As the final project of Diferential Methods of AI, I studied and implemented image processing techniques based on calculus of variations, focusing on image denoising. The project included a comprehensive report detailing the mathematical foundations and practical implementations of each technique, with a particular focus on medical images.",
+                link: "https://github.com/rdgzmanuel/image_processing",
+                icon: "🖼️",
+                image: "assets/projects/brain_tv.pdf",
+                imageId: "brain-tv"
+            },       
         ],
         skills: {
             "Programming Languages": [
@@ -260,7 +269,7 @@ const portfolioDataTranslations = {
     es: {
         experience: [
             {
-                title: "Asistente de Investigación en LLMs",
+                title: "Asistente de Investigación",
                 company: "Universidad Pontificia Comillas",
                 location: "Madrid, España",
                 date: "Sep 2025 – Abr 2026",
@@ -353,6 +362,15 @@ const portfolioDataTranslations = {
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
                 imageId: "hackathon"
+            },
+            {
+                title: "Procesamiento de Imágenes mediante Cálculo de Variaciones",
+                tech: "Python, Cálculo de Variaciones, Procesamiento de Imágenes",
+                description: "Como proyecto final de Métodos Diferenciales de la IA, hemos estudiado y aplicado el uso del cálculo de variaciones sobre el procesamiento de imágenes. Nos hemos centrado en sus fundamentos matemátios y en su aplicación concreta en el campo de la imagen médica (resonancias cerebrales y escáneres de rayos-X).",
+                link: "https://github.com/rdgzmanuel/image_processing",
+                icon: "🖼️",
+                image: "assets/projects/brain_tv.pdf",
+                imageId: "brain-tv"
             },
         ],
         skills: {
