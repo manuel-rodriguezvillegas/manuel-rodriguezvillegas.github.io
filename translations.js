@@ -155,7 +155,7 @@ const portfolioDataTranslations = {
         projects: [
             {
                 title: "Visual Topological SLAM",
-                tech: "ROS2, Pytorch, Deep Learning, Computer Vision, NLP",
+                tech: "ROS2, PyTorch, Deep Learning, Computer Vision, NLP",
                 description: "For my Bachelor Thesis, I implemented a visual SLAM system integrating vision foundation models (CNN, AutoEncoder) with NLP and graph theory for voice-controlled indoor navigation. Features real-time mapping and autonomous navigation capabilities. The project was developed as part of the UNIJES SocialTech Challenge, a competition with social purposes where different Spanish universities build an autonomous wheelchair.",
                 link: "https://github.com/rdgzmanuel/visual_topological_slam",
                 icon: "🗺️",
@@ -338,7 +338,7 @@ const portfolioDataTranslations = {
         projects: [
             {
                 title: "SLAM Topológico Visual",
-                tech: "ROS2, Pytorch, Deep Learning, Visión por Computador, NLP",
+                tech: "ROS2, PyTorch, Deep Learning, Visión por Computador, NLP",
                 description: "Para mi Trabajo de Fin de Grado (TFG) implementé un sistema de SLAM visual integrando modelos fundamentales de visión (CNN, AutoEncoder) con NLP y teoría de grafos, habilitando la navegación interior controlada por voz. Incluye capacidades de mapeo en tiempo real y navegación autónoma. El proyecto fue desarrollado como parte del UNIJES SocialTech Challenge, una competición con fines sociales donde diferentes universidades españolas construyen una silla de ruedas autónoma.",
                 link: "https://github.com/rdgzmanuel/visual_topological_slam",
                 icon: "🗺️",
