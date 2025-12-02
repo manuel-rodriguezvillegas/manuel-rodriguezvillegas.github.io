@@ -192,7 +192,7 @@ const portfolioDataTranslations = {
             {
                 title: "Neural Networks on Riemannian Manifolds",
                 tech: "Differential Geometry, PyTorch, Deep Learning",
-                description: "For my Information Geometry final project, I studied the implementation of neural networks that operate with Riemannian data and parameters, optimizing with the natural gradient for a much more efficient training. The project included a comprehensive report detailing the mathematical foundations and practical implementations of these techniques.",
+                description: "This work studies the implementation of neural networks that operate with Riemannian data and parameters, optimizing with the natural gradient for a much more efficient training. The project includes a comprehensive report detailing the mathematical foundations and practical implementations of these techniques.",
                 link: "https://github.com/rdgzmanuel/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
@@ -384,7 +384,7 @@ const portfolioDataTranslations = {
             {
                 title: "Redes Neuronales en Variedades Riemannianas",
                 tech: "Geometría Diferencial, PyTorch, Deep Learning",
-                description: "Como proyecto final de Geometría de la Información, trabajé en la implementación de redes neuronales que operan con datos y parámetros Riemannianos, optimizando con el gradiente natural para un entrenamiento mucho más eficiente. El proyecto incluye un informe detallado sobre los fundamentos matemáticos y la implementación de estas técnicas.",
+                description: "Proyecto sobre la implementación de redes neuronales que operan con datos y parámetros Riemannianos, optimizando con el gradiente natural para un entrenamiento mucho más eficiente. Incluye un informe detallado sobre los fundamentos matemáticos y la implementación de estas técnicas.",
                 link: "https://github.com/rdgzmanuel/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
