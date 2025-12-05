@@ -186,7 +186,7 @@ const portfolioDataTranslations = {
                 description: "As the final project of Diferential Methods of AI, I studied and implemented image processing techniques based on calculus of variations, focusing on image denoising. The project included a comprehensive report detailing the mathematical foundations and practical implementations of each technique, with a particular focus on medical images.",
                 link: "https://github.com/rdgzmanuel/image_processing",
                 icon: "🖼️",
-                image: "assets/projects/brain_tv.pdf",
+                image: "assets/projects/brain_tv.png",
                 imageId: "brain-tv"
             },      
             {
@@ -378,7 +378,7 @@ const portfolioDataTranslations = {
                 description: "Como proyecto final de Métodos Diferenciales de la IA, hemos estudiado y aplicado el uso del cálculo de variaciones sobre el procesamiento de imágenes. Nos hemos centrado en sus fundamentos matemátios y en su aplicación concreta en el campo de la imagen médica (resonancias cerebrales y escáneres de rayos-X).",
                 link: "https://github.com/rdgzmanuel/image_processing",
                 icon: "🖼️",
-                image: "assets/projects/brain_tv.pdf",
+                image: "assets/projects/brain_tv.png",
                 imageId: "brain-tv"
             },
             {
