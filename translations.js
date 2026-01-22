@@ -12,7 +12,7 @@ const translations = {
             skills: "Skills"
         },
         hero: {
-            subtitle: "MSc in Advanced Artificial Intelligence @ ICAI",
+            subtitle: "MSc in Artificial Intelligence @ ICAI",
             description: "Curious mind focused on AI for human benefit, deep learning and the pursuit of elegant, efficient solutions.",
             contactBtn: "Get in Touch",
             projectsBtn: "View Projects",
@@ -27,7 +27,7 @@ const translations = {
             awards: "Honors & Awards"
         },
         about: {
-            p1: "Hi! I'm Manuel, MSc student in Advanced Artificial Intelligence at Comillas Pontifical University (Madrid) with a BSc in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
+            p1: "Hi! I'm Manuel, MSc student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BSc in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
             p2: "I would describe myself as a rigorous individual, obsessed with excellence, optimization, and the search for meaning in a field as complex as AI. Given my academic background, which combines deep mathematical foundations with their applications to AI, I consider my profile to bridge the gap between mathematical rigor and state-of-the-art AI systems.",
             p3: "Beyond my professional interests, I enjoy fitness, nature, and reading. I consider these essential to living a balanced life, especially when shared with others."
         },
@@ -50,7 +50,7 @@ const translations = {
             skills: "Habilidades"
         },
         hero: {
-            subtitle: "MSc en Inteligencia Artificial Avanzada @ ICAI",
+            subtitle: "MSc en Inteligencia Artificial @ ICAI",
             description: "Estudiante curioso y proactivo enfocado en la IA para el beneficio humano, el aprendizaje profundo y la búsqueda de soluciones elegantes y eficientes.",
             contactBtn: "Contactar",
             projectsBtn: "Ver Proyectos",
@@ -65,7 +65,7 @@ const translations = {
             awards: "Premios y Reconocimientos"
         },
         about: {
-            p1: "¡Hola! Soy Manuel, estudiante de Máster en Inteligencia Artificial Avanzada en la Universidad Pontificia Comillas (Madrid) con un Grado en Ingeniería Matemática e IA. Mi trayectoria académica me ha llevado de Madrid a <strong>Cornell University</strong> (Nueva York) e <strong>Imperial College London</strong>, donde he trabajado con diferentes arquitecturas en visión por computador, robótica e IA generativa.",
+            p1: "¡Hola! Soy Manuel, estudiante de Máster en Inteligencia Artificial en la Universidad Pontificia Comillas (Madrid) con un Grado en Ingeniería Matemática e IA. Mi trayectoria académica me ha llevado de Madrid a <strong>Cornell University</strong> (Nueva York) e <strong>Imperial College London</strong>, donde he trabajado con diferentes arquitecturas en visión por computador, robótica e IA generativa.",
             p2: "Me describiría como un chico riguroso, obsesionado con la excelencia, la optimización y la búsqueda de significado en un campo tan complejo como la IA. Dada mi formación académica, que profundiza en sistemas de IA a partir de su fundamento matemático, considero que mi perfil cierra la brecha entre el rigor matemático y los sistemas de IA de última generación.",
             p3: "Más allá de mis intereses profesionales, disfruto del deporte, la naturaleza y la lectura, actividades que considero esenciales para vivir una vida equilibrada, especialmente cuando se comparten con otros."
         },
@@ -90,7 +90,7 @@ const portfolioDataTranslations = {
                 company: "Comillas Pontifical University",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – Apr 2026",
-                description: "I'm currently working as a Teaching Assistant at my university, exploring the latest open-source Large Language Models (LLMs) and investigating their potential for real-world applications.",
+                description: "I'm currently working as a Teaching Assistant at my university, collaborating on the implementation of a GPU cluster for AI students",
                 link: "https://www.comillas.edu/en/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -124,11 +124,11 @@ const portfolioDataTranslations = {
         ],
         education: [
             {
-                degree: "MSc in Advanced Artificial Intelligence",
+                degree: "MSc in Artificial Intelligence",
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – 2026",
-                description: "Class Representative & Member of the Academic Council. Winner of the 10th Smart Industry Hackathon. Program focused on Deep Generative Models, Differential Geometry & Calculus, MLOps, Deep Reinforcement Learning, Probabilistic AI and Explainability.",
+                description: "Class Representative & Member of the Academic Council. Winner of the 10th Smart Industry Hackathon. Program focused on Deep Generative Models, Differential Geometry, MLOps, Deep Reinforcement Learning, Probabilistic AI and Geometric Deep Learning.",
                 link: "https://www.comillas.edu/en/master-en-inteligencia-artificial-avanzada/",
                 logo: "assets/icons/education/comillas.png"
             },
@@ -197,7 +197,16 @@ const portfolioDataTranslations = {
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
                 imageId: "grassmann"
-            },   
+            },
+            {
+                title: "Explainability in Traffic Sign Recognition",
+                tech: "Computer Vision, PyTorch, Deep Learning, XAI",
+                description: "In this project I analyze different models used for traffic sign recognition from an explainability perspective. The aime is to understand what the models are focusing on and how this affects their performance.",
+                link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
+                icon: "🧠",
+                image: "assets/projects/xai.png",
+                imageId: "xai"
+            },  
         ],
         skills: {
             "Programming Languages": [
@@ -278,11 +287,11 @@ const portfolioDataTranslations = {
     es: {
         experience: [
             {
-                title: "Asistente de Investigación",
+                title: "Asistente de Profesorado",
                 company: "Universidad Pontificia Comillas",
                 location: "Madrid, España",
                 date: "Sep 2025 – Abr 2026",
-                description: "Actualmente trabajo como Asistente de Investigación en mi universidad, explorando los últimos Large Language Models (LLMs) de código abierto e investigando su potencial para aplicaciones del mundo real.",
+                description: "Actualmente trabajo como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUS para estudiantes de IA",
                 link: "https://www.comillas.edu/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -316,7 +325,7 @@ const portfolioDataTranslations = {
         ],
         education: [
             {
-                degree: "Máster en Inteligencia Artificial Avanzada",
+                degree: "Máster en Inteligencia Artificial",
                 institution: "Universidad Pontificia Comillas, ETSI ICAI",
                 location: "Madrid, España",
                 date: "Sep 2025 – 2026",
@@ -389,7 +398,16 @@ const portfolioDataTranslations = {
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
                 imageId: "grassmann"
-            }, 
+            },
+            {
+                title: "Explicabilidad en Reconocimiento de Señales de Tráfico",
+                tech: "PyTorch, Deep Learning, Visión por Computador, XAI",
+                description: "En este proyecto analizo diferentes modelos de reconocimiento de señales de tráfico desde el punto de vista de la explicabilidad, entendiendo qué partes de las imágenes son importantes para los modelos y cómo eso puede afecta a su rendimiento.",
+                link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
+                icon: "🗺️",
+                image: "assets/projects/xai.png",
+                imageId: "xai"
+            },
         ],
         skills: {
             "Lenguajes de Programación": [
