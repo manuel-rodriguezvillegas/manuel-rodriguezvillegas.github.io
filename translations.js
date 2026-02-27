@@ -128,7 +128,7 @@ const portfolioDataTranslations = {
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – 2026",
-                description: "Class Representative & Member of the Academic Council. Winner of the 10th Smart Industry Hackathon. Program focused on Deep Generative Models, Differential Geometry, MLOps, Deep Reinforcement Learning, Probabilistic AI and Geometric Deep Learning.",
+                description: "Class Representative & Member of the Academic Council. Winner of the 10th Smart Industry Hackathon. Program focused on Deep Generative Models, Probabilistic AI, MLOps, Deep Reinforcement Learning, Geometric Deep Learning, and Explainability.",
                 link: "https://www.comillas.edu/en/master-en-inteligencia-artificial-avanzada/",
                 logo: "assets/icons/education/comillas.png"
             },
@@ -229,7 +229,8 @@ const portfolioDataTranslations = {
                 "OpenCV",
                 "MATLAB",
                 "Git",
-                "Docker"
+                "Docker",
+                "n8n"
             ],
             "Mathematics": [
                 "Linear Algebra",
@@ -241,8 +242,8 @@ const portfolioDataTranslations = {
             ],
             "Languages": [
                 "Spanish (Native)",
-                "English (Advanced)",
-                "French (Basic)"
+                "English (Fluent)",
+                "German (Beginner)"
             ]
         },
         awards: [
@@ -329,7 +330,7 @@ const portfolioDataTranslations = {
                 institution: "Universidad Pontificia Comillas, ETSI ICAI",
                 location: "Madrid, España",
                 date: "Sep 2025 – 2026",
-                description: "Delegado de Clase y Miembro del Claustro Universitario. Ganador del X Hackathon de Industria Inteligente. Programa enfocado en Modelos Generativos Profundos, Geometría y Cálculo Diferencial, MLOps, Aprendizaje por Refuerzo Profundo, IA Probabilística y Explicabilidad.",
+                description: "Delegado de Clase y Miembro del Claustro Universitario. Ganador del X Hackathon de Industria Inteligente. Programa enfocado en Modelos Generativos Profundos, Geometría y Cálculo Diferencial, MLOps, Aprendizaje por Refuerzo Profundo, Aprendizaje Profundo Geométrico, IA Probabilística y Explicabilidad.",
                 link: "https://www.comillas.edu/master-en-inteligencia-artificial-avanzada/",
                 logo: "assets/icons/education/comillas.png"
             },
@@ -430,7 +431,8 @@ const portfolioDataTranslations = {
                 "OpenCV",
                 "MATLAB",
                 "Git",
-                "Docker"
+                "Docker",
+                "n8n"
             ],
             "Matemáticas": [
                 "Álgebra Lineal",
@@ -443,7 +445,7 @@ const portfolioDataTranslations = {
             "Idiomas": [
                 "Español (Nativo)",
                 "Inglés (Avanzado)",
-                "Francés (Básico)"
+                "Alemán (Básico)"
             ]
         },
         awards: [
