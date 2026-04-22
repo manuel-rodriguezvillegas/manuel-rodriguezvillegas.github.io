@@ -6,6 +6,7 @@ const translations = {
     en: {
         nav: {
             about: "About",
+            journey: "Journey",
             experience: "Experience",
             education: "Education",
             projects: "Projects",
@@ -20,11 +21,19 @@ const translations = {
         },
         sections: {
             about: "About Me",
+            journey: "My Journey",
             experience: "Experience",
             education: "Education",
             projects: "Featured Projects",
             skills: "Skills & Technologies",
             awards: "Honors & Awards"
+        },
+        journey: {
+            subtitle: "A visual map of my academic and professional path.",
+            academic: "Academic",
+            professional: "Professional",
+            exchange: "Exchange / Abroad",
+            present: "Present"
         },
         about: {
             p1: "Hi! I'm Manuel, MSc student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BSc in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
@@ -44,6 +53,7 @@ const translations = {
     es: {
         nav: {
             about: "Sobre mí",
+            journey: "Trayectoria",
             experience: "Experiencia",
             education: "Educación",
             projects: "Proyectos",
@@ -58,11 +68,19 @@ const translations = {
         },
         sections: {
             about: "Sobre mí",
+            journey: "Mi Trayectoria",
             experience: "Experiencia",
             education: "Educación",
             projects: "Proyectos Destacados",
             skills: "Habilidades y Tecnologías",
             awards: "Premios y Reconocimientos"
+        },
+        journey: {
+            subtitle: "Un mapa visual de mi trayectoria académica y profesional.",
+            academic: "Académico",
+            professional: "Profesional",
+            exchange: "Estancia / Internacional",
+            present: "Actualidad"
         },
         about: {
             p1: "¡Hola! Soy Manuel, estudiante de Máster en Inteligencia Artificial en la Universidad Pontificia Comillas (Madrid) con un Grado en Ingeniería Matemática e IA. Mi trayectoria académica me ha llevado de Madrid a <strong>Cornell University</strong> (Nueva York) e <strong>Imperial College London</strong>, donde he trabajado con diferentes arquitecturas en visión por computador, robótica e IA generativa.",
@@ -493,7 +511,138 @@ const portfolioDataTranslations = {
     }
 };
 
+// ===================================
+// Timeline Data (Journey Section)
+// ===================================
+// Easily add/edit events here. Dates use YYYY-MM format.
+// type: "academic" | "professional" | "exchange"
+// "exchange" events are rendered as academic (top) but with a distinct style.
+// Use end: "present" for ongoing events.
+const timelineData = {
+    // Global range shown on the axis. Adjust when adding years.
+    rangeStart: "2021-09",
+    rangeEnd: "2026-09",
+    events: {
+        en: [
+            {
+                type: "academic",
+                title: "BSc Mathematical Engineering & AI",
+                institution: "Comillas ICAI",
+                start: "2021-09",
+                end: "2025-06",
+                logo: "assets/icons/education/comillas.png"
+            },
+            {
+                type: "exchange",
+                title: "Exchange — ECE",
+                institution: "Cornell University",
+                start: "2025-01",
+                end: "2025-05",
+                logo: "assets/icons/education/cornell.png"
+            },
+            {
+                type: "academic",
+                title: "MSc in Artificial Intelligence",
+                institution: "Comillas ICAI",
+                start: "2025-09",
+                end: "2026-06",
+                logo: "assets/icons/education/comillas.png"
+            },
+            {
+                type: "professional",
+                title: "Energy Data Analyst Intern",
+                institution: "Endesa",
+                start: "2023-06",
+                end: "2023-08",
+                logo: "assets/icons/experience/endesa.png"
+            },
+            {
+                type: "professional",
+                title: "Research Assistant (UROP)",
+                institution: "Imperial College London",
+                start: "2024-06",
+                end: "2024-08",
+                logo: "assets/icons/experience/imperial.png"
+            },
+            {
+                type: "professional",
+                title: "Computer Vision Intern",
+                institution: "Azzulei Technologies",
+                start: "2025-06",
+                end: "2025-08",
+                logo: "assets/icons/experience/azzulei.png"
+            },
+            {
+                type: "professional",
+                title: "Teaching Assistant",
+                institution: "Comillas Pontifical University",
+                start: "2025-09",
+                end: "2026-04",
+                logo: "assets/icons/experience/comillas.png"
+            }
+        ],
+        es: [
+            {
+                type: "academic",
+                title: "Grado en Ingeniería Matemática e IA",
+                institution: "Comillas ICAI",
+                start: "2021-09",
+                end: "2025-06",
+                logo: "assets/icons/education/comillas.png"
+            },
+            {
+                type: "exchange",
+                title: "Intercambio — ECE",
+                institution: "Cornell University",
+                start: "2025-01",
+                end: "2025-05",
+                logo: "assets/icons/education/cornell.png"
+            },
+            {
+                type: "academic",
+                title: "Máster en Inteligencia Artificial",
+                institution: "Comillas ICAI",
+                start: "2025-09",
+                end: "2026-06",
+                logo: "assets/icons/education/comillas.png"
+            },
+            {
+                type: "professional",
+                title: "Prácticas en Análisis de Datos Energéticos",
+                institution: "Endesa",
+                start: "2023-06",
+                end: "2023-08",
+                logo: "assets/icons/experience/endesa.png"
+            },
+            {
+                type: "professional",
+                title: "Asistente de Investigación (UROP)",
+                institution: "Imperial College London",
+                start: "2024-06",
+                end: "2024-08",
+                logo: "assets/icons/experience/imperial.png"
+            },
+            {
+                type: "professional",
+                title: "Prácticas en Visión por Computador",
+                institution: "Azzulei Technologies",
+                start: "2025-06",
+                end: "2025-08",
+                logo: "assets/icons/experience/azzulei.png"
+            },
+            {
+                type: "professional",
+                title: "Asistente Docente",
+                institution: "Universidad Pontificia Comillas",
+                start: "2025-09",
+                end: "2026-04",
+                logo: "assets/icons/experience/comillas.png"
+            }
+        ]
+    }
+};
+
 // Export for use in script.js
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { translations, portfolioDataTranslations };
+    module.exports = { translations, portfolioDataTranslations, timelineData };
 }

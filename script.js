@@ -67,6 +67,7 @@ function updatePageLanguage() {
     
     // Re-render dynamic content
     clearContainers();
+    renderTimeline();
     renderExperience();
     renderEducation();
     renderProjects();
@@ -78,6 +79,9 @@ function updatePageLanguage() {
     
     // Update about section
     updateAboutSection();
+    
+    // Update journey section
+    updateJourneySection();
     
     // Update section titles
     updateSectionTitles();
@@ -102,6 +106,7 @@ function getTranslation(key) {
 }
 
 function clearContainers() {
+    document.getElementById('timeline-container').innerHTML = '';
     document.getElementById('experience-container').innerHTML = '';
     document.getElementById('education-container').innerHTML = '';
     document.getElementById('projects-container').innerHTML = '';
@@ -128,12 +133,22 @@ function updateAboutSection() {
 
 function updateSectionTitles() {
     const sections = translations[currentLanguage].sections;
+    document.querySelector('#journey .section-title').textContent = sections.journey;
     document.querySelector('#about .section-title').textContent = sections.about;
     document.querySelector('#experience .section-title').textContent = sections.experience;
     document.querySelector('#education .section-title').textContent = sections.education;
     document.querySelector('#projects .section-title').textContent = sections.projects;
     document.querySelector('#skills .section-title').textContent = sections.skills;
     document.querySelector('#awards .section-title').textContent = sections.awards;
+}
+
+function updateJourneySection() {
+    const j = translations[currentLanguage].journey;
+    const subtitleEl = document.querySelector('.journey-subtitle');
+    if (subtitleEl) subtitleEl.textContent = j.subtitle;
+    document.querySelectorAll('[data-i18n="journey.academic"]').forEach(el => el.textContent = j.academic);
+    document.querySelectorAll('[data-i18n="journey.professional"]').forEach(el => el.textContent = j.professional);
+    document.querySelectorAll('[data-i18n="journey.exchange"]').forEach(el => el.textContent = j.exchange);
 }
 
 function updateFooter() {
@@ -146,12 +161,168 @@ function updateFooter() {
 // Initialize Portfolio Content
 // ===================================
 function initializePortfolio() {
+    renderTimeline();
     renderExperience();
     renderEducation();
     renderProjects();
     renderSkills();
     renderAwards();
     updatePageLanguage();
+}
+
+// ===================================
+// Render Timeline (Journey Section)
+// ===================================
+function parseYearMonth(ym) {
+    // Accepts "YYYY-MM" or "present"
+    if (ym === 'present') {
+        const now = new Date();
+        return { year: now.getFullYear(), month: now.getMonth() + 1 };
+    }
+    const [y, m] = ym.split('-').map(Number);
+    return { year: y, month: m };
+}
+
+function monthsBetween(a, b) {
+    // Returns the number of months from date a to date b (can be fractional-free integer).
+    return (b.year - a.year) * 12 + (b.month - a.month);
+}
+
+function renderTimeline() {
+    const container = document.getElementById('timeline-container');
+    if (!container) return;
+
+    const rangeStart = parseYearMonth(timelineData.rangeStart);
+    const rangeEnd = parseYearMonth(timelineData.rangeEnd);
+    const totalMonths = monthsBetween(rangeStart, rangeEnd);
+    if (totalMonths <= 0) return;
+
+    const events = timelineData.events[currentLanguage] || timelineData.events.en;
+
+    // Build year markers (every January that falls in range, plus endpoints)
+    const years = [];
+    for (let y = rangeStart.year; y <= rangeEnd.year; y++) {
+        years.push(y);
+    }
+
+    const yearsHTML = years.map(y => {
+        const pos = monthsBetween(rangeStart, { year: y, month: 1 });
+        const pct = Math.max(0, Math.min(100, (pos / totalMonths) * 100));
+        return `<div class="timeline-year" style="left: ${pct}%;"><span>${y}</span></div>`;
+    }).join('');
+
+    // Separate events by lane (academic/exchange above, professional below)
+    const topEvents = events.filter(e => e.type === 'academic' || e.type === 'exchange');
+    const bottomEvents = events.filter(e => e.type === 'professional');
+
+    // Simple lane-stacking for overlapping events within a lane.
+    // Considers both temporal overlap AND visual overlap (cards have a min width
+    // in px that translates to ~N months of the range depending on timeline width).
+    const stackEvents = (list) => {
+        const prepared = list.map(e => {
+            const s = parseYearMonth(e.start);
+            const endRaw = e.end === 'present' ? timelineData.rangeEnd : e.end;
+            const en = parseYearMonth(endRaw);
+            return {
+                ...e,
+                _start: monthsBetween(rangeStart, s),
+                _end: monthsBetween(rangeStart, en)
+            };
+        }).sort((a, b) => a._start - b._start);
+
+        // Approx. minimum visual width of a card in months.
+        // Timeline min-width is 900px with some padding, for totalMonths ~60 -> ~15px/month.
+        // A card is ~150px, plus a small gap -> require ~11 months between consecutive card starts.
+        const minMonthGap = Math.max(3, totalMonths * 0.18);
+
+        const lanes = []; // each entry holds the "blocked until" month index
+        prepared.forEach(ev => {
+            const effectiveEnd = Math.max(ev._end, ev._start + minMonthGap);
+            let placed = false;
+            for (let i = 0; i < lanes.length; i++) {
+                if (ev._start >= lanes[i]) {
+                    ev._lane = i;
+                    lanes[i] = effectiveEnd;
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                ev._lane = lanes.length;
+                lanes.push(effectiveEnd);
+            }
+        });
+        return { prepared, laneCount: Math.max(1, lanes.length) };
+    };
+
+    const top = stackEvents(topEvents);
+    const bottom = stackEvents(bottomEvents);
+
+    const buildBarHTML = (ev, side) => {
+        const leftPct = (ev._start / totalMonths) * 100;
+        const widthPct = Math.max(1.5, ((ev._end - ev._start) / totalMonths) * 100);
+        const typeClass = `tl-${ev.type}`;
+        const sideClass = `tl-${side}`;
+        // Lane offset within the half (pushes bars away from center line)
+        const laneOffset = ev._lane * 100; // px per lane
+        const styleSide = side === 'top'
+            ? `bottom: ${laneOffset}px;`
+            : `top: ${laneOffset}px;`;
+
+        const logoHTML = ev.logo
+            ? `<img src="${ev.logo}" alt="${ev.institution}" class="tl-logo" onerror="this.style.display='none'">`
+            : '';
+
+        const endLabel = ev.end === 'present'
+            ? translations[currentLanguage].journey.present
+            : formatMonthYear(ev.end);
+
+        return `
+            <div class="tl-event ${typeClass} ${sideClass}" style="left: ${leftPct}%; width: ${widthPct}%; ${styleSide}">
+                <div class="tl-bar">
+                    <div class="tl-bar-fill"></div>
+                </div>
+                <div class="tl-card">
+                    <div class="tl-card-header">
+                        ${logoHTML}
+                        <div class="tl-card-text">
+                            <div class="tl-title">${ev.title}</div>
+                            <div class="tl-institution">${ev.institution}</div>
+                        </div>
+                    </div>
+                    <div class="tl-dates">${formatMonthYear(ev.start)} — ${endLabel}</div>
+                </div>
+            </div>
+        `;
+    };
+
+    const topBarsHTML = top.prepared.map(ev => buildBarHTML(ev, 'top')).join('');
+    const bottomBarsHTML = bottom.prepared.map(ev => buildBarHTML(ev, 'bottom')).join('');
+
+    // Height of each half derived from number of lanes
+    const topHeight = 20 + top.laneCount * 100;
+    const bottomHeight = 20 + bottom.laneCount * 100;
+
+    container.innerHTML = `
+        <div class="tl-half tl-half-top" style="height: ${topHeight}px;">
+            ${topBarsHTML}
+        </div>
+        <div class="tl-axis">
+            ${yearsHTML}
+        </div>
+        <div class="tl-half tl-half-bottom" style="height: ${bottomHeight}px;">
+            ${bottomBarsHTML}
+        </div>
+    `;
+}
+
+function formatMonthYear(ym) {
+    if (ym === 'present') return translations[currentLanguage].journey.present;
+    const { year, month } = parseYearMonth(ym);
+    const monthsEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthsEs = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const arr = currentLanguage === 'es' ? monthsEs : monthsEn;
+    return `${arr[month - 1]} ${year}`;
 }
 
 // ===================================
