@@ -219,8 +219,9 @@ const portfolioDataTranslations = {
                 "Deep Learning",
                 "Computer Vision",
                 "Natural Language Processing",
+                "Probabilistic AI",
                 "Robotics",
-                "Reinforcement Learning",
+                "Deep Reinforcement Learning",
                 "Physics-Informed NNs"
             ],
             "Tools & Frameworks": [
@@ -238,7 +239,8 @@ const portfolioDataTranslations = {
                 "Optimization",
                 "Dynamical Systems",
                 "Differential Equations",
-                "Differential Geometry"
+                "Differential Geometry",
+                "Probability & Statistics"
             ],
             "Languages": [
                 "Spanish (Native)",
@@ -421,8 +423,9 @@ const portfolioDataTranslations = {
                 "Deep Learning",
                 "Visión por Computador",
                 "Procesamiento del Lenguaje Natural (NLP)",
+                "IA Probabilística",
                 "Robótica",
-                "Aprendizaje por Refuerzo",
+                "Aprendizaje por Refuerzo Profundo",
                 "Redes Neuronales Informadas por Física (PIINs)"
             ],
             "Herramientas y Frameworks": [
@@ -440,7 +443,8 @@ const portfolioDataTranslations = {
                 "Optimización",
                 "Sistemas Dinámicos",
                 "Ecuaciones Diferenciales",
-                "Geometría Diferencial"
+                "Geometría Diferencial",
+                "Probabilidad y Estadística"
             ],
             "Idiomas": [
                 "Español (Nativo)",

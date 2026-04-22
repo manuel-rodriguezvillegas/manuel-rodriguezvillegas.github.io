@@ -228,7 +228,7 @@ function createEducationCard(edu) {
     
     // Handle honors section separately if it exists
     const honorsHTML = edu.honors 
-        ? `<p class="card-description card-honors"><strong>Honors:</strong> ${edu.honors}</p>`
+        ? `<p class="card-description card-honors"> ${edu.honors}</p>`
         : '';
     
     card.innerHTML = `
