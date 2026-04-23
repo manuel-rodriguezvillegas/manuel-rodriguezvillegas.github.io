@@ -44,7 +44,8 @@ const translations = {
             viewWebsite: "Visit Website →",
             viewProgram: "View Program →",
             viewProject: "View Project →",
-            viewAward: "Learn More →"
+            viewAward: "Learn More →",
+            showAllProjects: "Show all projects"
         },
         cmdk: {
             placeholder: "Type a command or search…",
@@ -116,7 +117,8 @@ const translations = {
             viewWebsite: "Visitar Web →",
             viewProgram: "Ver Programa →",
             viewProject: "Ver Proyecto →",
-            viewAward: "Más Información →"
+            viewAward: "Más Información →",
+            showAllProjects: "Mostrar todos los proyectos"
         },
         cmdk: {
             placeholder: "Escribe un comando o busca…",

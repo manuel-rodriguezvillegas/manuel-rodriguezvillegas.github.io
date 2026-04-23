@@ -459,15 +459,49 @@ function createEducationCard(edu) {
 // ===================================
 // Render Projects Section
 // ===================================
+const INITIAL_PROJECTS_COUNT = 4;
+
 function renderProjects() {
     const container = document.getElementById('projects-container');
     const data = portfolioDataTranslations[currentLanguage].projects;
-    
+
     data.forEach((project, index) => {
         const card = createProjectCard(project);
         card.classList.add('reveal');
+        if (index >= INITIAL_PROJECTS_COUNT) {
+            card.classList.add('project-card-hidden');
+        }
         container.appendChild(card);
     });
+
+    // Remove any previously inserted button (e.g. after language switch re-render)
+    const existingBtn = document.getElementById('show-all-projects-btn');
+    if (existingBtn) existingBtn.remove();
+
+    // Add the "Show all" button only if there are more projects than initially shown
+    if (data.length > INITIAL_PROJECTS_COUNT) {
+        const btn = document.createElement('button');
+        btn.id = 'show-all-projects-btn';
+        btn.type = 'button';
+        btn.className = 'btn btn-secondary show-all-projects-btn';
+        btn.textContent = translations[currentLanguage].links.showAllProjects;
+        btn.addEventListener('click', () => {
+            const hiddenCards = container.querySelectorAll('.project-card-hidden');
+            hiddenCards.forEach((card, i) => {
+                card.classList.remove('project-card-hidden');
+                // Trigger the reveal animation with a small stagger so the
+                // newly shown cards fade/slide in instead of popping in.
+                card.style.transitionDelay = `${Math.min(i, 6) * 60}ms`;
+                // Next frame so the transition actually runs
+                requestAnimationFrame(() => {
+                    card.classList.add('is-visible');
+                });
+            });
+            btn.remove();
+        });
+        // Insert the button after the projects grid, inside the same section
+        container.parentElement.appendChild(btn);
+    }
 }
 
 function createProjectCard(project) {
