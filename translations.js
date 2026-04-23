@@ -46,6 +46,31 @@ const translations = {
             viewProject: "View Project →",
             viewAward: "Learn More →"
         },
+        cmdk: {
+            placeholder: "Type a command or search…",
+            empty: "No results",
+            section: "Section",
+            action: "Action",
+            goAbout: "Go to About",
+            goJourney: "Go to Journey",
+            goExperience: "Go to Experience",
+            goEducation: "Go to Education",
+            goProjects: "Go to Projects",
+            goSkills: "Go to Skills",
+            goAwards: "Go to Awards",
+            openCv: "Open CV (PDF)",
+            sendEmail: "Send Email",
+            openGithub: "Open GitHub",
+            openLinkedin: "Open LinkedIn",
+            switchEn: "Switch to English",
+            switchEs: "Switch to Spanish"
+        },
+        currently: {
+            title: "Currently",
+            reading: "Reading",
+            building: "Building",
+            focus: "Focused on"
+        },
         footer: {
             rights: "All rights reserved."
         }
@@ -92,6 +117,31 @@ const translations = {
             viewProgram: "Ver Programa →",
             viewProject: "Ver Proyecto →",
             viewAward: "Más Información →"
+        },
+        cmdk: {
+            placeholder: "Escribe un comando o busca…",
+            empty: "Sin resultados",
+            section: "Sección",
+            action: "Acción",
+            goAbout: "Ir a Sobre mí",
+            goJourney: "Ir a Trayectoria",
+            goExperience: "Ir a Experiencia",
+            goEducation: "Ir a Educación",
+            goProjects: "Ir a Proyectos",
+            goSkills: "Ir a Habilidades",
+            goAwards: "Ir a Premios",
+            openCv: "Abrir CV (PDF)",
+            sendEmail: "Enviar Email",
+            openGithub: "Abrir GitHub",
+            openLinkedin: "Abrir LinkedIn",
+            switchEn: "Cambiar a Inglés",
+            switchEs: "Cambiar a Español"
+        },
+        currently: {
+            title: "Ahora mismo",
+            reading: "Leyendo",
+            building: "Construyendo",
+            focus: "Enfocado en"
         },
         footer: {
             rights: "Todos los derechos reservados."
@@ -545,7 +595,7 @@ const timelineData = {
                 title: "MSc in Artificial Intelligence",
                 institution: "Comillas ICAI",
                 start: "2025-09",
-                end: "2026-06",
+                end: "present",
                 logo: "assets/icons/education/comillas.png"
             },
             {
@@ -603,7 +653,7 @@ const timelineData = {
                 title: "Máster en Inteligencia Artificial",
                 institution: "Comillas ICAI",
                 start: "2025-09",
-                end: "2026-06",
+                end: "present",
                 logo: "assets/icons/education/comillas.png"
             },
             {
@@ -642,7 +692,24 @@ const timelineData = {
     }
 };
 
+// ===================================
+// "Currently" block (footer)
+// ===================================
+// Update these values whenever you want. The UI pulls from here.
+const currentlyData = {
+    en: {
+        reading: "Thinking Fast and Slow — Kahneman",
+        building: "Visual SLAM for an autonomous wheelchair",
+        focus: "Deep Generative Models & Probabilistic AI"
+    },
+    es: {
+        reading: "Pensar rápido, pensar despacio — Kahneman",
+        building: "SLAM visual para una silla de ruedas autónoma",
+        focus: "Modelos Generativos Profundos e IA Probabilística"
+    }
+};
+
 // Export for use in script.js
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { translations, portfolioDataTranslations, timelineData };
+    module.exports = { translations, portfolioDataTranslations, timelineData, currentlyData };
 }

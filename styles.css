@@ -145,6 +145,39 @@ nav {
     font-weight: 300;
 }
 
+/* Command palette trigger */
+.cmdk-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(184, 147, 95, 0.25);
+    color: var(--text-secondary);
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+    margin-right: 0.75rem;
+}
+
+.cmdk-trigger:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cmdk-kbd {
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--bg-secondary);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
 /* ===================================
    Hero Section
    =================================== */
@@ -295,6 +328,37 @@ section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
+    position: relative;
+}
+
+/* Alternating subtle background bands for visual rhythm.
+   These wrap out to full width via a negative-margin ::before pseudo-element
+   so content stays centered at 1200px but the tint spans the whole viewport. */
+#about::before,
+#projects::before,
+#awards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(180deg,
+        rgba(235, 229, 217, 0) 0%,
+        rgba(235, 229, 217, 0.55) 10%,
+        rgba(235, 229, 217, 0.55) 90%,
+        rgba(235, 229, 217, 0) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Lift content above the tint */
+#about > *,
+#projects > *,
+#awards > * {
+    position: relative;
+    z-index: 1;
 }
 
 .section-title {
@@ -535,10 +599,30 @@ section {
     transition: var(--transition);
 }
 
+.skill-tag.has-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0.7rem;
+}
+
+.skill-tag-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+    opacity: 0.85;
+    transition: transform 0.2s ease;
+}
+
 .skill-tag:hover {
     background: var(--accent);
     color: white;
     transform: translateY(-2px);
+}
+
+.skill-tag.has-icon:hover .skill-tag-icon {
+    transform: scale(1.1);
 }
 
 /* ===================================
@@ -602,13 +686,92 @@ section {
    =================================== */
 footer {
     background: var(--bg-secondary);
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 2rem;
     text-align: center;
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.currently {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    padding: 1.75rem 2rem;
+    background: var(--card-bg);
+    border-radius: 14px;
+    border: 1px solid rgba(184, 147, 95, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    text-align: left;
+}
+
+.currently-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-dark);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.currently-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.18);
+    animation: currently-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes currently-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.18); }
+    50%      { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.08); }
+}
+
+.currently-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.currently-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.currently-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+}
+
+.currently-value {
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+    .currently {
+        padding: 1.25rem 1.25rem;
+    }
+    .currently-items {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
 }
 
 .footer-links {
@@ -811,8 +974,11 @@ footer p {
 .tl-event {
     position: absolute;
     min-width: 60px;
-    transition: transform 0.25s ease, filter 0.25s ease;
-    cursor: default;
+    transition: transform 0.2s ease, filter 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .tl-event:hover {
@@ -821,12 +987,18 @@ footer p {
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
 }
 
+.tl-event:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
 .tl-bar {
     position: absolute;
     left: 0;
     right: 0;
-    height: 10px;
-    border-radius: 5px;
+    height: 8px;
+    border-radius: 4px;
     overflow: hidden;
     background: rgba(212, 165, 116, 0.15);
 }
@@ -842,7 +1014,7 @@ footer p {
 .tl-bar-fill {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 4px;
     background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
     transform-origin: left center;
     animation: tl-grow 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
@@ -866,43 +1038,41 @@ footer p {
 .tl-card {
     position: absolute;
     left: 0;
-    right: 0;
     background: var(--card-bg);
     border-radius: 10px;
-    padding: 0.6rem 0.8rem;
+    padding: 0.55rem 0.75rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     border: 1px solid rgba(184, 147, 95, 0.15);
     font-size: 0.8rem;
     line-height: 1.3;
-    min-width: 140px;
-    max-width: 260px;
-    transition: all 0.25s ease;
+    min-width: 150px;
+    max-width: 220px;
+    transition: all 0.2s ease;
 }
 
 .tl-top .tl-card {
-    bottom: 16px;
+    bottom: 14px;
 }
 
 .tl-bottom .tl-card {
-    top: 16px;
+    top: 14px;
 }
 
 .tl-event:hover .tl-card {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
     border-color: var(--accent);
-    transform: translateY(0);
+    background: #fffdf9;
 }
 
 .tl-card-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.25rem;
+    gap: 0.6rem;
 }
 
 .tl-logo {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -912,33 +1082,41 @@ footer p {
     flex: 1;
 }
 
-.tl-title {
-    font-weight: 700;
+.tl-institution {
     color: var(--text-primary);
+    font-weight: 700;
     font-size: 0.85rem;
     line-height: 1.25;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-}
-
-.tl-institution {
-    color: var(--accent-dark);
-    font-weight: 500;
-    font-size: 0.75rem;
-    line-height: 1.25;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin-bottom: 2px;
 }
 
 .tl-dates {
     color: var(--text-secondary);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-variant-numeric: tabular-nums;
-    margin-top: 0.2rem;
+    white-space: nowrap;
+}
+
+/* Subtle "call to action" arrow on hover to hint clickability */
+.tl-card::after {
+    content: '→';
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tl-event:hover .tl-card::after {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Connector line between bar and card, subtle */
@@ -986,6 +1164,184 @@ footer p {
     }
     .tl-title {
         font-size: 0.78rem;
+    }
+}
+
+/* ===================================
+   Reading progress bar
+   =================================== */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+    z-index: 1100;
+    transition: width 0.12s ease;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(212, 165, 116, 0.4);
+}
+
+/* ===================================
+   Command palette  (⌘K)
+   =================================== */
+.cmdk-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 44, 44, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 12vh;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.cmdk-overlay.is-open {
+    display: flex;
+    opacity: 1;
+}
+
+.cmdk-panel {
+    width: min(600px, 92vw);
+    background: var(--card-bg);
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(184, 147, 95, 0.2);
+    overflow: hidden;
+    animation: cmdk-in 0.18s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes cmdk-in {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cmdk-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--bg-secondary);
+}
+
+.cmdk-search-icon {
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.cmdk-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.cmdk-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.cmdk-esc {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+    font-size: 0.7rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 3px 7px;
+    border-radius: 5px;
+    border: 1px solid rgba(184, 147, 95, 0.2);
+    font-weight: 600;
+}
+
+.cmdk-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.cmdk-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.1s ease;
+}
+
+.cmdk-item.is-active {
+    background: linear-gradient(90deg, rgba(212, 165, 116, 0.18), rgba(212, 165, 116, 0.05));
+}
+
+.cmdk-label {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.cmdk-hint {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.cmdk-empty {
+    padding: 1.25rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.cmdk-footer {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.6rem 1.25rem;
+    border-top: 1px solid var(--bg-secondary);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    background: var(--bg-primary);
+}
+
+.cmdk-footer kbd {
+    background: var(--card-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(184, 147, 95, 0.25);
+    font-size: 0.7rem;
+    margin-right: 4px;
+    font-family: inherit;
+}
+
+/* ===================================
+   Scroll reveal
+   =================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        transition: none;
+        opacity: 1;
+        transform: none;
     }
 }
 

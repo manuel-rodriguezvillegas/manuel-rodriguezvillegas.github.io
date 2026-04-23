@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSmoothScrolling();
     setupNavbarScroll();
     setupLanguageSwitcher();
+    setupScrollAnimations();
+    setupReadingProgress();
+    setupCommandPalette();
 });
 
 // ===================================
@@ -88,6 +91,10 @@ function updatePageLanguage() {
     
     // Update footer
     updateFooter();
+    updateCurrently();
+
+    // Re-bind scroll reveals for newly rendered cards
+    reobserveReveals();
 }
 
 function getTranslation(key) {
@@ -157,6 +164,25 @@ function updateFooter() {
     document.querySelector('footer p').textContent = `© ${year} Manuel Rodríguez Villegas. ${rights}`;
 }
 
+function updateCurrently() {
+    const t = translations[currentLanguage].currently;
+    const data = currentlyData[currentLanguage] || currentlyData.en;
+    const titleEl = document.querySelector('.currently-title');
+    if (titleEl) titleEl.textContent = t.title;
+    const labels = document.querySelectorAll('.currently-label');
+    if (labels.length >= 3) {
+        labels[0].textContent = t.reading;
+        labels[1].textContent = t.building;
+        labels[2].textContent = t.focus;
+    }
+    const readingEl = document.querySelector('[data-currently="reading"]');
+    const buildingEl = document.querySelector('[data-currently="building"]');
+    const focusEl = document.querySelector('[data-currently="focus"]');
+    if (readingEl) readingEl.textContent = data.reading;
+    if (buildingEl) buildingEl.textContent = data.building;
+    if (focusEl) focusEl.textContent = data.focus;
+}
+
 // ===================================
 // Initialize Portfolio Content
 // ===================================
@@ -215,10 +241,19 @@ function renderTimeline() {
     const topEvents = events.filter(e => e.type === 'academic' || e.type === 'exchange');
     const bottomEvents = events.filter(e => e.type === 'professional');
 
-    // Simple lane-stacking for overlapping events within a lane.
-    // Considers both temporal overlap AND visual overlap (cards have a min width
-    // in px that translates to ~N months of the range depending on timeline width).
-    const stackEvents = (list) => {
+    // Card min-width in px (must match CSS .tl-card min-width)
+    const CARD_MIN_PX = 150;
+    const CARD_GAP_PX = 16;
+
+    // The real timeline pixel width we'll measure after first render.
+    // For the initial DOM build we use an estimate (900 is our CSS min-width).
+    // After render, we re-measure and re-layout if needed.
+    const estimatedPxWidth = Math.max(900, (container.parentElement?.clientWidth || 900));
+
+    const stackEvents = (list, pxWidth) => {
+        const pxPerMonth = pxWidth / totalMonths;
+        const minMonthGap = (CARD_MIN_PX + CARD_GAP_PX) / pxPerMonth;
+
         const prepared = list.map(e => {
             const s = parseYearMonth(e.start);
             const endRaw = e.end === 'present' ? timelineData.rangeEnd : e.end;
@@ -230,13 +265,9 @@ function renderTimeline() {
             };
         }).sort((a, b) => a._start - b._start);
 
-        // Approx. minimum visual width of a card in months.
-        // Timeline min-width is 900px with some padding, for totalMonths ~60 -> ~15px/month.
-        // A card is ~150px, plus a small gap -> require ~11 months between consecutive card starts.
-        const minMonthGap = Math.max(3, totalMonths * 0.18);
-
-        const lanes = []; // each entry holds the "blocked until" month index
+        const lanes = [];
         prepared.forEach(ev => {
+            // The card for this event visually occupies from _start to at least _start + minMonthGap
             const effectiveEnd = Math.max(ev._end, ev._start + minMonthGap);
             let placed = false;
             for (let i = 0; i < lanes.length; i++) {
@@ -255,8 +286,8 @@ function renderTimeline() {
         return { prepared, laneCount: Math.max(1, lanes.length) };
     };
 
-    const top = stackEvents(topEvents);
-    const bottom = stackEvents(bottomEvents);
+    const top = stackEvents(topEvents, estimatedPxWidth);
+    const bottom = stackEvents(bottomEvents, estimatedPxWidth);
 
     const buildBarHTML = (ev, side) => {
         const leftPct = (ev._start / totalMonths) * 100;
@@ -264,7 +295,7 @@ function renderTimeline() {
         const typeClass = `tl-${ev.type}`;
         const sideClass = `tl-${side}`;
         // Lane offset within the half (pushes bars away from center line)
-        const laneOffset = ev._lane * 100; // px per lane
+        const laneOffset = ev._lane * 82; // px per lane (reduced since no title anymore)
         const styleSide = side === 'top'
             ? `bottom: ${laneOffset}px;`
             : `top: ${laneOffset}px;`;
@@ -277,8 +308,13 @@ function renderTimeline() {
             ? translations[currentLanguage].journey.present
             : formatMonthYear(ev.end);
 
+        // Each event links to the matching section:
+        // academic + exchange -> #education, professional -> #experience
+        const target = ev.type === 'professional' ? '#experience' : '#education';
+        const ariaLabel = `${ev.institution}, ${formatMonthYear(ev.start)} — ${endLabel}`;
+
         return `
-            <div class="tl-event ${typeClass} ${sideClass}" style="left: ${leftPct}%; width: ${widthPct}%; ${styleSide}">
+            <a class="tl-event ${typeClass} ${sideClass}" href="${target}" aria-label="${ariaLabel}" style="left: ${leftPct}%; width: ${widthPct}%; ${styleSide}">
                 <div class="tl-bar">
                     <div class="tl-bar-fill"></div>
                 </div>
@@ -286,13 +322,12 @@ function renderTimeline() {
                     <div class="tl-card-header">
                         ${logoHTML}
                         <div class="tl-card-text">
-                            <div class="tl-title">${ev.title}</div>
                             <div class="tl-institution">${ev.institution}</div>
+                            <div class="tl-dates">${formatMonthYear(ev.start)} — ${endLabel}</div>
                         </div>
                     </div>
-                    <div class="tl-dates">${formatMonthYear(ev.start)} — ${endLabel}</div>
                 </div>
-            </div>
+            </a>
         `;
     };
 
@@ -300,8 +335,8 @@ function renderTimeline() {
     const bottomBarsHTML = bottom.prepared.map(ev => buildBarHTML(ev, 'bottom')).join('');
 
     // Height of each half derived from number of lanes
-    const topHeight = 20 + top.laneCount * 100;
-    const bottomHeight = 20 + bottom.laneCount * 100;
+    const topHeight = 20 + top.laneCount * 82;
+    const bottomHeight = 20 + bottom.laneCount * 82;
 
     container.innerHTML = `
         <div class="tl-half tl-half-top" style="height: ${topHeight}px;">
@@ -334,7 +369,7 @@ function renderExperience() {
     
     data.forEach((exp, index) => {
         const card = createExperienceCard(exp);
-        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
+        card.classList.add('reveal');
         container.appendChild(card);
     });
 }
@@ -379,7 +414,7 @@ function renderEducation() {
     
     data.forEach((edu, index) => {
         const card = createEducationCard(edu);
-        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
+        card.classList.add('reveal');
         container.appendChild(card);
     });
 }
@@ -430,7 +465,7 @@ function renderProjects() {
     
     data.forEach((project, index) => {
         const card = createProjectCard(project);
-        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
+        card.classList.add('reveal');
         container.appendChild(card);
     });
 }
@@ -471,26 +506,63 @@ function renderSkills() {
     
     Object.entries(data).forEach(([category, skills], index) => {
         const skillCard = createSkillCard(category, skills);
-        skillCard.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
+        skillCard.classList.add('reveal');
         container.appendChild(skillCard);
     });
+}
+
+// Mapping: skill name (normalized) -> simpleicons slug + optional brand color.
+// Keys match the start of the skill string, case-insensitive. If a skill is not
+// in the map it renders as a text-only tag (which is fine for abstract concepts
+// like "Deep Learning" or "Linear Algebra").
+const SKILL_ICONS = {
+    "python":      { slug: "python",    color: "3776AB" },
+    "r":           { slug: "r",         color: "276DC3" },
+    "c#":          { slug: "csharp",    color: "512BD4" },
+    "sql":         { slug: "mysql",     color: "4479A1" },
+    "pytorch":     { slug: "pytorch",   color: "EE4C2C" },
+    "ros":         { slug: "ros",       color: "22314E" },
+    "opencv":      { slug: "opencv",    color: "5C3EE8" },
+    "matlab":      { slug: "octave",    color: "0790C0" },
+    "git":         { slug: "git",       color: "F05032" },
+    "docker":      { slug: "docker",    color: "2496ED" },
+    "n8n":         { slug: "n8n",       color: "EA4B71" }
+};
+
+function getSkillIcon(skillName) {
+    const lower = skillName.toLowerCase().trim();
+    // Try exact key match first (longest first for specificity)
+    const keys = Object.keys(SKILL_ICONS).sort((a, b) => b.length - a.length);
+    for (const key of keys) {
+        if (lower.startsWith(key)) {
+            const meta = SKILL_ICONS[key];
+            return `https://cdn.simpleicons.org/${meta.slug}/${meta.color}`;
+        }
+    }
+    return null;
 }
 
 function createSkillCard(category, skills) {
     const card = document.createElement('div');
     card.className = 'skill-category';
-    
+
     const skillTags = skills
-        .map(skill => `<span class="skill-tag">${skill}</span>`)
+        .map(skill => {
+            const iconUrl = getSkillIcon(skill);
+            const iconHTML = iconUrl
+                ? `<img src="${iconUrl}" alt="" class="skill-tag-icon" onerror="this.style.display='none'">`
+                : '';
+            return `<span class="skill-tag${iconUrl ? ' has-icon' : ''}">${iconHTML}${skill}</span>`;
+        })
         .join('');
-    
+
     card.innerHTML = `
         <h3>${category}</h3>
         <div class="skill-tags">
             ${skillTags}
         </div>
     `;
-    
+
     return card;
 }
 
@@ -503,7 +575,7 @@ function renderAwards() {
     
     data.forEach((award, index) => {
         const card = createAwardCard(award);
-        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
+        card.classList.add('reveal');
         container.appendChild(card);
     });
 }
@@ -599,24 +671,210 @@ function scrollToTop() {
     });
 }
 
-// Intersection Observer for scroll animations (optional enhancement)
+// Intersection Observer for scroll animations — adds "is-visible"
+// to any element carrying the "reveal" class when it enters the viewport.
 function setupScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                const parent = entry.target.parentElement;
+                const siblings = parent ? [...parent.children].filter(c => c.classList.contains('reveal')) : [];
+                const idx = siblings.indexOf(entry.target);
+                entry.target.style.transitionDelay = `${Math.min(idx, 6) * 60}ms`;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
-    
-    // Observe all cards
-    document.querySelectorAll('.card, .project-card, .skill-category').forEach(el => {
-        observer.observe(el);
+
+    // Observe any element flagged as .reveal
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Safety: if for any reason the observer never fires for some elements
+    // (e.g., print view, headless screenshot, prefers-reduced-motion already applied),
+    // reveal anything still hidden after 1.5s.
+    setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 1.2) {
+                el.classList.add('is-visible');
+            }
+        });
+    }, 1500);
+}
+
+// Re-run on language change because clearContainers / renderX rebuild DOM
+function reobserveReveals() {
+    setupScrollAnimations();
+}
+
+// ===================================
+// Reading progress bar
+// ===================================
+function setupReadingProgress() {
+    const bar = document.createElement('div');
+    bar.className = 'reading-progress';
+    document.body.appendChild(bar);
+
+    const update = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct = height > 0 ? (scrollTop / height) * 100 : 0;
+        bar.style.width = `${pct}%`;
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+}
+
+// ===================================
+// Command palette  (⌘K / Ctrl+K)
+// ===================================
+function setupCommandPalette() {
+    // Build the overlay once
+    const overlay = document.createElement('div');
+    overlay.className = 'cmdk-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Command palette');
+    overlay.innerHTML = `
+        <div class="cmdk-panel">
+            <div class="cmdk-input-wrap">
+                <svg class="cmdk-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                <input class="cmdk-input" type="text" autocomplete="off" spellcheck="false" placeholder="Type a command or search…" />
+                <kbd class="cmdk-esc">ESC</kbd>
+            </div>
+            <ul class="cmdk-list" role="listbox"></ul>
+            <div class="cmdk-footer">
+                <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+                <span><kbd>↵</kbd> open</span>
+                <span><kbd>esc</kbd> close</span>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const input = overlay.querySelector('.cmdk-input');
+    const list = overlay.querySelector('.cmdk-list');
+    let activeIndex = 0;
+
+    // Build command list dynamically from the current page
+    const buildCommands = () => {
+        const t = translations[currentLanguage].cmdk || {};
+        return [
+            { label: t.goAbout || 'About',         hint: t.section || 'Section', action: () => go('#about') },
+            { label: t.goJourney || 'Journey',     hint: t.section || 'Section', action: () => go('#journey') },
+            { label: t.goExperience || 'Experience', hint: t.section || 'Section', action: () => go('#experience') },
+            { label: t.goEducation || 'Education', hint: t.section || 'Section', action: () => go('#education') },
+            { label: t.goProjects || 'Projects',   hint: t.section || 'Section', action: () => go('#projects') },
+            { label: t.goSkills || 'Skills',       hint: t.section || 'Section', action: () => go('#skills') },
+            { label: t.goAwards || 'Awards',       hint: t.section || 'Section', action: () => go('#awards') },
+            { label: t.openCv || 'Open CV',        hint: t.action || 'Action',   action: () => window.open('assets/CV.pdf', '_blank') },
+            { label: t.sendEmail || 'Send Email',  hint: t.action || 'Action',   action: () => location.href = 'mailto:manuel.rodriguezvillegas09@gmail.com' },
+            { label: t.openGithub || 'GitHub',     hint: t.action || 'Action',   action: () => window.open('https://github.com/rdgzmanuel', '_blank') },
+            { label: t.openLinkedin || 'LinkedIn', hint: t.action || 'Action',   action: () => window.open('https://www.linkedin.com/in/mrodriguezvillegas', '_blank') },
+            { label: t.switchEn || 'Switch to English',  hint: t.action || 'Action', action: () => switchLang('en') },
+            { label: t.switchEs || 'Switch to Spanish',  hint: t.action || 'Action', action: () => switchLang('es') }
+        ];
+    };
+
+    const go = (hash) => {
+        close();
+        const el = document.querySelector(hash);
+        if (!el) return;
+        const navH = document.querySelector('nav').offsetHeight;
+        window.scrollTo({ top: el.offsetTop - navH - 20, behavior: 'smooth' });
+    };
+
+    const switchLang = (lang) => {
+        close();
+        if (lang !== currentLanguage) {
+            currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            updateLanguageButtons();
+            updatePageLanguage();
+        }
+    };
+
+    const render = (filter = '') => {
+        const commands = buildCommands();
+        const f = filter.trim().toLowerCase();
+        const filtered = f
+            ? commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f))
+            : commands;
+        activeIndex = 0;
+        list.innerHTML = filtered.length
+            ? filtered.map((c, i) => `
+                <li class="cmdk-item ${i === 0 ? 'is-active' : ''}" role="option" data-idx="${i}">
+                    <span class="cmdk-label">${c.label}</span>
+                    <span class="cmdk-hint">${c.hint}</span>
+                </li>`).join('')
+            : `<li class="cmdk-empty">${(translations[currentLanguage].cmdk && translations[currentLanguage].cmdk.empty) || 'No results'}</li>`;
+        list._filtered = filtered;
+    };
+
+    const setActive = (i) => {
+        const items = list.querySelectorAll('.cmdk-item');
+        if (!items.length) return;
+        activeIndex = (i + items.length) % items.length;
+        items.forEach(el => el.classList.remove('is-active'));
+        items[activeIndex].classList.add('is-active');
+        items[activeIndex].scrollIntoView({ block: 'nearest' });
+    };
+
+    const execActive = () => {
+        const f = list._filtered || [];
+        if (f[activeIndex]) f[activeIndex].action();
+    };
+
+    const open = () => {
+        const t = (translations[currentLanguage].cmdk || {});
+        input.placeholder = t.placeholder || 'Type a command or search…';
+        render('');
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        input.value = '';
+        setTimeout(() => input.focus(), 50);
+    };
+
+    const close = () => {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+    };
+
+    // Keyboard shortcut: Cmd+K / Ctrl+K
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            overlay.classList.contains('is-open') ? close() : open();
+            return;
+        }
+        if (!overlay.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIndex + 1); }
+        else if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(activeIndex - 1); }
+        else if (e.key === 'Enter')     { e.preventDefault(); execActive(); }
     });
+
+    input.addEventListener('input', (e) => render(e.target.value));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    list.addEventListener('click', (e) => {
+        const item = e.target.closest('.cmdk-item');
+        if (!item) return;
+        activeIndex = Number(item.dataset.idx);
+        execActive();
+    });
+    list.addEventListener('mousemove', (e) => {
+        const item = e.target.closest('.cmdk-item');
+        if (item) setActive(Number(item.dataset.idx));
+    });
+
+    // Expose trigger hook (e.g. a visible button can call window.openCmdk())
+    window.openCmdk = open;
 }

@@ -21,6 +21,10 @@
                 <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
             </ul>
             <div class="language-switcher">
+                <button class="cmdk-trigger" onclick="window.openCmdk && window.openCmdk()" aria-label="Open command palette">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    <kbd class="cmdk-kbd">⌘K</kbd>
+                </button>
                 <button class="lang-btn active" data-lang="en" aria-label="Switch to English">
                     <img src="assets/icons/flags/uk.png" alt="UK flag" class="flag">
                     <span class="lang-code">EN</span>
@@ -161,6 +165,24 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="currently" id="currently-block">
+                <h4 class="currently-title">Currently</h4>
+                <div class="currently-items">
+                    <div class="currently-item">
+                        <span class="currently-label">Reading</span>
+                        <span class="currently-value" data-currently="reading">—</span>
+                    </div>
+                    <div class="currently-item">
+                        <span class="currently-label">Building</span>
+                        <span class="currently-value" data-currently="building">—</span>
+                    </div>
+                    <div class="currently-item">
+                        <span class="currently-label">Focused on</span>
+                        <span class="currently-value" data-currently="focus">—</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="footer-links">
                 <a href="https://www.linkedin.com/in/mrodriguezvillegas" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="https://github.com/rdgzmanuel" target="_blank" rel="noopener">GitHub</a>
