@@ -13,7 +13,7 @@ const translations = {
             skills: "Skills"
         },
         hero: {
-            subtitle: "MSc in Artificial Intelligence @ ICAI",
+            subtitle: "Master's Degree in Artificial Intelligence @ ICAI",
             description: "Curious mind focused on AI for human benefit, deep learning and the pursuit of elegant, efficient solutions.",
             contactBtn: "Get in Touch",
             projectsBtn: "View Projects",
@@ -36,7 +36,7 @@ const translations = {
             present: "Present"
         },
         about: {
-            p1: "Hi! I'm Manuel, MSc student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BSc in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
+            p1: "Hi! I'm Manuel, Master's Degree student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BE in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
             p2: "I would describe myself as a rigorous individual, obsessed with excellence, optimization, and the search for meaning in a field as complex as AI. Given my academic background, which combines deep mathematical foundations with their applications to AI, I consider my profile to bridge the gap between mathematical rigor and state-of-the-art AI systems.",
             p3: "Beyond my professional interests, I enjoy fitness, nature, and reading. I consider these essential to living a balanced life, especially when shared with others."
         },
@@ -85,7 +85,7 @@ const translations = {
             skills: "Habilidades"
         },
         hero: {
-            subtitle: "MSc en Inteligencia Artificial @ ICAI",
+            subtitle: "Máster en Inteligencia Artificial @ ICAI",
             description: "Estudiante curioso y proactivo enfocado en la IA para el beneficio humano, el aprendizaje profundo y la búsqueda de soluciones elegantes y eficientes.",
             contactBtn: "Contactar",
             projectsBtn: "Ver Proyectos",
@@ -158,7 +158,7 @@ const portfolioDataTranslations = {
                 company: "Comillas Pontifical University",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – Apr 2026",
-                description: "I'm currently working as a Teaching Assistant at my university, collaborating on the implementation of a GPU cluster for AI students",
+                description: "I worked as a Teaching Assistant at my university, collaborating on the implementation of a GPU cluster for AI students",
                 link: "https://www.comillas.edu/en/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -192,7 +192,7 @@ const portfolioDataTranslations = {
         ],
         education: [
             {
-                degree: "MSc in Artificial Intelligence",
+                degree: "Master's Degree in Artificial Intelligence",
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – 2026",
@@ -210,7 +210,7 @@ const portfolioDataTranslations = {
                 logo: "assets/icons/education/cornell.png"
             },
             {
-                degree: "BSc in Mathematical Engineering and AI",
+                degree: "BE in Mathematical Engineering and AI",
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "2021 – 2025",
@@ -362,7 +362,7 @@ const portfolioDataTranslations = {
                 company: "Universidad Pontificia Comillas",
                 location: "Madrid, España",
                 date: "Sep 2025 – Abr 2026",
-                description: "Actualmente trabajo como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUs para estudiantes de IA",
+                description: "Trabajé como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUs para estudiantes de IA",
                 link: "https://www.comillas.edu/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -576,7 +576,7 @@ const timelineData = {
         en: [
             {
                 type: "academic",
-                title: "BSc Mathematical Engineering & AI",
+                title: "BE Mathematical Engineering & AI",
                 institution: "Comillas ICAI",
                 start: "2021-09",
                 end: "2025-06",
@@ -592,7 +592,7 @@ const timelineData = {
             },
             {
                 type: "academic",
-                title: "MSc in Artificial Intelligence",
+                title: "Master's Degree in Artificial Intelligence",
                 institution: "Comillas ICAI",
                 start: "2025-09",
                 end: "present",
