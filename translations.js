@@ -362,7 +362,7 @@ const portfolioDataTranslations = {
                 company: "Universidad Pontificia Comillas",
                 location: "Madrid, España",
                 date: "Sep 2025 – Abr 2026",
-                description: "Actualmente trabajo como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUS para estudiantes de IA",
+                description: "Actualmente trabajo como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUs para estudiantes de IA",
                 link: "https://www.comillas.edu/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -494,7 +494,7 @@ const portfolioDataTranslations = {
                 "IA Probabilística",
                 "Robótica",
                 "Aprendizaje por Refuerzo Profundo",
-                "Redes Neuronales Informadas por Física (PIINs)"
+                "Redes Neuronales Informadas por Física (PINNs)"
             ],
             "Herramientas y Frameworks": [
                 "PyTorch",
@@ -698,14 +698,14 @@ const timelineData = {
 // Update these values whenever you want. The UI pulls from here.
 const currentlyData = {
     en: {
-        reading: "Thinking Fast and Slow — Kahneman",
-        building: "Visual SLAM for an autonomous wheelchair",
-        focus: "Deep Generative Models & Probabilistic AI"
+        reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
+        building: "Visual topologic SLAM",
+        focus: "Final Master's Exams"
     },
     es: {
-        reading: "Pensar rápido, pensar despacio — Kahneman",
-        building: "SLAM visual para una silla de ruedas autónoma",
-        focus: "Modelos Generativos Profundos e IA Probabilística"
+        reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
+        building: "Visual topologic SLAM",
+        focus: "Exámenes finales del máster"
     }
 };
 
