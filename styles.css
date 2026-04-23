@@ -332,10 +332,14 @@ section {
 }
 
 /* Alternating subtle background bands for visual rhythm.
-   These wrap out to full width via a negative-margin ::before pseudo-element
-   so content stays centered at 1200px but the tint spans the whole viewport. */
+   Every main section gets a soft faded band. The Journey section has its own
+   stronger treatment (defined elsewhere); these are the subtle ones.
+   The tint wraps out to full width via an absolute ::before pseudo-element. */
 #about::before,
+#experience::before,
+#education::before,
 #projects::before,
+#skills::before,
 #awards::before {
     content: '';
     position: absolute;
@@ -344,18 +348,39 @@ section {
     transform: translateX(-50%);
     width: 100vw;
     height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Tinted sections (alternating) get a soft beige band that fades in/out vertically */
+#about::before,
+#projects::before,
+#awards::before {
     background: linear-gradient(180deg,
         rgba(235, 229, 217, 0) 0%,
         rgba(235, 229, 217, 0.55) 10%,
         rgba(235, 229, 217, 0.55) 90%,
         rgba(235, 229, 217, 0) 100%);
-    z-index: -1;
-    pointer-events: none;
+}
+
+/* The "negative" sections get a slightly lighter, almost-white fade that still
+   has vertical fade-in/out edges so the section feels self-contained. */
+#experience::before,
+#education::before,
+#skills::before {
+    background: linear-gradient(180deg,
+        rgba(255, 253, 247, 0) 0%,
+        rgba(255, 253, 247, 0.6) 10%,
+        rgba(255, 253, 247, 0.6) 90%,
+        rgba(255, 253, 247, 0) 100%);
 }
 
 /* Lift content above the tint */
 #about > *,
+#experience > *,
+#education > *,
 #projects > *,
+#skills > *,
 #awards > * {
     position: relative;
     z-index: 1;

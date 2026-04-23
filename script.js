@@ -511,19 +511,18 @@ function renderSkills() {
     });
 }
 
-// Mapping: skill name (normalized) -> simpleicons slug + optional brand color.
-// Keys match the start of the skill string, case-insensitive. If a skill is not
-// in the map it renders as a text-only tag (which is fine for abstract concepts
-// like "Deep Learning" or "Linear Algebra").
+// Mapping: skill name (normalized) -> simpleicons slug + official brand color.
+// All entries below are verified against the simple-icons npm package.
+// Skills not in this map render as plain text tags — that's intentional for
+// abstract concepts (Deep Learning, Linear Algebra, Robotics, PINNs, etc.)
+// and for technologies without an official simple-icons logo (MATLAB, C#).
 const SKILL_ICONS = {
     "python":      { slug: "python",    color: "3776AB" },
     "r":           { slug: "r",         color: "276DC3" },
-    "c#":          { slug: "csharp",    color: "512BD4" },
     "sql":         { slug: "mysql",     color: "4479A1" },
     "pytorch":     { slug: "pytorch",   color: "EE4C2C" },
     "ros":         { slug: "ros",       color: "22314E" },
     "opencv":      { slug: "opencv",    color: "5C3EE8" },
-    "matlab":      { slug: "octave",    color: "0790C0" },
     "git":         { slug: "git",       color: "F05032" },
     "docker":      { slug: "docker",    color: "2496ED" },
     "n8n":         { slug: "n8n",       color: "EA4B71" }
@@ -531,10 +530,19 @@ const SKILL_ICONS = {
 
 function getSkillIcon(skillName) {
     const lower = skillName.toLowerCase().trim();
-    // Try exact key match first (longest first for specificity)
+    // Match either exact, or with a space/parenthesis/number right after the key.
+    // This prevents false positives like "Robotics" matching "ros", or
+    // "Python (Advanced)" still matching "python".
     const keys = Object.keys(SKILL_ICONS).sort((a, b) => b.length - a.length);
     for (const key of keys) {
-        if (lower.startsWith(key)) {
+        if (lower === key) {
+            const meta = SKILL_ICONS[key];
+            return `https://cdn.simpleicons.org/${meta.slug}/${meta.color}`;
+        }
+        // Allow: "python (advanced)", "ros 2", "sql (postgres)"
+        // Disallow: "robotics" matching "ros"
+        const nextChar = lower.charAt(key.length);
+        if (lower.startsWith(key) && (nextChar === ' ' || nextChar === '(' || /[0-9]/.test(nextChar))) {
             const meta = SKILL_ICONS[key];
             return `https://cdn.simpleicons.org/${meta.slug}/${meta.color}`;
         }
