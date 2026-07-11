@@ -7,10 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSmoothScrolling();
     setupNavbarScroll();
     setupLanguageSwitcher();
-    setupScrollAnimations();
+    setupThemeToggle();
     setupReadingProgress();
     setupCommandPalette();
 });
+
+// ===================================
+// Theme (light / dark)
+// ===================================
+// The initial theme is applied by an inline script in <head> (before first
+// paint). This only wires up the navbar toggle.
+function setupThemeToggle() {
+    const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('preferredTheme', next);
+        // Let theme-aware components (e.g. the mesh canvas) re-read colors
+        window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+    });
+}
 
 // ===================================
 // Language Management
@@ -59,6 +76,15 @@ function updateLanguageButtons() {
 }
 
 function updatePageLanguage() {
+    // Keep the document language in sync (screen readers, SEO)
+    document.documentElement.lang = currentLanguage;
+    const meta = translations[currentLanguage].meta;
+    if (meta) {
+        document.title = meta.title;
+        const descEl = document.querySelector('meta[name="description"]');
+        if (descEl) descEl.content = meta.description;
+    }
+
     // Update static translations
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.dataset.i18n;
@@ -126,7 +152,7 @@ function updateHeroSection() {
     document.querySelector('.hero-content .subtitle').textContent = t.subtitle;
     document.querySelector('.hero-content .hero-description').textContent = t.description;
     document.querySelector('.btn-primary').textContent = t.contactBtn;
-    document.querySelector('.btn-secondary').textContent = t.projectsBtn;
+    document.querySelector('.cta-buttons .btn-secondary:not(.btn-cv)').textContent = t.projectsBtn;
     document.querySelector('.btn-cv').textContent = t.cvBtn;
 }
 
@@ -187,12 +213,8 @@ function updateCurrently() {
 // Initialize Portfolio Content
 // ===================================
 function initializePortfolio() {
-    renderTimeline();
-    renderExperience();
-    renderEducation();
-    renderProjects();
-    renderSkills();
-    renderAwards();
+    // updatePageLanguage() already renders every dynamic section,
+    // so a single call covers the initial paint too.
     updatePageLanguage();
 }
 
@@ -301,7 +323,7 @@ function renderTimeline() {
             : `top: ${laneOffset}px;`;
 
         const logoHTML = ev.logo
-            ? `<img src="${ev.logo}" alt="${ev.institution}" class="tl-logo" onerror="this.style.display='none'">`
+            ? `<img src="${ev.logo}" alt="${ev.institution}" class="tl-logo" loading="lazy" decoding="async" onerror="this.style.display='none'">`
             : '';
 
         const endLabel = ev.end === 'present'
@@ -384,7 +406,7 @@ function createExperienceCard(exp) {
         : '';
     
     const logoHTML = exp.logo
-        ? `<img src="${exp.logo}" alt="${exp.company}" class="card-logo">`
+        ? `<img src="${exp.logo}" alt="${exp.company}" class="card-logo" loading="lazy" decoding="async">`
         : '';
     
     card.innerHTML = `
@@ -429,7 +451,7 @@ function createEducationCard(edu) {
         : '';
     
     const logoHTML = edu.logo
-        ? `<img src="${edu.logo}" alt="${edu.institution}" class="card-logo">`
+        ? `<img src="${edu.logo}" alt="${edu.institution}" class="card-logo" loading="lazy" decoding="async">`
         : '';
     
     // Handle honors section separately if it exists
@@ -514,8 +536,8 @@ function createProjectCard(project) {
         : '';
     
     // Projects don't use icons anymore, only images
-    const imageHTML = project.image 
-        ? `<img src="${project.image}" alt="${project.title}">`
+    const imageHTML = project.image
+        ? `<img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async">`
         : `<div class="project-placeholder"></div>`;
     
     card.innerHTML = `
@@ -592,7 +614,7 @@ function createSkillCard(category, skills) {
         .map(skill => {
             const iconUrl = getSkillIcon(skill);
             const iconHTML = iconUrl
-                ? `<img src="${iconUrl}" alt="" class="skill-tag-icon" onerror="this.style.display='none'">`
+                ? `<img src="${iconUrl}" alt="" class="skill-tag-icon" loading="lazy" decoding="async" onerror="this.style.display='none'">`
                 : '';
             return `<span class="skill-tag${iconUrl ? ' has-icon' : ''}">${iconHTML}${skill}</span>`;
         })
@@ -632,9 +654,9 @@ function createAwardCard(award) {
         : '';
     
     // Use image if available, otherwise use icon as SVG
-    const iconHTML = award.image 
-        ? `<img src="${award.image}" alt="${award.title}" class="award-image">`
-        : `<img src="${award.icon}" alt="${award.title}" class="award-icon-svg">`;
+    const iconHTML = award.image
+        ? `<img src="${award.image}" alt="${award.title}" class="award-image" loading="lazy" decoding="async">`
+        : `<img src="${award.icon}" alt="${award.title}" class="award-icon-svg" loading="lazy" decoding="async">`;
     
     card.innerHTML = `
         ${iconHTML}
@@ -653,30 +675,25 @@ function createAwardCard(award) {
 // Smooth Scrolling for Navigation
 // ===================================
 function setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            
-            if (targetId === '#') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                return;
-            }
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const navHeight = document.querySelector('nav').offsetHeight;
-                const targetPosition = targetElement.offsetTop - navHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+    // Delegated listener: also covers anchors rendered later
+    // (timeline bars, cards re-rendered on language switch).
+    document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href');
+
+        if (targetId === '#') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const navHeight = document.getElementById('navbar').offsetHeight;
+            const targetPosition = targetElement.offsetTop - navHeight - 20;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
     });
 }
 
@@ -685,20 +702,18 @@ function setupSmoothScrolling() {
 // ===================================
 function setupNavbarScroll() {
     const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add shadow when scrolled
-        if (currentScroll > 0) {
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        } else {
-            navbar.style.boxShadow = 'none';
+    let scrolled = false;
+
+    const onScroll = () => {
+        const isScrolled = window.scrollY > 0;
+        if (isScrolled !== scrolled) {
+            scrolled = isScrolled;
+            navbar.classList.toggle('is-scrolled', scrolled);
         }
-        
-        lastScroll = currentScroll;
-    });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 }
 
 // ===================================
@@ -715,7 +730,13 @@ function scrollToTop() {
 
 // Intersection Observer for scroll animations — adds "is-visible"
 // to any element carrying the "reveal" class when it enters the viewport.
+let revealObserver = null;
+
 function setupScrollAnimations() {
+    // Drop the previous observer (language switches rebuild the DOM,
+    // so stale observers would pile up otherwise).
+    if (revealObserver) revealObserver.disconnect();
+
     const observerOptions = {
         threshold: 0.08,
         rootMargin: '0px 0px -40px 0px'
@@ -733,6 +754,8 @@ function setupScrollAnimations() {
             }
         });
     }, observerOptions);
+
+    revealObserver = observer;
 
     // Observe any element flagged as .reveal
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -770,8 +793,19 @@ function setupReadingProgress() {
         bar.style.width = `${pct}%`;
     };
 
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    // Coalesce scroll events into one style write per frame
+    let ticking = false;
+    const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            update();
+            ticking = false;
+        });
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
     update();
 }
 
@@ -919,4 +953,12 @@ function setupCommandPalette() {
 
     // Expose trigger hook (e.g. a visible button can call window.openCmdk())
     window.openCmdk = open;
+
+    // Show the right modifier key on non-Apple platforms
+    const isApplePlatform = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+    if (!isApplePlatform) {
+        document.querySelectorAll('.cmdk-kbd, .kbd-combo').forEach(el => {
+            el.textContent = 'Ctrl K';
+        });
+    }
 }

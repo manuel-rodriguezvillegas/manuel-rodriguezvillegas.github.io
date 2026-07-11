@@ -4,6 +4,10 @@
 
 const translations = {
     en: {
+        meta: {
+            title: "Manuel Rodríguez Villegas - AI Engineering Graduate Student",
+            description: "MSc in Artificial Intelligence at Comillas ICAI. Geometric AI Intern at Audi AG — deep learning on 3D data (meshes, CAD, voxels). Projects in computer vision, robotics and geometric deep learning."
+        },
         nav: {
             about: "About",
             journey: "Journey",
@@ -17,7 +21,8 @@ const translations = {
             description: "Curious mind focused on AI for human benefit, deep learning and the pursuit of elegant, efficient solutions.",
             contactBtn: "Get in Touch",
             projectsBtn: "View Projects",
-            cvBtn: "View CV"
+            cvBtn: "View CV",
+            kbdHint: "to navigate from anywhere"
         },
         sections: {
             about: "About Me",
@@ -35,9 +40,17 @@ const translations = {
             exchange: "Exchange / Abroad",
             present: "Present"
         },
+        mesh: {
+            eyebrow: "Geometric AI",
+            description: "I work with 3D data — meshes, CAD models, voxel grids. This icosphere is rendered by a tiny 3D engine written in plain JavaScript for this page: no libraries, just projection, shading and a bit of linear algebra.",
+            solid: "Solid",
+            wireframe: "Wireframe",
+            points: "Points",
+            hint: "Drag to rotate · Auto-spins when idle"
+        },
         about: {
-            p1: "Hi! I'm Manuel, Master's Degree student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BE in Mathematical Engineering and AI. My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
-            p2: "I would describe myself as a rigorous individual, obsessed with excellence, optimization, and the search for meaning in a field as complex as AI. Given my academic background, which combines deep mathematical foundations with their applications to AI, I consider my profile to bridge the gap between mathematical rigor and state-of-the-art AI systems.",
+            p1: "Hi! I'm Manuel, Master's Degree student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BE in Mathematical Engineering and AI. My academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
+            p2: "My background combines deep mathematical foundations with state-of-the-art AI systems. I believe the full potential of today's technologies can only be unlocked — and tomorrow's built — by understanding them from first principles.",
             p3: "Beyond my professional interests, I enjoy fitness, nature, and reading. I consider these essential to living a balanced life, especially when shared with others."
         },
         links: {
@@ -77,6 +90,10 @@ const translations = {
         }
     },
     es: {
+        meta: {
+            title: "Manuel Rodríguez Villegas - Estudiante de Máster en IA",
+            description: "Máster en Inteligencia Artificial en Comillas ICAI. Becario en IA Geométrica en Audi AG — deep learning sobre datos 3D (mallas, CAD, vóxeles). Proyectos de visión por computador, robótica y aprendizaje profundo geométrico."
+        },
         nav: {
             about: "Sobre mí",
             journey: "Trayectoria",
@@ -90,7 +107,8 @@ const translations = {
             description: "Estudiante curioso y proactivo enfocado en la IA para el beneficio humano, el aprendizaje profundo y la búsqueda de soluciones elegantes y eficientes.",
             contactBtn: "Contactar",
             projectsBtn: "Ver Proyectos",
-            cvBtn: "Ver CV"
+            cvBtn: "Ver CV",
+            kbdHint: "para navegar desde cualquier sitio"
         },
         sections: {
             about: "Sobre mí",
@@ -108,9 +126,17 @@ const translations = {
             exchange: "Estancia / Internacional",
             present: "Actualidad"
         },
+        mesh: {
+            eyebrow: "IA Geométrica",
+            description: "Trabajo con datos 3D — mallas, modelos CAD, rejillas de vóxeles. Esta icoesfera está renderizada por un pequeño motor 3D escrito en JavaScript puro para esta página: sin librerías, solo proyección, sombreado y algo de álgebra lineal.",
+            solid: "Sólido",
+            wireframe: "Wireframe",
+            points: "Puntos",
+            hint: "Arrastra para rotar · Gira sola en reposo"
+        },
         about: {
             p1: "¡Hola! Soy Manuel, estudiante de Máster en Inteligencia Artificial en la Universidad Pontificia Comillas (Madrid) con un Grado en Ingeniería Matemática e IA. Mi trayectoria académica me ha llevado de Madrid a <strong>Cornell University</strong> (Nueva York) e <strong>Imperial College London</strong>, donde he trabajado con diferentes arquitecturas en visión por computador, robótica e IA generativa.",
-            p2: "Me describiría como un chico riguroso, obsesionado con la excelencia, la optimización y la búsqueda de significado en un campo tan complejo como la IA. Dada mi formación académica, que profundiza en sistemas de IA a partir de su fundamento matemático, considero que mi perfil cierra la brecha entre el rigor matemático y los sistemas de IA de última generación.",
+            p2: "Mi formación combina fundamentos matemáticos profundos con sistemas de IA de última generación. Creo que el potencial de las tecnologías actuales solo se aprovecha — y las del futuro solo se construyen — entendiéndolas desde sus principios fundamentales.",
             p3: "Más allá de mis intereses profesionales, disfruto del deporte, la naturaleza y la lectura, actividades que considero esenciales para vivir una vida equilibrada, especialmente cuando se comparten con otros."
         },
         links: {
@@ -156,11 +182,20 @@ const portfolioDataTranslations = {
     en: {
         experience: [
             {
+                title: "Geometric AI Intern",
+                company: "Audi AG",
+                location: "Ingolstadt, Germany",
+                date: "Jul – Nov 2026",
+                description: "Deep learning on 3D data — meshes, CAD models, and voxel representations — for automotive design and engineering at Audi's Ingolstadt headquarters, plus optimization of agentic AI workflows for internal development processes. Writing my Master's Thesis in parallel.",
+                link: "https://www.audi.com/en.html",
+                logo: "assets/icons/experience/audi.png"
+            },
+            {
                 title: "Teaching Assistant",
                 company: "Comillas Pontifical University",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – Apr 2026",
-                description: "I worked as a Teaching Assistant at my university, collaborating on the implementation of a GPU cluster for AI students",
+                description: "Helped design and deploy a GPU cluster now used by AI students for their deep learning coursework.",
                 link: "https://www.comillas.edu/en/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -169,7 +204,7 @@ const portfolioDataTranslations = {
                 company: "Azzulei Technologies",
                 location: "Madrid, Spain",
                 date: "Jun – Aug 2025",
-                description: "For my third summer internship I joined the startup Azzulei Technologies, where my role consisted on developing an automated camera control system for sports events. I successfully achieved this task by implementing a real-time Multi-Object Tracking system using YOLO, significantly improving broadcast quality and reducing manual operation requirements. I also designed a virtual commentary generator using open-source LLMs and text-to-speech (TTS) models for automated commentary of matches.",
+                description: "Built a real-time multi-object tracking system (YOLO) that automates camera control for live sports broadcasts, replacing manual operation. Also prototyped an automated match commentary generator with open-source LLMs and text-to-speech models.",
                 link: "https://azzulei.com/en/",
                 logo: "assets/icons/experience/azzulei.png"
             },
@@ -178,7 +213,7 @@ const portfolioDataTranslations = {
                 company: "Imperial College London",
                 location: "Remote (London, UK)",
                 date: "Jun – Aug 2024",
-                description: "During the summer of 2024, I participated in the Undergraduate Research Opportunities Programme (UROP) at Imperial College London. My work focused on reproducing complex dynamical systems (Lotka–Volterra, SIR, Lorenz) using Neural Ordinary Differential Equations (Neural ODEs) and Physics-Informed Neural Networks (PINNs). I successfully developed robust models in PyTorch that generalized well across varying initial conditions, collaborating actively with international PhD students.",
+                description: "Modelled complex dynamical systems (Lotka–Volterra, SIR, Lorenz) with Neural ODEs and Physics-Informed Neural Networks during the UROP research programme, building PyTorch models that generalized across varying initial conditions alongside an international PhD team.",
                 link: "https://www.imperial.ac.uk/urop/",
                 logo: "assets/icons/experience/imperial.png"
             },
@@ -187,7 +222,7 @@ const portfolioDataTranslations = {
                 company: "Endesa",
                 location: "Madrid, Spain",
                 date: "Jun – Aug 2023",
-                description: "For my first internship I joined Endesa, one of Spain's biggest energy companies. I focused on estimating daily Iberian ancillary services costs, achieving >90% accuracy using regression and MLP techniques, providing valuable insights for energy market forecasting.",
+                description: "Built regression and MLP models estimating daily Iberian ancillary-services costs with >90% accuracy, used for energy market forecasting at one of Spain's largest utilities.",
                 link: "https://www.endesa.com/en",
                 logo: "assets/icons/experience/endesa.png"
             }
@@ -226,7 +261,7 @@ const portfolioDataTranslations = {
             {
                 title: "Visual Topological SLAM",
                 tech: "ROS2, PyTorch, Deep Learning, Computer Vision, NLP",
-                description: "For my Bachelor Thesis, I implemented a visual SLAM system integrating vision foundation models (CNN, AutoEncoder) with NLP and graph theory for voice-controlled indoor navigation. Features real-time mapping and autonomous navigation capabilities. The project was developed as part of the UNIJES SocialTech Challenge, a competition with social purposes where different Spanish universities build an autonomous wheelchair.",
+                description: "Bachelor Thesis: voice-controlled indoor navigation for an autonomous wheelchair. Combines vision foundation models with NLP and graph theory for real-time topological mapping and autonomous navigation. Built for the UNIJES SocialTech Challenge.",
                 link: "https://github.com/rdgzmanuel/visual_topological_slam",
                 icon: "🗺️",
                 image: "assets/projects/tfg_map.png",
@@ -235,7 +270,7 @@ const portfolioDataTranslations = {
             {
                 title: "Multi-Object Tracking System",
                 tech: "YOLO, Computer Vision, Optical Flow, PyTorch, ONNX",
-                description: "During my internship at Azzulei Techonologies, I developed from scratch a real-time tracking system for automated camera control in sports events. It included advanced object detection and tracking algorithms for efficient broadcast automation, as well as a digitial commenatry generator based on LLMs and Text-to-Speech (TTS) systems.",
+                description: "Real-time tracking system that automates camera control for sports broadcasts — YOLO detection, optical-flow tracking, ONNX deployment — plus an LLM + TTS match commentary generator. Developed from scratch at Azzulei Technologies.",
                 link: "https://github.com/rdgzmanuel/ai_camera",
                 icon: "🎥",
                 image: "assets/projects/azzulei.png",
@@ -244,7 +279,7 @@ const portfolioDataTranslations = {
             {
                 title: "Virtual Assistant for Train Operators",
                 tech: "PyTorch, Machine Learning, NLP",
-                description: "As the winning project of the 10th Smart Industry Hackathon, I developed a virtual assistant with an intelligent recommendation system for train operators. The operator enters the symptom of the malfunction, and the agent recommends the most likely faulty components along with their associated repairs. The project was developed in a single morning and won first prize, competing against 9 other teams from Madrid and Seville.",
+                description: "Winner of the 10th Smart Industry Hackathon: a fault-diagnosis assistant that maps symptoms described by train operators to the most likely faulty components and their repairs. Built in a single morning — first among 10 teams from Madrid and Seville.",
                 link: "https://github.com/rdgzmanuel/hackathon_kearney",
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
@@ -253,7 +288,7 @@ const portfolioDataTranslations = {
             {
                 title: "Image Processing via Calculus of Variations",
                 tech: "Python, Calculus of Variations, Image Processing",
-                description: "As the final project of Diferential Methods of AI, I studied and implemented image processing techniques based on calculus of variations, focusing on image denoising. The project included a comprehensive report detailing the mathematical foundations and practical implementations of each technique, with a particular focus on medical images.",
+                description: "Variational methods for image denoising, applied to medical imaging (brain MRI, X-ray scans). Includes a full report on the mathematical foundations and implementation of each technique.",
                 link: "https://github.com/rdgzmanuel/image_processing",
                 icon: "🖼️",
                 image: "assets/projects/brain_tv.png",
@@ -262,7 +297,7 @@ const portfolioDataTranslations = {
             {
                 title: "Neural Networks on Riemannian Manifolds",
                 tech: "Differential Geometry, PyTorch, Deep Learning",
-                description: "This work studies the implementation of neural networks that operate with Riemannian data and parameters, optimizing with the natural gradient for a much more efficient training. The project includes a comprehensive report detailing the mathematical foundations and practical implementations of these techniques.",
+                description: "Neural networks operating on Riemannian data and parameters, trained with natural-gradient optimization for markedly faster convergence. Includes a report on the underlying differential geometry.",
                 link: "https://github.com/rdgzmanuel/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
@@ -271,10 +306,10 @@ const portfolioDataTranslations = {
             {
                 title: "Explainability in Traffic Sign Recognition",
                 tech: "Computer Vision, PyTorch, Deep Learning, XAI",
-                description: "In this project I analyze different models used for traffic sign recognition from an explainability perspective. The aime is to understand what the models are focusing on and how this affects their performance.",
+                description: "Explainability analysis of traffic-sign recognition models: what the networks attend to when classifying, and how it affects their performance.",
                 link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
                 icon: "🧠",
-                image: "assets/projects/xai.png",
+                image: null,
                 imageId: "xai"
             },  
         ],
@@ -346,25 +381,26 @@ const portfolioDataTranslations = {
                 description: "2nd highest GPA in Community of Madrid",
                 icon: "assets/icons/awards/madrid.png",
                 link: null
-            },
-            {
-                title: "Kumon Mathematics Programme",
-                year: "2020",
-                description: "Completed the Kumon Mathematics Programme",
-                icon: "assets/icons/awards/kumon.png",
-                link: "https://www.kumon.org",
-                image: "assets/icons/awards/kumon.png"
             }
         ]
     },
     es: {
         experience: [
             {
+                title: "Becario en IA Geométrica",
+                company: "Audi AG",
+                location: "Ingolstadt, Alemania",
+                date: "Jul – Nov 2026",
+                description: "Deep learning sobre datos 3D — mallas, modelos CAD y representaciones en vóxeles — para el diseño y la ingeniería del automóvil en la sede central de Audi en Ingolstadt, junto con la optimización de flujos de trabajo agénticos para procesos internos de desarrollo. En paralelo, desarrollo mi Trabajo de Fin de Máster.",
+                link: "https://www.audi.com/en.html",
+                logo: "assets/icons/experience/audi.png"
+            },
+            {
                 title: "Asistente de Profesorado",
                 company: "Universidad Pontificia Comillas",
                 location: "Madrid, España",
                 date: "Sep 2025 – Abr 2026",
-                description: "Trabajé como Asistente de Profesorado en mi universidad, colaborando en la implementación de un clúster de GPUs para estudiantes de IA",
+                description: "Colaboré en el diseño y despliegue de un clúster de GPUs que hoy utilizan los estudiantes de IA en sus asignaturas de deep learning.",
                 link: "https://www.comillas.edu/",
                 logo: "assets/icons/experience/comillas.png"
             },
@@ -373,7 +409,7 @@ const portfolioDataTranslations = {
                 company: "Azzulei Technologies",
                 location: "Madrid, España",
                 date: "Jun – Ago 2025",
-                description: "Durante mis terceras prácticas de verano trabajé en la startup Azzulei Technologies, donde desarrollé desde cero un sistema de control automático de cámara para eventos deportivos. Para ello implementé un sistema de seguimiento de múltiples objetivos en tiempo real usando YOLO, mejorando significativamente la calidad de transmisión y reduciendo los requisitos de operación manual. También diseñé un generador de comentarios virtuales usando LLMs de código abierto y modelos Text-to-Speech (TTS).",
+                description: "Desarrollé un sistema de seguimiento multi-objeto en tiempo real (YOLO) que automatiza el control de cámara en retransmisiones deportivas, sustituyendo la operación manual. También prototipé un generador automático de comentarios con LLMs de código abierto y modelos text-to-speech.",
                 link: "https://azzulei.com/",
                 logo: "assets/icons/experience/azzulei.png"
             },
@@ -382,7 +418,7 @@ const portfolioDataTranslations = {
                 company: "Imperial College London",
                 location: "Remoto (Londres, Reino Unido)",
                 date: "Jun – Ago 2024",
-                description: "Durante el verano de 2024, participé en el Undergraduate Research Opportunities Programme (UROP) del Imperial College London. Mi trabajo se centró en reproducir sistemas dinámicos complejos (Lotka–Volterra, SIR, Lorenz) utilizando Ecuaciones Diferenciales Ordinarias Neuronales (Neural ODEs) y Physicis-Informed Neural Networks (PINNs). Desarrollé modelos robustos en PyTorch que generalizaban bien para diferentes condiciones iniciales, colaborando activamente con estudiantes de doctorado internacionales.",
+                description: "Modelé sistemas dinámicos complejos (Lotka–Volterra, SIR, Lorenz) con Neural ODEs y Physics-Informed Neural Networks dentro del programa de investigación UROP, construyendo modelos en PyTorch que generalizaban ante distintas condiciones iniciales junto a un equipo internacional de doctorandos.",
                 link: "https://www.imperial.ac.uk/urop/",
                 logo: "assets/icons/experience/imperial.png"
             },
@@ -391,7 +427,7 @@ const portfolioDataTranslations = {
                 company: "Endesa",
                 location: "Madrid, España",
                 date: "Jun – Ago 2023",
-                description: "Durante mis primeras prácticas trabajé en Endesa, una de las compañías energéticas más grandes de España. Me centré en estimar los costes diarios de servicios auxiliares ibéricos, logrando >90% de precisión usando técnicas de regresión y MLP, proporcionando información valiosa para la predicción del mercado energético.",
+                description: "Construí modelos de regresión y MLP que estiman los costes diarios de servicios auxiliares ibéricos con >90% de precisión, empleados en la predicción del mercado energético de una de las mayores eléctricas de España.",
                 link: "https://www.endesa.com/",
                 logo: "assets/icons/experience/endesa.png"
             }
@@ -430,7 +466,7 @@ const portfolioDataTranslations = {
             {
                 title: "SLAM Topológico Visual",
                 tech: "ROS2, PyTorch, Deep Learning, Visión por Computador, NLP",
-                description: "Para mi Trabajo de Fin de Grado (TFG) implementé un sistema de SLAM visual integrando modelos fundamentales de visión (CNN, AutoEncoder) con NLP y teoría de grafos, habilitando la navegación interior controlada por voz. Incluye capacidades de mapeo en tiempo real y navegación autónoma. El proyecto fue desarrollado como parte del UNIJES SocialTech Challenge, una competición con fines sociales donde diferentes universidades españolas construyen una silla de ruedas autónoma.",
+                description: "Trabajo de Fin de Grado: navegación interior controlada por voz para una silla de ruedas autónoma. Combina modelos fundacionales de visión con NLP y teoría de grafos para mapeo topológico en tiempo real y navegación autónoma. Desarrollado para el UNIJES SocialTech Challenge.",
                 link: "https://github.com/rdgzmanuel/visual_topological_slam",
                 icon: "🗺️",
                 image: "assets/projects/tfg_map.png",
@@ -438,8 +474,8 @@ const portfolioDataTranslations = {
             },
             {
                 title: "Sistema de Seguimiento Multi-Objetivo",
-                tech: "PyTroch, YOLO, Visión por Computador, Flujo Óptico, ONNX",
-                description: "Durante mis prácticas en Azzulei Technologies, desarrollé desde cero un sistema de seguimiento en tiempo real enfocado en el control automático de la cámara en eventos deportivos. Implementé algoritmos avanzados de detección y seguimiento de objetos, así como un sistema de generación de comentarios virtuales.",
+                tech: "PyTorch, YOLO, Visión por Computador, Flujo Óptico, ONNX",
+                description: "Sistema de seguimiento en tiempo real que automatiza el control de cámara en retransmisiones deportivas — detección con YOLO, seguimiento por flujo óptico, despliegue en ONNX — más un generador de comentarios con LLMs y TTS. Desarrollado desde cero en Azzulei Technologies.",
                 link: "https://github.com/rdgzmanuel/ai_camera",
                 icon: "🎥",
                 image: "assets/projects/azzulei.png",
@@ -448,7 +484,7 @@ const portfolioDataTranslations = {
             {
                 title: "Asistente Virtual para Operarios de Trenes",
                 tech: "PyTorch, Machine Learning, NLP",
-                description: "Como proyecto ganador del X Hackathon de Industria Inteligente, desarrollé una asistente virtual con un sistema de recomendaciones inteligente para operarios de trenes. El operario introduce el síntome a de la avería y el agente le recomienda los componentes estropeados más probables junto a sus reparaciones asociadas. EL proyecto fue elaborado en una sola mañana y obtuvo el primer premio, enfrentándose a otros 9 equipos de Madrid y Sevilla.",
+                description: "Ganador del X Hackathon de Industria Inteligente: un asistente de diagnóstico de averías que asocia los síntomas descritos por el operario con los componentes defectuosos más probables y sus reparaciones. Construido en una sola mañana — primero entre 10 equipos de Madrid y Sevilla.",
                 link: "https://github.com/rdgzmanuel/hackathon_kearney",
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
@@ -457,7 +493,7 @@ const portfolioDataTranslations = {
             {
                 title: "Procesamiento de Imágenes mediante Cálculo de Variaciones",
                 tech: "Python, Cálculo de Variaciones, Procesamiento de Imágenes",
-                description: "Como proyecto final de Métodos Diferenciales de la IA, hemos estudiado y aplicado el uso del cálculo de variaciones sobre el procesamiento de imágenes. Nos hemos centrado en sus fundamentos matemátios y en su aplicación concreta en el campo de la imagen médica (resonancias cerebrales y escáneres de rayos-X).",
+                description: "Métodos variacionales para la eliminación de ruido en imágenes, aplicados a imagen médica (resonancias cerebrales y rayos X). Incluye un informe completo sobre los fundamentos matemáticos y la implementación de cada técnica.",
                 link: "https://github.com/rdgzmanuel/image_processing",
                 icon: "🖼️",
                 image: "assets/projects/brain_tv.png",
@@ -466,7 +502,7 @@ const portfolioDataTranslations = {
             {
                 title: "Redes Neuronales en Variedades Riemannianas",
                 tech: "Geometría Diferencial, PyTorch, Deep Learning",
-                description: "Proyecto sobre la implementación de redes neuronales que operan con datos y parámetros Riemannianos, optimizando con el gradiente natural para un entrenamiento mucho más eficiente. Incluye un informe detallado sobre los fundamentos matemáticos y la implementación de estas técnicas.",
+                description: "Redes neuronales que operan con datos y parámetros riemannianos, entrenadas con optimización de gradiente natural para una convergencia notablemente más rápida. Incluye un informe sobre la geometría diferencial subyacente.",
                 link: "https://github.com/rdgzmanuel/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
@@ -475,10 +511,10 @@ const portfolioDataTranslations = {
             {
                 title: "Explicabilidad en Reconocimiento de Señales de Tráfico",
                 tech: "PyTorch, Deep Learning, Visión por Computador, XAI",
-                description: "En este proyecto analizo diferentes modelos de reconocimiento de señales de tráfico desde el punto de vista de la explicabilidad, entendiendo qué partes de las imágenes son importantes para los modelos y cómo eso puede afecta a su rendimiento.",
+                description: "Análisis de explicabilidad de modelos de reconocimiento de señales de tráfico: a qué atienden las redes al clasificar y cómo afecta a su rendimiento.",
                 link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
                 icon: "🗺️",
-                image: "assets/projects/xai.png",
+                image: null,
                 imageId: "xai"
             },
         ],
@@ -550,14 +586,6 @@ const portfolioDataTranslations = {
                 description: "2ª nota más alta de la Comunidad de Madrid",
                 icon: "assets/icons/awards/madrid.png",
                 link: null
-            },
-            {
-                title: "Programa de Matemáticas Kumon",
-                year: "2020",
-                description: "Programa de matemáticas Kumon completado",
-                icon: "assets/icons/awards/kumon.png",
-                link: "https://www.kumon.org",
-                image: "assets/icons/awards/kumon.png"
             }
         ]
     }
@@ -573,7 +601,7 @@ const portfolioDataTranslations = {
 const timelineData = {
     // Global range shown on the axis. Adjust when adding years.
     rangeStart: "2021-09",
-    rangeEnd: "2026-09",
+    rangeEnd: "2026-12",
     events: {
         en: [
             {
@@ -631,6 +659,14 @@ const timelineData = {
                 start: "2025-09",
                 end: "2026-04",
                 logo: "assets/icons/experience/comillas.png"
+            },
+            {
+                type: "professional",
+                title: "Geometric AI Intern",
+                institution: "Audi AG",
+                start: "2026-07",
+                end: "2026-11",
+                logo: "assets/icons/experience/audi.png"
             }
         ],
         es: [
@@ -689,6 +725,14 @@ const timelineData = {
                 start: "2025-09",
                 end: "2026-04",
                 logo: "assets/icons/experience/comillas.png"
+            },
+            {
+                type: "professional",
+                title: "Becario en IA Geométrica",
+                institution: "Audi AG",
+                start: "2026-07",
+                end: "2026-11",
+                logo: "assets/icons/experience/audi.png"
             }
         ]
     }
@@ -701,13 +745,13 @@ const timelineData = {
 const currentlyData = {
     en: {
         reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
-        building: "Visual topologic SLAM",
-        focus: "Final Master's Exams"
+        building: "Master's Thesis",
+        focus: "Geometric AI @ Audi AG (Ingolstadt)"
     },
     es: {
         reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
-        building: "Visual topologic SLAM",
-        focus: "Exámenes finales del máster"
+        building: "Trabajo de Fin de Máster",
+        focus: "IA Geométrica en Audi AG (Ingolstadt)"
     }
 };
 

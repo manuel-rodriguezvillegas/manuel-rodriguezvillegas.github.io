@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Low-poly hexagonal gem in the site's accent palette -->
+  <polygon points="32,3 57,17.5 32,32" fill="#e2b98e"/>
+  <polygon points="57,17.5 57,46.5 32,32" fill="#cfa06c"/>
+  <polygon points="57,46.5 32,61 32,32" fill="#b8935f"/>
+  <polygon points="32,61 7,46.5 32,32" fill="#a5825a"/>
+  <polygon points="7,46.5 7,17.5 32,32" fill="#c49a6b"/>
+  <polygon points="7,17.5 32,3 32,32" fill="#d9ac7c"/>
+  <polygon points="32,3 57,17.5 57,46.5 32,61 7,46.5 7,17.5" fill="none" stroke="#8a6b45" stroke-width="2" stroke-linejoin="round"/>
+</svg>

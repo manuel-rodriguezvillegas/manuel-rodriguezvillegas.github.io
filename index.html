@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manuel Rodríguez Villegas - AI Engineering Graduate Student">
+    <meta name="description" content="MSc in Artificial Intelligence at Comillas ICAI. Geometric AI Intern at Audi AG — deep learning on 3D data (meshes, CAD, voxels). Projects in computer vision, robotics and geometric deep learning.">
     <title>Manuel Rodríguez Villegas - AI Engineering Graduate Student</title>
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Manuel Rodríguez Villegas — AI Engineering Graduate Student">
+    <meta property="og:description" content="MSc in Artificial Intelligence at Comillas ICAI. Geometric AI Intern at Audi AG — deep learning on 3D data (meshes, CAD, voxels).">
+    <meta property="og:url" content="https://rdgzmanuel.github.io/">
+    <meta property="og:image" content="https://rdgzmanuel.github.io/assets/pictures/profile.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Manuel Rodríguez Villegas — AI Engineering Graduate Student">
+    <meta name="twitter:description" content="MSc in Artificial Intelligence at Comillas ICAI. Geometric AI Intern at Audi AG — deep learning on 3D data (meshes, CAD, voxels).">
+    <meta name="twitter:image" content="https://rdgzmanuel.github.io/assets/pictures/profile.png">
+
+    <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Set theme before first paint to avoid a light-mode flash
+        (function () {
+            var saved = localStorage.getItem('preferredTheme');
+            var theme = (saved === 'dark' || saved === 'light')
+                ? saved
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -21,6 +47,10 @@
                 <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
             </ul>
             <div class="language-switcher">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
                 <button class="cmdk-trigger" onclick="window.openCmdk && window.openCmdk()" aria-label="Open command palette">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
                     <kbd class="cmdk-kbd">⌘K</kbd>
@@ -72,13 +102,37 @@
                     <span>Email</span>
                 </a>
             </div>
+
+            <p class="kbd-hint">
+                <kbd class="kbd-combo">⌘K</kbd>
+                <span data-i18n="hero.kbdHint">to navigate from anywhere</span>
+            </p>
         </div>
 
         <div class="hero-image">
             <div class="profile-pic">
-                <img src="assets/pictures/profile.png" alt="Manuel Rodríguez Villegas">
+                <img src="assets/pictures/profile.png" alt="Manuel Rodríguez Villegas" fetchpriority="high" decoding="async">
             </div>
         </div>
+
+        <a href="#journey" class="scroll-hint" aria-label="Scroll down">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </a>
+    </section>
+
+    <!-- Geometric AI demo -->
+    <section id="geometry" class="mesh-section">
+        <div class="mesh-text">
+            <h4 class="mesh-eyebrow" data-i18n="mesh.eyebrow">Geometric AI</h4>
+            <p class="mesh-description" data-i18n="mesh.description">I work with 3D data — meshes, CAD models, voxel grids. This icosphere is rendered by a tiny 3D engine written in plain JavaScript for this page: no libraries, just projection, shading and a bit of linear algebra.</p>
+            <div class="mesh-controls" role="group" aria-label="Render mode">
+                <button type="button" class="mesh-mode active" data-mode="solid" data-i18n="mesh.solid">Solid</button>
+                <button type="button" class="mesh-mode" data-mode="wireframe" data-i18n="mesh.wireframe">Wireframe</button>
+                <button type="button" class="mesh-mode" data-mode="points" data-i18n="mesh.points">Points</button>
+            </div>
+            <p class="mesh-hint" data-i18n="mesh.hint">Drag to rotate · Auto-spins when idle</p>
+        </div>
+        <canvas id="mesh-canvas" aria-label="Interactive 3D mesh demo"></canvas>
     </section>
 
     <!-- Timeline / Journey Section -->
@@ -107,14 +161,12 @@
         <div class="card">
             <p class="card-description">
                 Hi! I'm Manuel, MSc student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BSc in Mathematical Engineering and AI.
-                My journey academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've explored different architectures in computer
+                My academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've explored different architectures in computer
                 vision, robotics, and generative AI.
             </p>
             <p class="card-description">
-                I would describe myself as a rigorous individual, obsessed with excellence, optimization, and the search for meaning in a field as complex as AI.
-                Given my academic background, which combines deep mathematical foundations with their applications to AI, I consider my profile to bridge the gap
-                between mathematical rigor and state-of-the-art AI systems. Only by deeply understanding the core foundations of today's technologies
-                are we able to extract their full potential, optimize them, and build the future from there.
+                My background combines deep mathematical foundations with state-of-the-art AI systems. I believe the full potential of today's
+                technologies can only be unlocked — and tomorrow's built — by understanding them from first principles.
             </p>
             <p class="card-description">
                 Beyond my professional interests, I enjoy fitness, nature, and reading. I consider these essential to living a balanced life, especially when shared with others.
@@ -194,5 +246,6 @@
 
     <script src="translations.js"></script>
     <script src="script.js"></script>
+    <script src="mesh.js"></script>
 </body>
 </html>
