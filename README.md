@@ -20,7 +20,7 @@ The site includes:
 
 ## Usage
 
-Simply open `index.html` in a modern browser to view the site. You can also check `https://rdgzmanuel.github.io` to access the website.
+Simply open `index.html` in a modern browser to view the site. You can also check `https://manuel-rodriguezvillegas.github.io` to access the website.
 If you wish to reuse or adapt the code, feel free to clone the repository and modify as needed.
 
 ## Contact

@@ -262,7 +262,7 @@ const portfolioDataTranslations = {
                 title: "Visual Topological SLAM",
                 tech: "ROS2, PyTorch, Deep Learning, Computer Vision, NLP",
                 description: "Bachelor Thesis: voice-controlled indoor navigation for an autonomous wheelchair. Combines vision foundation models with NLP and graph theory for real-time topological mapping and autonomous navigation. Built for the UNIJES SocialTech Challenge.",
-                link: "https://github.com/rdgzmanuel/visual_topological_slam",
+                link: "https://github.com/manuel-rodriguezvillegas/visual_topological_slam",
                 icon: "🗺️",
                 image: "assets/projects/tfg_map.png",
                 imageId: "visual-slam"
@@ -271,7 +271,7 @@ const portfolioDataTranslations = {
                 title: "Multi-Object Tracking System",
                 tech: "YOLO, Computer Vision, Optical Flow, PyTorch, ONNX",
                 description: "Real-time tracking system that automates camera control for sports broadcasts — YOLO detection, optical-flow tracking, ONNX deployment — plus an LLM + TTS match commentary generator. Developed from scratch at Azzulei Technologies.",
-                link: "https://github.com/rdgzmanuel/ai_camera",
+                link: "https://github.com/manuel-rodriguezvillegas/ai_camera",
                 icon: "🎥",
                 image: "assets/projects/azzulei.png",
                 imageId: "multi-object-tracking"
@@ -280,7 +280,7 @@ const portfolioDataTranslations = {
                 title: "Virtual Assistant for Train Operators",
                 tech: "PyTorch, Machine Learning, NLP",
                 description: "Winner of the 10th Smart Industry Hackathon: a fault-diagnosis assistant that maps symptoms described by train operators to the most likely faulty components and their repairs. Built in a single morning — first among 10 teams from Madrid and Seville.",
-                link: "https://github.com/rdgzmanuel/hackathon_kearney",
+                link: "https://github.com/manuel-rodriguezvillegas/hackathon_kearney",
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
                 imageId: "hackathon"
@@ -289,7 +289,7 @@ const portfolioDataTranslations = {
                 title: "Image Processing via Calculus of Variations",
                 tech: "Python, Calculus of Variations, Image Processing",
                 description: "Variational methods for image denoising, applied to medical imaging (brain MRI, X-ray scans). Includes a full report on the mathematical foundations and implementation of each technique.",
-                link: "https://github.com/rdgzmanuel/image_processing",
+                link: "https://github.com/manuel-rodriguezvillegas/image_processing",
                 icon: "🖼️",
                 image: "assets/projects/brain_tv.png",
                 imageId: "brain-tv"
@@ -298,7 +298,7 @@ const portfolioDataTranslations = {
                 title: "Neural Networks on Riemannian Manifolds",
                 tech: "Differential Geometry, PyTorch, Deep Learning",
                 description: "Neural networks operating on Riemannian data and parameters, trained with natural-gradient optimization for markedly faster convergence. Includes a report on the underlying differential geometry.",
-                link: "https://github.com/rdgzmanuel/riemannian_geometry",
+                link: "https://github.com/manuel-rodriguezvillegas/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
                 imageId: "grassmann"
@@ -307,7 +307,7 @@ const portfolioDataTranslations = {
                 title: "Explainability in Traffic Sign Recognition",
                 tech: "Computer Vision, PyTorch, Deep Learning, XAI",
                 description: "Explainability analysis of traffic-sign recognition models: what the networks attend to when classifying, and how it affects their performance.",
-                link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
+                link: "https://github.com/ICAI-IMAT-XAI/final-project-manuel-rodriguezvillegas",
                 icon: "🧠",
                 image: null,
                 imageId: "xai"
@@ -359,7 +359,7 @@ const portfolioDataTranslations = {
                 year: "2025",
                 description: "Virtual assistant with recommendation system for train operators",
                 icon: "assets/icons/awards/caf.png",
-                link: "https://github.com/rdgzmanuel/hackathon_kearney"
+                link: "https://github.com/manuel-rodriguezvillegas/hackathon_kearney"
             },
             {
                 title: "Winner of UNIJES Social Tech Challenge",
@@ -467,7 +467,7 @@ const portfolioDataTranslations = {
                 title: "SLAM Topológico Visual",
                 tech: "ROS2, PyTorch, Deep Learning, Visión por Computador, NLP",
                 description: "Trabajo de Fin de Grado: navegación interior controlada por voz para una silla de ruedas autónoma. Combina modelos fundacionales de visión con NLP y teoría de grafos para mapeo topológico en tiempo real y navegación autónoma. Desarrollado para el UNIJES SocialTech Challenge.",
-                link: "https://github.com/rdgzmanuel/visual_topological_slam",
+                link: "https://github.com/manuel-rodriguezvillegas/visual_topological_slam",
                 icon: "🗺️",
                 image: "assets/projects/tfg_map.png",
                 imageId: "visual-slam"
@@ -476,7 +476,7 @@ const portfolioDataTranslations = {
                 title: "Sistema de Seguimiento Multi-Objetivo",
                 tech: "PyTorch, YOLO, Visión por Computador, Flujo Óptico, ONNX",
                 description: "Sistema de seguimiento en tiempo real que automatiza el control de cámara en retransmisiones deportivas — detección con YOLO, seguimiento por flujo óptico, despliegue en ONNX — más un generador de comentarios con LLMs y TTS. Desarrollado desde cero en Azzulei Technologies.",
-                link: "https://github.com/rdgzmanuel/ai_camera",
+                link: "https://github.com/manuel-rodriguezvillegas/ai_camera",
                 icon: "🎥",
                 image: "assets/projects/azzulei.png",
                 imageId: "multi-object-tracking"
@@ -485,7 +485,7 @@ const portfolioDataTranslations = {
                 title: "Asistente Virtual para Operarios de Trenes",
                 tech: "PyTorch, Machine Learning, NLP",
                 description: "Ganador del X Hackathon de Industria Inteligente: un asistente de diagnóstico de averías que asocia los síntomas descritos por el operario con los componentes defectuosos más probables y sus reparaciones. Construido en una sola mañana — primero entre 10 equipos de Madrid y Sevilla.",
-                link: "https://github.com/rdgzmanuel/hackathon_kearney",
+                link: "https://github.com/manuel-rodriguezvillegas/hackathon_kearney",
                 icon: "🚂",
                 image: "assets/projects/hackathon.png",
                 imageId: "hackathon"
@@ -494,7 +494,7 @@ const portfolioDataTranslations = {
                 title: "Procesamiento de Imágenes mediante Cálculo de Variaciones",
                 tech: "Python, Cálculo de Variaciones, Procesamiento de Imágenes",
                 description: "Métodos variacionales para la eliminación de ruido en imágenes, aplicados a imagen médica (resonancias cerebrales y rayos X). Incluye un informe completo sobre los fundamentos matemáticos y la implementación de cada técnica.",
-                link: "https://github.com/rdgzmanuel/image_processing",
+                link: "https://github.com/manuel-rodriguezvillegas/image_processing",
                 icon: "🖼️",
                 image: "assets/projects/brain_tv.png",
                 imageId: "brain-tv"
@@ -503,7 +503,7 @@ const portfolioDataTranslations = {
                 title: "Redes Neuronales en Variedades Riemannianas",
                 tech: "Geometría Diferencial, PyTorch, Deep Learning",
                 description: "Redes neuronales que operan con datos y parámetros riemannianos, entrenadas con optimización de gradiente natural para una convergencia notablemente más rápida. Incluye un informe sobre la geometría diferencial subyacente.",
-                link: "https://github.com/rdgzmanuel/riemannian_geometry",
+                link: "https://github.com/manuel-rodriguezvillegas/riemannian_geometry",
                 icon: "🧠",
                 image: "assets/projects/grassmann.png",
                 imageId: "grassmann"
@@ -512,7 +512,7 @@ const portfolioDataTranslations = {
                 title: "Explicabilidad en Reconocimiento de Señales de Tráfico",
                 tech: "PyTorch, Deep Learning, Visión por Computador, XAI",
                 description: "Análisis de explicabilidad de modelos de reconocimiento de señales de tráfico: a qué atienden las redes al clasificar y cómo afecta a su rendimiento.",
-                link: "https://github.com/ICAI-IMAT-XAI/final-project-rdgzmanuel",
+                link: "https://github.com/ICAI-IMAT-XAI/final-project-manuel-rodriguezvillegas",
                 icon: "🗺️",
                 image: null,
                 imageId: "xai"
@@ -564,7 +564,7 @@ const portfolioDataTranslations = {
                 year: "2025",
                 description: "Asistente virtual con sistema de recomendaciones para operarios de trenes",
                 icon: "assets/icons/awards/caf.png",
-                link: "https://github.com/rdgzmanuel/hackathon_kearney"
+                link: "https://github.com/manuel-rodriguezvillegas/hackathon_kearney"
             },
             {
                 title: "Ganador de UNIJES SocialTech Challenge",

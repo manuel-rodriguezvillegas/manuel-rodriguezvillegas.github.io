@@ -853,7 +853,7 @@ function setupCommandPalette() {
             { label: t.goAwards || 'Awards',       hint: t.section || 'Section', action: () => go('#awards') },
             { label: t.openCv || 'Open CV',        hint: t.action || 'Action',   action: () => window.open('assets/CV.pdf', '_blank') },
             { label: t.sendEmail || 'Send Email',  hint: t.action || 'Action',   action: () => location.href = 'mailto:manuel.rodriguezvillegas09@gmail.com' },
-            { label: t.openGithub || 'GitHub',     hint: t.action || 'Action',   action: () => window.open('https://github.com/rdgzmanuel', '_blank') },
+            { label: t.openGithub || 'GitHub',     hint: t.action || 'Action',   action: () => window.open('https://github.com/manuel-rodriguezvillegas', '_blank') },
             { label: t.openLinkedin || 'LinkedIn', hint: t.action || 'Action',   action: () => window.open('https://www.linkedin.com/in/mrodriguezvillegas', '_blank') },
             { label: t.switchEn || 'Switch to English',  hint: t.action || 'Action', action: () => switchLang('en') },
             { label: t.switchEs || 'Switch to Spanish',  hint: t.action || 'Action', action: () => switchLang('es') }
