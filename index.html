@@ -51,10 +51,6 @@
                     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                     <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 </button>
-                <button class="cmdk-trigger" onclick="window.openCmdk && window.openCmdk()" aria-label="Open command palette">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                    <kbd class="cmdk-kbd">⌘K</kbd>
-                </button>
                 <button class="lang-btn active" data-lang="en" aria-label="Switch to English">
                     <img src="assets/icons/flags/uk.png" alt="UK flag" class="flag">
                     <span class="lang-code">EN</span>
@@ -102,11 +98,6 @@
                     <span>Email</span>
                 </a>
             </div>
-
-            <p class="kbd-hint">
-                <kbd class="kbd-combo">⌘K</kbd>
-                <span data-i18n="hero.kbdHint">to navigate from anywhere</span>
-            </p>
         </div>
 
         <div class="hero-image">
@@ -118,21 +109,6 @@
         <a href="#journey" class="scroll-hint" aria-label="Scroll down">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </a>
-    </section>
-
-    <!-- Geometric AI demo -->
-    <section id="geometry" class="mesh-section">
-        <div class="mesh-text">
-            <h4 class="mesh-eyebrow" data-i18n="mesh.eyebrow">Geometric AI</h4>
-            <p class="mesh-description" data-i18n="mesh.description">I work with 3D data — meshes, CAD models, voxel grids. This icosphere is rendered by a tiny 3D engine written in plain JavaScript for this page: no libraries, just projection, shading and a bit of linear algebra.</p>
-            <div class="mesh-controls" role="group" aria-label="Render mode">
-                <button type="button" class="mesh-mode active" data-mode="solid" data-i18n="mesh.solid">Solid</button>
-                <button type="button" class="mesh-mode" data-mode="wireframe" data-i18n="mesh.wireframe">Wireframe</button>
-                <button type="button" class="mesh-mode" data-mode="points" data-i18n="mesh.points">Points</button>
-            </div>
-            <p class="mesh-hint" data-i18n="mesh.hint">Drag to rotate · Auto-spins when idle</p>
-        </div>
-        <canvas id="mesh-canvas" aria-label="Interactive 3D mesh demo"></canvas>
     </section>
 
     <!-- Timeline / Journey Section -->
@@ -246,6 +222,5 @@
 
     <script src="translations.js"></script>
     <script src="script.js"></script>
-    <script src="mesh.js"></script>
 </body>
 </html>

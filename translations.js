@@ -21,8 +21,7 @@ const translations = {
             description: "Curious mind focused on AI for human benefit, deep learning and the pursuit of elegant, efficient solutions.",
             contactBtn: "Get in Touch",
             projectsBtn: "View Projects",
-            cvBtn: "View CV",
-            kbdHint: "to navigate from anywhere"
+            cvBtn: "View CV"
         },
         sections: {
             about: "About Me",
@@ -40,14 +39,6 @@ const translations = {
             exchange: "Exchange / Abroad",
             present: "Present"
         },
-        mesh: {
-            eyebrow: "Geometric AI",
-            description: "I work with 3D data — meshes, CAD models, voxel grids. This icosphere is rendered by a tiny 3D engine written in plain JavaScript for this page: no libraries, just projection, shading and a bit of linear algebra.",
-            solid: "Solid",
-            wireframe: "Wireframe",
-            points: "Points",
-            hint: "Drag to rotate · Auto-spins when idle"
-        },
         about: {
             p1: "Hi! I'm Manuel, Master's Degree student in Artificial Intelligence at Comillas Pontifical University (Madrid) with a BE in Mathematical Engineering and AI. My academic journey has taken me from Madrid to <strong>Cornell University</strong> and <strong>Imperial College London</strong>, where I've worked on computer vision, robotics, and generative AI systems.",
             p2: "My background combines deep mathematical foundations with state-of-the-art AI systems. I believe the full potential of today's technologies can only be unlocked — and tomorrow's built — by understanding them from first principles.",
@@ -59,25 +50,6 @@ const translations = {
             viewProject: "View Project →",
             viewAward: "Learn More →",
             showAllProjects: "Show all projects"
-        },
-        cmdk: {
-            placeholder: "Type a command or search…",
-            empty: "No results",
-            section: "Section",
-            action: "Action",
-            goAbout: "Go to About",
-            goJourney: "Go to Journey",
-            goExperience: "Go to Experience",
-            goEducation: "Go to Education",
-            goProjects: "Go to Projects",
-            goSkills: "Go to Skills",
-            goAwards: "Go to Awards",
-            openCv: "Open CV (PDF)",
-            sendEmail: "Send Email",
-            openGithub: "Open GitHub",
-            openLinkedin: "Open LinkedIn",
-            switchEn: "Switch to English",
-            switchEs: "Switch to Spanish"
         },
         currently: {
             title: "Currently",
@@ -107,8 +79,7 @@ const translations = {
             description: "Estudiante curioso y proactivo enfocado en la IA para el beneficio humano, el aprendizaje profundo y la búsqueda de soluciones elegantes y eficientes.",
             contactBtn: "Contactar",
             projectsBtn: "Ver Proyectos",
-            cvBtn: "Ver CV",
-            kbdHint: "para navegar desde cualquier sitio"
+            cvBtn: "Ver CV"
         },
         sections: {
             about: "Sobre mí",
@@ -126,14 +97,6 @@ const translations = {
             exchange: "Estancia / Internacional",
             present: "Actualidad"
         },
-        mesh: {
-            eyebrow: "IA Geométrica",
-            description: "Trabajo con datos 3D — mallas, modelos CAD, rejillas de vóxeles. Esta icoesfera está renderizada por un pequeño motor 3D escrito en JavaScript puro para esta página: sin librerías, solo proyección, sombreado y algo de álgebra lineal.",
-            solid: "Sólido",
-            wireframe: "Wireframe",
-            points: "Puntos",
-            hint: "Arrastra para rotar · Gira sola en reposo"
-        },
         about: {
             p1: "¡Hola! Soy Manuel, estudiante de Máster en Inteligencia Artificial en la Universidad Pontificia Comillas (Madrid) con un Grado en Ingeniería Matemática e IA. Mi trayectoria académica me ha llevado de Madrid a <strong>Cornell University</strong> (Nueva York) e <strong>Imperial College London</strong>, donde he trabajado con diferentes arquitecturas en visión por computador, robótica e IA generativa.",
             p2: "Mi formación combina fundamentos matemáticos profundos con sistemas de IA de última generación. Creo que el potencial de las tecnologías actuales solo se aprovecha — y las del futuro solo se construyen — entendiéndolas desde sus principios fundamentales.",
@@ -145,25 +108,6 @@ const translations = {
             viewProject: "Ver Proyecto →",
             viewAward: "Más Información →",
             showAllProjects: "Mostrar todos los proyectos"
-        },
-        cmdk: {
-            placeholder: "Escribe un comando o busca…",
-            empty: "Sin resultados",
-            section: "Sección",
-            action: "Acción",
-            goAbout: "Ir a Sobre mí",
-            goJourney: "Ir a Trayectoria",
-            goExperience: "Ir a Experiencia",
-            goEducation: "Ir a Educación",
-            goProjects: "Ir a Proyectos",
-            goSkills: "Ir a Habilidades",
-            goAwards: "Ir a Premios",
-            openCv: "Abrir CV (PDF)",
-            sendEmail: "Enviar Email",
-            openGithub: "Abrir GitHub",
-            openLinkedin: "Abrir LinkedIn",
-            switchEn: "Cambiar a Inglés",
-            switchEs: "Cambiar a Español"
         },
         currently: {
             title: "Ahora mismo",
@@ -744,12 +688,12 @@ const timelineData = {
 // Update these values whenever you want. The UI pulls from here.
 const currentlyData = {
     en: {
-        reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
+        reading: "The Godfather - Mario Puzo",
         building: "Master's Thesis",
         focus: "Geometric AI @ Audi AG (Ingolstadt)"
     },
     es: {
-        reading: "El Puente de los Asesinos - Arturo Pérez-Reverte",
+        reading: "El Padrino - Mario Puzo",
         building: "Trabajo de Fin de Máster",
         focus: "IA Geométrica en Audi AG (Ingolstadt)"
     }
