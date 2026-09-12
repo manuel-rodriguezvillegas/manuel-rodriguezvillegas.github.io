@@ -5,7 +5,7 @@
 const translations = {
     en: {
         meta: {
-            title: "Manuel Rodríguez Villegas - Geometric AI Engineer",
+            title: "Manuel Rodríguez Villegas - AI Engineer",
             description: "Geometric AI Intern at Audi AG, building AI systems for geometry, computer vision and robotics. Selected work in visual topological mapping and geometric deep learning."
         },
         nav: {
@@ -17,7 +17,7 @@ const translations = {
         },
         hero: {
             subtitle: "Geometric AI Intern @ Audi AG",
-            description: "I build AI systems for geometry, vision and robotics — from first principles, with a bias toward simple and efficient solutions.",
+            description: "I build AI systems for geometry, vision and robotics. I like understanding a problem from the ground up and finding a simple, efficient way to solve it.",
             personal: "Outside of work, I enjoy reading, fitness, and spending as much time outdoors as I can.",
             contactBtn: "Get in Touch",
             projectsBtn: "View Projects",
@@ -27,30 +27,32 @@ const translations = {
             journey: "My Journey",
             experience: "Experience",
             education: "Education",
-            projects: "Featured Projects",
+            projects: "Selected projects",
             skills: "Skills & Technologies",
             awards: "Honors & Awards"
         },
         journey: {
-            subtitle: "A visual map of my academic and professional path.",
+            subtitle: "Where I’ve studied, worked and explored new ideas.",
             academic: "Academic",
             professional: "Professional",
             exchange: "Exchange / Abroad",
             present: "Present"
         },
         links: {
-            viewWebsite: "Visit Website →",
-            viewProgram: "View Program →",
-            viewProject: "Explore repository →",
-            viewAward: "Learn More →"
+            viewWebsite: "Visit website →",
+            viewProgram: "View programme →",
+            viewProject: "View code →",
+            viewAward: "Learn more →"
         },
         footer: {
+            heading: "Let’s talk.",
+            invitation: "About a project, an idea, or a shared interest in AI.",
             rights: "All rights reserved."
         }
     },
     es: {
         meta: {
-            title: "Manuel Rodríguez Villegas - IA geométrica, visión y robótica",
+            title: "Manuel Rodríguez Villegas - AI Engineer",
             description: "Geometric AI Intern en Audi AG. Desarrollo sistemas de IA para geometría, visión por computador y robótica."
         },
         nav: {
@@ -62,7 +64,7 @@ const translations = {
         },
         hero: {
             subtitle: "Geometric AI Intern @ Audi AG",
-            description: "Trabajo en sistemas de IA para geometría, visión y robótica, intentando aplicar la filosofía de first principles y resolverlo de la forma más simple y eficiente posible.",
+            description: "Desarrollo sistemas de IA para geometría, visión y robótica. Me gusta entender los problemas desde sus fundamentos y encontrar soluciones simples y eficientes.",
             personal: "Fuera del trabajo, me gusta mucho leer, hacer deporte y pasar todo el tiempo que puedo al aire libre.",
             contactBtn: "Contactar",
             projectsBtn: "Ver Proyectos",
@@ -77,7 +79,7 @@ const translations = {
             awards: "Premios y reconocimientos"
         },
         journey: {
-            subtitle: "Un recorrido por mi formación y experiencia profesional.",
+            subtitle: "Dónde he estudiado, trabajado y explorado nuevas ideas.",
             academic: "Formación",
             professional: "Experiencia",
             exchange: "Estancia internacional",
@@ -86,10 +88,12 @@ const translations = {
         links: {
             viewWebsite: "Visitar web →",
             viewProgram: "Ver programa →",
-            viewProject: "Explorar repositorio →",
+            viewProject: "Ver código →",
             viewAward: "Más información →"
         },
         footer: {
+            heading: "Hablemos.",
+            invitation: "De un proyecto, una idea o nuestro interés por la IA.",
             rights: "Todos los derechos reservados."
         }
     }
@@ -105,7 +109,7 @@ const portfolioDataTranslations = {
                 company: "Audi AG",
                 location: "Ingolstadt, Germany",
                 date: "Jul – Nov 2026",
-                description: "Deep learning on 3D data — meshes, CAD models, and voxel representations — for automotive design and engineering at Audi's Ingolstadt headquarters, plus optimization of agentic AI workflows for internal development processes.",
+                description: "I work on two complementary areas at Audi: classifying 3D structures with deep learning and applying AI to requirements engineering. For the latter, I combine API integrations, bi-encoder models and fine-tuning to support the analysis and retrieval of engineering requirements.",
                 link: "https://www.audi.com/en.html",
                 logo: "assets/icons/experience/audi.png"
             },
@@ -135,9 +139,9 @@ const portfolioDataTranslations = {
                 company: "Imperial College London",
                 location: "Remote (London, UK)",
                 date: "Jun – Aug 2024",
-                description: "Modelled complex dynamical systems (Lotka–Volterra, SIR, Lorenz) with Neural ODEs and Physics-Informed Neural Networks during the UROP research programme, building PyTorch models that generalized across varying initial conditions alongside an international PhD team.",
+                description: "Worked with an international team of PhD researchers during the UROP programme. Built PyTorch models using Neural ODEs and physics-informed neural networks to model dynamical systems, including Lotka–Volterra, SIR and Lorenz, across different initial conditions.",
                 link: "https://www.imperial.ac.uk/urop/",
-                logo: "assets/icons/experience/imperial.png"
+                logo: "assets/icons/experience/imperial-square.png"
             },
             {
                 id: "endesa",
@@ -147,7 +151,7 @@ const portfolioDataTranslations = {
                 date: "Jun – Aug 2023",
                 description: "Built regression and MLP models estimating daily Iberian ancillary-services costs with >90% accuracy, used for energy market forecasting at one of Spain's largest utilities.",
                 link: "https://www.endesa.com/en",
-                logo: "assets/icons/experience/endesa.png"
+                logo: "assets/icons/experience/endesa-square.png"
             }
         ],
         education: [
@@ -157,7 +161,7 @@ const portfolioDataTranslations = {
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "Sep 2025 – 2026",
-                description: "Class Representative & Member of the Academic Council. Winner of the 10th Smart Industry Hackathon. Program focused on Deep Generative Models, Probabilistic AI, MLOps, Deep Reinforcement Learning, Geometric Deep Learning, and Explainability.",
+                description: "Class representative and member of the Academic Council. Coursework in generative models, probabilistic AI, MLOps, deep reinforcement learning, geometric deep learning and explainability. Won the 10th Smart Industry Hackathon.",
                 link: "https://www.comillas.edu/en/master-en-inteligencia-artificial-avanzada/",
                 logo: "assets/icons/education/comillas.png"
             },
@@ -167,13 +171,13 @@ const portfolioDataTranslations = {
                 institution: "Cornell University",
                 location: "Ithaca, NY, USA",
                 date: "Jan – May 2025",
-                description: "Writer for Cornell Healthcare Review, focusing on AI applications in the healthcare industry at Cornell University. Explored topics on data science, ethical guidelines for engineers and strategic technology and management.",
+                description: "Wrote for the Cornell Healthcare Review about AI in healthcare. Studied data science, engineering ethics and strategic technology management.",
                 link: "https://www.engineering.cornell.edu/ece/",
                 logo: "assets/icons/education/cornell.png"
             },
             {
                 id: "bsc-math-ai",
-                degree: "BE in Mathematical Engineering and AI",
+                degree: "Bachelor’s Degree in Mathematical Engineering and AI",
                 institution: "Comillas Pontifical University, ETSI ICAI",
                 location: "Madrid, Spain",
                 date: "2021 – 2025",
@@ -187,7 +191,7 @@ const portfolioDataTranslations = {
             {
                 title: "TopoSIGMA",
                 tech: "ROS 2 · DINOv2 · Computer Vision · Robotics · Information Geometry",
-                description: "An online, training-free visual topological mapping system that separates place discovery from covariance-aware loop closure. It represents each place as a directional distribution of DINOv2 descriptors and builds compact, queryable graphs from RGB and wheel odometry.",
+                description: "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while uncertainty-aware loop closure connects them into a compact, queryable graph.",
                 link: "https://github.com/manuel-rodriguezvillegas/topo_sigma",
                 image: "assets/projects/toposigma.png",
                 imageWebp: "assets/projects/toposigma.webp",
@@ -202,7 +206,7 @@ const portfolioDataTranslations = {
                 imagePosition: "center top",
                 title: "Geometric GNNs for Molecular Property Prediction",
                 tech: "PyTorch Geometric · GIN · EGNN · QM9",
-                description: "A controlled study of how 3D geometry changes molecular GNNs: topology-only GIN, distance-aware GIN and E(3)-equivariant EGNN. It evaluates four quantum properties, robustness to coordinate noise and the relationship between Ollivier–Ricci curvature and over-squashing.",
+                description: "How much does 3D geometry help predict a molecule’s properties? I compared topology-only, distance-aware and equivariant graph networks on four quantum properties, testing their sensitivity to coordinate noise and exploring the link between graph curvature and over-squashing.",
                 link: "https://github.com/manuel-rodriguezvillegas/molecular_prediction",
                 image: "assets/projects/molecular_gnn.png",
                 imageWebp: "assets/projects/molecular_gnn.webp",
@@ -212,14 +216,14 @@ const portfolioDataTranslations = {
                 imageAlt: "Molecular graph illustrating messages exchanged between atoms and functional groups.",
                 imageId: "molecular-gnn",
                 imageCredit: {
-                    text: "Image from TUM DAML — Fragment-Biases for Molecular GNNs",
+                    text: "Image: TUM DAML",
                     url: "https://www.cs.cit.tum.de/daml/fragment-biased-gnns/"
                 }
             },
             {
                 title: "Resource-Efficient LLM Fine-Tuning",
                 tech: "Mistral 7B · QLoRA · PEFT · NF4 · Hugging Face",
-                description: "A resource-constrained study of instruction tuning for Mistral-7B on a single 24 GB consumer GPU. QLoRA, NF4 quantization and a paged 8-bit optimizer reduced training to about 21 million parameters—just 0.29% of the model—while making the quality–memory–compute trade-off explicit. Its most valuable outcome was diagnosing why the model learned the wrong behavior, tracing it to data construction and EOS masking.",
+                description: "Fine-tuned Mistral-7B on a single 24 GB GPU using QLoRA and NF4 quantization, training just 0.29% of its parameters. The key lesson came from debugging unexpected model behaviour: tracing it back to how the training data and end-of-sequence masks were constructed.",
                 image: "assets/projects/llm_finetuning.jpg",
                 imageWebp: "assets/projects/llm_finetuning.webp",
                 imageWebpSrcset: "assets/projects/llm_finetuning_720.webp 720w, assets/projects/llm_finetuning.webp 1920w",
@@ -248,7 +252,7 @@ const portfolioDataTranslations = {
             {
                 title: "Deep RL Car Agent",
                 tech: "PPO · PyTorch · Gymnasium · Stable-Baselines3",
-                description: "A car agent trained with PPO to navigate custom 2D tracks directly from RGB frames. The project includes a custom Gymnasium simulator, continuous steering and throttle, stacked visual observations, a residual CNN, multi-track training, Optuna tuning and saliency maps for interpreting the learned policy.",
+                description: "Trained a driving agent to navigate 2D tracks using only RGB images. Built a Gymnasium simulator with continuous steering and throttle, trained a PPO policy across multiple tracks, and used saliency maps to see which parts of the road guided its decisions.",
                 link: "https://github.com/NatLey30/CarGameRL",
                 image: "assets/projects/car_game_rl.png",
                 imageWebp: "assets/projects/car_game_rl.webp",
@@ -274,8 +278,6 @@ const portfolioDataTranslations = {
                 "Python",
                 "PyTorch",
                 "ROS 2",
-                "OpenCV",
-                "MATLAB",
                 "Git",
                 "Docker",
                 "n8n"
@@ -299,28 +301,28 @@ const portfolioDataTranslations = {
             {
                 title: "Winner of the 10th Smart Industry Hackathon",
                 year: "2025",
-                description: "Virtual assistant with recommendation system for train operators",
+                description: "Built a virtual assistant with recommendations for train operators.",
                 icon: "assets/icons/awards/caf.png",
                 link: "https://github.com/manuel-rodriguezvillegas/hackathon_kearney"
             },
             {
                 title: "Winner of UNIJES Social Tech Challenge",
                 year: "2024",
-                description: "Voice-controlled wheelchair project",
+                description: "Developed a voice-controlled wheelchair.",
                 icon: "assets/icons/awards/trophy.png",
                 link: "https://socialtech-challenge.org"
             },
             {
                 title: "Academic Excellence Scholarship",
                 year: "2021, 2023, 2024",
-                description: "Top-scoring students across Community of Madrid",
+                description: "Awarded to university students with outstanding academic records in the Community of Madrid.",
                 icon: "assets/icons/awards/madrid.png",
                 link: "https://www.comunidad.madrid/servicios/educacion/becas-excelencia-universitarios"
             },
             {
-                title: "Baccalaureate Honorific Mention",
+                title: "Baccalaureate Academic Honours",
                 year: "2021",
-                description: "2nd highest GPA in Community of Madrid",
+                description: "Second-highest GPA in the Community of Madrid.",
                 icon: "assets/icons/awards/madrid.png",
                 link: null
             }
@@ -334,7 +336,7 @@ const portfolioDataTranslations = {
                 company: "Audi AG",
                 location: "Ingolstadt, Alemania",
                 date: "Jul – Nov 2026",
-                description: "Trabajo con deep learning sobre datos 3D —mallas, modelos CAD y representaciones en vóxeles— para aplicaciones de diseño e ingeniería del automóvil. También optimizo procesos internos de desarrollo mediante flujos de trabajo basados en agentes de IA.",
+                description: "Trabajo en dos áreas complementarias en Audi: la clasificación de estructuras 3D mediante deep learning y la aplicación de IA a la ingeniería de requisitos. En esta última, combino integraciones mediante APIs, modelos bi-encoder y fine-tuning para apoyar el análisis y la búsqueda de requisitos de ingeniería.",
                 link: "https://www.audi.com/en.html",
                 logo: "assets/icons/experience/audi.png"
             },
@@ -366,7 +368,7 @@ const portfolioDataTranslations = {
                 date: "Jun – Ago 2024",
                 description: "Durante el programa UROP modelé sistemas dinámicos complejos —Lotka–Volterra, SIR y Lorenz— mediante Neural ODEs y Physics-Informed Neural Networks. Desarrollé en PyTorch modelos capaces de generalizar entre distintas condiciones iniciales junto a un equipo internacional de doctorandos.",
                 link: "https://www.imperial.ac.uk/urop/",
-                logo: "assets/icons/experience/imperial.png"
+                logo: "assets/icons/experience/imperial-square.png"
             },
             {
                 id: "endesa",
@@ -376,7 +378,7 @@ const portfolioDataTranslations = {
                 date: "Jun – Ago 2023",
                 description: "Construí modelos de regresión y redes MLP para estimar los costes diarios de los servicios auxiliares del sistema eléctrico de la Península Ibérica, con una precisión superior al 90 %.",
                 link: "https://www.endesa.com/",
-                logo: "assets/icons/experience/endesa.png"
+                logo: "assets/icons/experience/endesa-square.png"
             }
         ],
         education: [
@@ -441,14 +443,14 @@ const portfolioDataTranslations = {
                 imageAlt: "Grafo molecular que representa los mensajes intercambiados entre átomos y grupos funcionales.",
                 imageId: "molecular-gnn",
                 imageCredit: {
-                    text: "Imagen de TUM DAML — Fragment-Biases for Molecular GNNs",
+                    text: "Imagen: TUM DAML",
                     url: "https://www.cs.cit.tum.de/daml/fragment-biased-gnns/"
                 }
             },
             {
                 title: "Fine-tuning eficiente de un LLM",
                 tech: "Mistral 7B · QLoRA · PEFT · NF4 · Hugging Face",
-                description: "Un proyecto de instruction tuning para Mistral-7B diseñado desde el principio para entrenar con una única GPU de consumo de 24 GB. Combinamos QLoRA, cuantización NF4 y un optimizador paginado de 8 bits para entrenar unos 21 millones de parámetros, solo el 0,29 % del modelo, haciendo explícito el equilibrio entre calidad, memoria y coste. El resultado más valioso fue entender por qué el modelo había aprendido el comportamiento equivocado y rastrearlo hasta la construcción de los datos y el enmascarado del token EOS.",
+                description: "Ajusté Mistral-7B en una única GPU de 24 GB con QLoRA y cuantización NF4, entrenando solo el 0,29 % de sus parámetros. La principal lección fue entender un comportamiento inesperado del modelo y localizar su origen en la preparación de los datos y el enmascarado del token de fin de secuencia.",
                 image: "assets/projects/llm_finetuning.jpg",
                 imageWebp: "assets/projects/llm_finetuning.webp",
                 imageWebpSrcset: "assets/projects/llm_finetuning_720.webp 720w, assets/projects/llm_finetuning.webp 1920w",
@@ -477,7 +479,7 @@ const portfolioDataTranslations = {
             {
                 title: "Deep RL Car Agent",
                 tech: "PPO · PyTorch · Gymnasium · Stable-Baselines3",
-                description: "Un agente entrenado con PPO para recorrer circuitos 2D utilizando únicamente imágenes RGB. El proyecto incluye un simulador propio compatible con Gymnasium, control continuo de dirección y acelerador, apilado de fotogramas, una CNN residual, entrenamiento en varios circuitos, ajuste de hiperparámetros con Optuna y mapas de saliencia para entender qué había aprendido la política.",
+                description: "Entrené un agente con PPO para recorrer circuitos 2D utilizando solo imágenes RGB. Desarrollé un simulador compatible con Gymnasium, con control continuo de dirección y acelerador, y utilicé mapas de saliencia para entender qué partes de la pista guiaban sus decisiones.",
                 link: "https://github.com/NatLey30/CarGameRL",
                 image: "assets/projects/car_game_rl.png",
                 imageWebp: "assets/projects/car_game_rl.webp",
@@ -503,8 +505,6 @@ const portfolioDataTranslations = {
                 "Python",
                 "PyTorch",
                 "ROS 2",
-                "OpenCV",
-                "MATLAB",
                 "Git",
                 "Docker",
                 "n8n"
@@ -564,13 +564,7 @@ const portfolioDataTranslations = {
 // type: "academic" | "professional" | "exchange"
 // "exchange" events are rendered as academic (top) but with a distinct style.
 // Use end: "present" for ongoing events.
-// Consecutive "academic" events that share a lane and are less than a year apart
-// (e.g. bachelor's -> master's) are joined by a connector bar, so the academic
-// path reads as one continuous line. See TL_BRIDGE_MAX_MONTHS in script.js.
 const timelineData = {
-    // Global range shown on the axis. Adjust when adding years.
-    rangeStart: "2021-09",
-    rangeEnd: "2026-12",
     events: {
         en: [
             {
@@ -579,7 +573,7 @@ const timelineData = {
                 title: "BE Mathematical Engineering & AI",
                 institution: "Comillas ICAI",
                 start: "2021-09",
-                end: "2025-05",
+                end: "2024-12",
                 logo: "assets/icons/education/comillas.png"
             },
             {
@@ -607,7 +601,7 @@ const timelineData = {
                 institution: "Endesa",
                 start: "2023-06",
                 end: "2023-08",
-                logo: "assets/icons/experience/endesa.png"
+                logo: "assets/icons/experience/endesa-square.png"
             },
             {
                 type: "professional",
@@ -616,7 +610,7 @@ const timelineData = {
                 institution: "Imperial College London",
                 start: "2024-06",
                 end: "2024-08",
-                logo: "assets/icons/experience/imperial.png"
+                logo: "assets/icons/experience/imperial-square.png"
             },
             {
                 type: "professional",
@@ -626,6 +620,15 @@ const timelineData = {
                 start: "2025-06",
                 end: "2025-08",
                 logo: "assets/icons/experience/azzulei.png"
+            },
+            {
+                type: "professional",
+                ref: "comillas-ta",
+                title: "Teaching Assistant",
+                institution: "Comillas ICAI",
+                start: "2025-09",
+                end: "2026-04",
+                logo: "assets/icons/experience/comillas.png"
             },
             {
                 type: "professional",
@@ -644,7 +647,7 @@ const timelineData = {
                 title: "Grado en Ingeniería Matemática e IA",
                 institution: "Comillas ICAI",
                 start: "2021-09",
-                end: "2025-05",
+                end: "2024-12",
                 logo: "assets/icons/education/comillas.png"
             },
             {
@@ -672,7 +675,7 @@ const timelineData = {
                 institution: "Endesa",
                 start: "2023-06",
                 end: "2023-08",
-                logo: "assets/icons/experience/endesa.png"
+                logo: "assets/icons/experience/endesa-square.png"
             },
             {
                 type: "professional",
@@ -681,7 +684,7 @@ const timelineData = {
                 institution: "Imperial College London",
                 start: "2024-06",
                 end: "2024-08",
-                logo: "assets/icons/experience/imperial.png"
+                logo: "assets/icons/experience/imperial-square.png"
             },
             {
                 type: "professional",
@@ -691,6 +694,15 @@ const timelineData = {
                 start: "2025-06",
                 end: "2025-08",
                 logo: "assets/icons/experience/azzulei.png"
+            },
+            {
+                type: "professional",
+                ref: "comillas-ta",
+                title: "Ayudante de docencia",
+                institution: "Comillas ICAI",
+                start: "2025-09",
+                end: "2026-04",
+                logo: "assets/icons/experience/comillas.png"
             },
             {
                 type: "professional",

@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Geometric AI Intern at Audi AG, building AI systems for geometry, computer vision and robotics. Selected work in visual topological mapping and geometric deep learning.">
-    <title>Manuel Rodríguez Villegas - Geometric AI Engineer</title>
+    <title>Manuel Rodríguez Villegas - AI Engineer</title>
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Manuel Rodríguez Villegas — Geometric AI Engineer">
+    <meta property="og:title" content="Manuel Rodríguez Villegas - AI Engineer">
     <meta property="og:description" content="Geometric AI Intern at Audi AG, building AI systems for geometry, computer vision and robotics.">
     <meta property="og:url" content="https://manuel-rodriguezvillegas.github.io/">
     <meta property="og:image" content="https://manuel-rodriguezvillegas.github.io/assets/pictures/profile.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Manuel Rodríguez Villegas — Geometric AI Engineer">
+    <meta name="twitter:title" content="Manuel Rodríguez Villegas - AI Engineer">
     <meta name="twitter:description" content="Geometric AI Intern at Audi AG, building AI systems for geometry, computer vision and robotics.">
     <meta name="twitter:image" content="https://manuel-rodriguezvillegas.github.io/assets/pictures/profile.jpg">
 
@@ -69,11 +69,12 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=d219524139">
     <script>
         // Set theme before first paint to avoid a light-mode flash
         (function () {
-            var saved = localStorage.getItem('preferredTheme');
+            var saved;
+            try { saved = localStorage.getItem('preferredTheme'); } catch (_) {}
             var theme = (saved === 'dark' || saved === 'light')
                 ? saved
                 : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -82,6 +83,7 @@
     </script>
 </head>
 <body>
+    <a class="skip-link" href="#projects">Skip to projects</a>
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
@@ -110,12 +112,13 @@
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Manuel Rodríguez Villegas</h1>
             <p class="subtitle">Geometric AI Intern @ Audi AG</p>
-            <p class="hero-description">I build AI systems for geometry, vision and robotics — from first principles, with a bias toward simple and efficient solutions.</p>
+            <p class="hero-description">I build AI systems for geometry, vision and robotics. I like understanding a problem from the ground up and finding a simple, efficient way to solve it.</p>
             <p class="hero-personal">Outside of work, I enjoy reading, fitness, and spending as much time outdoors as I can.</p>
             
             <div class="cta-buttons">
@@ -168,13 +171,7 @@
     <section id="journey" class="journey-section">
         <div class="journey-inner">
             <h2 class="section-title">My Journey</h2>
-            <p class="journey-subtitle">A visual map of my academic and professional path.</p>
-
-            <div class="timeline-legend">
-                <span class="legend-item"><span class="legend-dot legend-academic"></span><span data-i18n="journey.academic">Academic</span></span>
-                <span class="legend-item"><span class="legend-dot legend-professional"></span><span data-i18n="journey.professional">Professional</span></span>
-                <span class="legend-item"><span class="legend-dot legend-exchange"></span><span data-i18n="journey.exchange">Exchange / Abroad</span></span>
-            </div>
+            <p class="journey-subtitle">Where I’ve studied, worked and explored new ideas.</p>
 
             <div class="timeline-scroll">
                 <div class="timeline" id="timeline-container">
@@ -185,58 +182,64 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
+    <section id="projects" class="portfolio-section" aria-labelledby="projects-heading">
+        <h2 class="section-title" id="projects-heading">Selected projects</h2>
         <div class="projects-grid" id="projects-container">
             <!-- Project cards will be dynamically loaded from translations.js -->
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience">
-        <h2 class="section-title">Experience</h2>
+    <section id="experience" class="portfolio-section" aria-labelledby="experience-heading">
+        <h2 class="section-title" id="experience-heading">Experience</h2>
         <div class="experience-grid" id="experience-container">
             <!-- Experience cards will be dynamically loaded from translations.js -->
         </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education">
-        <h2 class="section-title">Education</h2>
+    <section id="education" class="portfolio-section" aria-labelledby="education-heading">
+        <h2 class="section-title" id="education-heading">Education</h2>
         <div class="education-grid" id="education-container">
             <!-- Education cards will be dynamically loaded from translations.js -->
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Skills & Technologies</h2>
+    <section id="skills" class="portfolio-section" aria-labelledby="skills-heading">
+        <h2 class="section-title" id="skills-heading">Skills & Technologies</h2>
         <div class="skills-grid" id="skills-container">
             <!-- Skills will be dynamically loaded from translations.js -->
         </div>
     </section>
 
     <!-- Awards Section -->
-    <section id="awards">
-        <h2 class="section-title">Honors & Awards</h2>
+    <section id="awards" class="portfolio-section" aria-labelledby="awards-heading">
+        <h2 class="section-title" id="awards-heading">Honors & Awards</h2>
         <div class="awards-grid" id="awards-container">
             <!-- Awards will be dynamically loaded from translations.js -->
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="footer-intro">
+                <h2 data-i18n="footer.heading">Let’s talk.</h2>
+                <p data-i18n="footer.invitation">About a project, an idea, or a shared interest in AI.</p>
+            </div>
             <div class="footer-links">
                 <a href="https://www.linkedin.com/in/mrodriguezvillegas" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="https://github.com/manuel-rodriguezvillegas" target="_blank" rel="noopener">GitHub</a>
                 <a href="mailto:manuel.rodriguezvillegas09@gmail.com">Email</a>
             </div>
-            <p>&copy; 2025 Manuel Rodríguez Villegas. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 Manuel Rodríguez Villegas. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="translations.js"></script>
-    <script src="script.js"></script>
+    <script src="translations.js?v=d7dd93b4b3"></script>
+    <script src="script.js?v=48f01115d4"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupThemeToggle();
     setupReadingProgress();
     setupJourneyLinking();
+    setupTimelineResize();
 });
 
 // ===================================
@@ -20,13 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupThemeToggle() {
     const btn = document.querySelector('.theme-toggle');
     if (!btn) return;
+    updateThemeLabel();
     btn.addEventListener('click', () => {
         const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;
-        localStorage.setItem('preferredTheme', next);
+        savePreference('preferredTheme', next);
+        updateThemeLabel();
         // Let theme-aware components (e.g. the mesh canvas) re-read colors
         window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
     });
+}
+
+// Storage can be disabled by browser privacy settings; preferences are optional.
+function readPreference(key) {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+}
+
+function savePreference(key, value) {
+    try { localStorage.setItem(key, value); } catch (_) { /* Keep the page usable. */ }
+}
+
+function updateThemeLabel() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    const label = currentLanguage === 'es'
+        ? (dark ? 'Activar modo claro' : 'Activar modo oscuro')
+        : (dark ? 'Switch to light mode' : 'Switch to dark mode');
+    document.querySelector('.theme-toggle').setAttribute('aria-label', label);
 }
 
 // ===================================
@@ -40,11 +60,11 @@ function initializeLanguage() {
     // ?lang= wins, so either version can be linked, shared and indexed on its
     // own. Then a previous choice, then the browser's preference.
     const urlLang = new URLSearchParams(window.location.search).get('lang');
-    const savedLang = localStorage.getItem('preferredLanguage');
+    const savedLang = readPreference('preferredLanguage');
 
     if (SUPPORTED_LANGUAGES.includes(urlLang)) {
         currentLanguage = urlLang;
-        localStorage.setItem('preferredLanguage', urlLang);
+        savePreference('preferredLanguage', urlLang);
         // An explicit ?lang= is the page being viewed — point canonical at it.
         updateCanonicalLink();
     } else if (SUPPORTED_LANGUAGES.includes(savedLang)) {
@@ -66,7 +86,7 @@ function setupLanguageSwitcher() {
             const lang = btn.dataset.lang;
             if (lang !== currentLanguage) {
                 currentLanguage = lang;
-                localStorage.setItem('preferredLanguage', lang);
+                savePreference('preferredLanguage', lang);
                 writeLanguageToUrl();
                 updateLanguageButtons();
                 updatePageLanguage();
@@ -94,6 +114,7 @@ function updateCanonicalLink() {
 
 function updateLanguageButtons() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLanguage));
         if (btn.dataset.lang === currentLanguage) {
             btn.classList.add('active');
         } else {
@@ -141,6 +162,8 @@ function updatePageLanguage() {
     
     // Update footer
     updateFooter();
+    updateThemeLabel();
+    document.querySelector('.skip-link').textContent = currentLanguage === 'es' ? 'Ir a proyectos' : 'Skip to projects';
 
     // Re-bind scroll reveals for newly rendered cards
     reobserveReveals();
@@ -183,11 +206,9 @@ function updateHeroSection() {
 function updateSectionTitles() {
     const sections = translations[currentLanguage].sections;
     document.querySelector('#journey .section-title').textContent = sections.journey;
-    document.querySelector('#experience .section-title').textContent = sections.experience;
-    document.querySelector('#education .section-title').textContent = sections.education;
-    document.querySelector('#projects .section-title').textContent = sections.projects;
-    document.querySelector('#skills .section-title').textContent = sections.skills;
-    document.querySelector('#awards .section-title').textContent = sections.awards;
+    ['projects', 'experience', 'education', 'skills', 'awards'].forEach(section => {
+        document.querySelector(`#${section} .section-title`).textContent = sections[section];
+    });
 }
 
 function updateJourneySection() {
@@ -202,7 +223,7 @@ function updateJourneySection() {
 function updateFooter() {
     const year = new Date().getFullYear();
     const rights = translations[currentLanguage].footer.rights;
-    document.querySelector('footer p').textContent = `© ${year} Manuel Rodríguez Villegas. ${rights}`;
+    document.querySelector('footer .copyright').textContent = `© ${year} Manuel Rodríguez Villegas. ${rights}`;
 }
 
 // ===================================
@@ -227,188 +248,89 @@ function parseYearMonth(ym) {
     return { year: y, month: m };
 }
 
-function monthsBetween(a, b) {
-    // Returns the number of months from date a to date b (can be fractional-free integer).
-    return (b.year - a.year) * 12 + (b.month - a.month);
-}
-
 function renderTimeline() {
     const container = document.getElementById('timeline-container');
     if (!container) return;
-
-    const rangeStart = parseYearMonth(timelineData.rangeStart);
-    const rangeEnd = parseYearMonth(timelineData.rangeEnd);
-    const totalMonths = monthsBetween(rangeStart, rangeEnd);
-    if (totalMonths <= 0) return;
-
+    const labels = translations[currentLanguage].journey;
     const events = timelineData.events[currentLanguage] || timelineData.events.en;
-
-    // Build year markers (every January that falls in range, plus endpoints)
+    const monthIndex = value => {
+        const { year, month } = parseYearMonth(value);
+        return year * 12 + month - 1;
+    };
+    const start = Math.floor(Math.min(...events.map(event => monthIndex(event.start))) / 12) * 12;
+    const end = Math.ceil(Math.max(...events.map(event => monthIndex(event.end) + 1)) / 12) * 12;
+    const span = end - start;
+    const width = Math.max(1, container.clientWidth);
+    const labelWidth = Math.min(width, width < 600 ? 140 : 170);
+    const laneHeight = 88;
+    const position = month => (month - start) / span * 100;
     const years = [];
-    for (let y = rangeStart.year; y <= rangeEnd.year; y++) {
-        years.push(y);
+    for (let year = start / 12; year < end / 12; year++) {
+        years.push(`<span style="left:${position(year * 12)}%">${year}</span>`);
     }
-
-    const yearsHTML = years.map(y => {
-        const pos = monthsBetween(rangeStart, { year: y, month: 1 });
-        const pct = Math.max(0, Math.min(100, (pos / totalMonths) * 100));
-        return `<div class="timeline-year" style="left: ${pct}%;"><span>${y}</span></div>`;
-    }).join('');
-
-    // Separate events by lane (academic/exchange above, professional below)
-    const topEvents = events.filter(e => e.type === 'academic' || e.type === 'exchange');
-    const bottomEvents = events.filter(e => e.type === 'professional');
-
-    // Card min-width in px (must match CSS .tl-card min-width)
-    const CARD_MIN_PX = 150;
-    const CARD_GAP_PX = 16;
-    // Vertical space one lane of stacked bars takes up
-    const LANE_HEIGHT_PX = 82;
-    // Consecutive academic stints closer than this are joined by a connector
-    // bar, so "one right after the other" reads as a single continuous line.
-    // Longer gaps stay open — those are a real break, not a continuation.
-    const TL_BRIDGE_MAX_MONTHS = 12;
-
-    // The real timeline pixel width we'll measure after first render.
-    // For the initial DOM build we use an estimate (900 is our CSS min-width).
-    // After render, we re-measure and re-layout if needed.
-    const estimatedPxWidth = Math.max(900, (container.parentElement?.clientWidth || 900));
-
-    const stackEvents = (list, pxWidth) => {
-        const pxPerMonth = pxWidth / totalMonths;
-        const minMonthGap = (CARD_MIN_PX + CARD_GAP_PX) / pxPerMonth;
-
-        const prepared = list.map(e => {
-            const s = parseYearMonth(e.start);
-            const endRaw = e.end === 'present' ? timelineData.rangeEnd : e.end;
-            const en = parseYearMonth(endRaw);
-            return {
-                ...e,
-                _start: monthsBetween(rangeStart, s),
-                _end: monthsBetween(rangeStart, en)
-            };
-        }).sort((a, b) => a._start - b._start);
-
+    function renderHalf(list, side) {
         const lanes = [];
-        prepared.forEach(ev => {
-            // The card for this event visually occupies from _start to at least _start + minMonthGap
-            const effectiveEnd = Math.max(ev._end, ev._start + minMonthGap);
-            let placed = false;
-            for (let i = 0; i < lanes.length; i++) {
-                if (ev._start >= lanes[i]) {
-                    ev._lane = i;
-                    lanes[i] = effectiveEnd;
-                    placed = true;
-                    break;
-                }
+        const placedLabels = [];
+        const paths = [...list].sort((a,b) => a.start.localeCompare(b.start)).map(event => {
+            const left = position(monthIndex(event.start));
+            const length = (monthIndex(event.end) + 1 - monthIndex(event.start)) / span * 100;
+            const midpoint = (left + length / 2) / 100 * width;
+            const labelLeft = Math.max(0, Math.min(midpoint - labelWidth / 2, width - labelWidth));
+            const occupiedStart = Math.min(labelLeft, left / 100 * width);
+            const occupiedEnd = Math.max(labelLeft + labelWidth, (left + length) / 100 * width) + 14;
+            let lane = lanes.findIndex(end => end <= occupiedStart);
+            if (lane < 0) lane = lanes.length;
+            lanes[lane] = occupiedEnd;
+            // Keep long stems clear of labels closer to the shared baseline.
+            let corridors = [[Math.max(labelLeft + 6, left / 100 * width),
+                Math.min(labelLeft + labelWidth - 6, (left + length) / 100 * width)]];
+            for (const label of placedLabels.filter(label => label.lane < lane)) {
+                corridors = corridors.flatMap(([from, to]) => {
+                    if (to <= label.left - 6 || from >= label.right + 6) return [[from, to]];
+                    return [[from, Math.min(to, label.left - 6)],
+                        [Math.max(from, label.right + 6), to]].filter(([a, b]) => b > a);
+                });
             }
-            if (!placed) {
-                ev._lane = lanes.length;
-                lanes.push(effectiveEnd);
-            }
-        });
-        return { prepared, laneCount: Math.max(1, lanes.length) };
-    };
+            const connector = corridors.map(([from, to]) => Math.max(from, Math.min(midpoint, to)))
+                .sort((a, b) => Math.abs(a - midpoint) - Math.abs(b - midpoint))[0] ?? midpoint;
+            placedLabels.push({ lane, left: labelLeft, right: labelLeft + labelWidth });
+            const endLabel = event.end === 'present' ? labels.present : formatMonthYear(event.end);
+            const name = event.ref === 'bsc-math-ai'
+                ? (currentLanguage === 'es' ? 'ICAI · Grado' : 'ICAI · BEng')
+                : event.ref === 'msc-ai'
+                    ? (currentLanguage === 'es' ? 'ICAI · Máster' : 'ICAI · Master’s')
+                    : event.institution === 'Imperial College London' ? 'Imperial' : event.institution;
+            const startLabel = event.end !== 'present' && event.start.slice(0, 4) === event.end.slice(0, 4)
+                ? formatMonthYear(event.start).split(' ')[0]
+                : formatMonthYear(event.start);
+            const description = `${event.institution}, ${event.title}, ${formatMonthYear(event.start)} — ${endLabel}`;
+            return `<a class="journey-milestone compact-event compact-${event.type}" href="${event.type === 'professional' ? '#experience' : '#education'}" data-ref="${event.ref}" aria-label="${description}" title="${event.title}"
+                style="--bar-left:${left}%;--bar-width:${length}%;--label-left:${labelLeft}px;--label-width:${labelWidth}px;--connector-left:${connector}px;--label-offset:${lane * laneHeight}px;${side === 'above' ? 'bottom' : 'top'}:0px">
+                <span class="compact-label"><img src="${event.logo}" alt="" width="24" height="24" loading="lazy" decoding="async"><span><strong>${name}</strong><small>${startLabel} – ${endLabel}</small></span></span>
+                <span class="compact-connector" aria-hidden="true"></span>
+                <span class="compact-bar" aria-hidden="true"></span>
+            </a>`;
+        }).join('');
+        return `<div class="compact-half compact-${side}" style="height:${lanes.length * laneHeight}px">${paths}</div>`;
+    }
+    container.innerHTML = `<div class="compact-timeline">
+        ${renderHalf(events.filter(event => event.type !== 'professional'), 'above')}
+        <div class="compact-axis" aria-hidden="true">${years.join('')}</div>
+        ${renderHalf(events.filter(event => event.type === 'professional'), 'below')}
+        <div class="compact-legend"><span>${labels.academic}</span><span>${labels.professional}</span></div>
+    </div>`;
+}
 
-    const top = stackEvents(topEvents, estimatedPxWidth);
-    const bottom = stackEvents(bottomEvents, estimatedPxWidth);
-
-    const buildBarHTML = (ev, side) => {
-        const leftPct = (ev._start / totalMonths) * 100;
-        const widthPct = Math.max(1.5, ((ev._end - ev._start) / totalMonths) * 100);
-        const typeClass = `tl-${ev.type}`;
-        const sideClass = `tl-${side}`;
-        // Lane offset within the half (pushes bars away from center line)
-        const laneOffset = ev._lane * LANE_HEIGHT_PX;
-        const styleSide = side === 'top'
-            ? `bottom: ${laneOffset}px;`
-            : `top: ${laneOffset}px;`;
-
-        const logoHTML = ev.logo
-            ? `<img src="${ev.logo}" alt="${ev.institution}" class="tl-logo" loading="lazy" decoding="async" onerror="this.style.display='none'">`
-            : '';
-
-        const endLabel = ev.end === 'present'
-            ? translations[currentLanguage].journey.present
-            : formatMonthYear(ev.end);
-
-        // Each event links to the matching section:
-        // academic + exchange -> #education, professional -> #experience
-        const target = ev.type === 'professional' ? '#experience' : '#education';
-        const ariaLabel = `${ev.institution}, ${formatMonthYear(ev.start)} — ${endLabel}`;
-        // ref points at the matching experience/education card (see setupJourneyLinking)
-        const refAttr = ev.ref ? ` data-ref="${ev.ref}"` : '';
-
-        return `
-            <a class="tl-event ${typeClass} ${sideClass}" href="${target}"${refAttr} aria-label="${ariaLabel}" style="left: ${leftPct}%; width: ${widthPct}%; ${styleSide}">
-                <div class="tl-bar">
-                    <div class="tl-bar-fill"></div>
-                </div>
-                <div class="tl-card">
-                    <div class="tl-card-header">
-                        ${logoHTML}
-                        <div class="tl-card-text">
-                            <div class="tl-institution">${ev.institution}</div>
-                            <div class="tl-dates">${formatMonthYear(ev.start)} — ${endLabel}</div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        `;
-    };
-
-    // Fill the gap between back-to-back academic stints sharing a lane, so the
-    // academic path shows as unbroken. Purely decorative: no link, no dates.
-    const buildBridgesHTML = (prepared, side) => {
-        const lanes = new Map();
-        prepared
-            .filter(ev => ev.type === 'academic')
-            .forEach(ev => {
-                if (!lanes.has(ev._lane)) lanes.set(ev._lane, []);
-                lanes.get(ev._lane).push(ev);
-            });
-
-        const bridges = [];
-        lanes.forEach((list, lane) => {
-            list.sort((a, b) => a._start - b._start);
-            for (let i = 0; i < list.length - 1; i++) {
-                const gapStart = list[i]._end;
-                const gap = list[i + 1]._start - gapStart;
-                if (gap <= 0 || gap > TL_BRIDGE_MAX_MONTHS) continue;
-
-                const leftPct = (gapStart / totalMonths) * 100;
-                const widthPct = (gap / totalMonths) * 100;
-                const laneOffset = lane * LANE_HEIGHT_PX;
-                const styleSide = side === 'top'
-                    ? `bottom: ${laneOffset}px;`
-                    : `top: ${laneOffset}px;`;
-                bridges.push(
-                    `<div class="tl-bridge tl-${side}" aria-hidden="true" style="left: ${leftPct}%; width: ${widthPct}%; ${styleSide}"></div>`
-                );
-            }
-        });
-        return bridges.join('');
-    };
-
-    const topBarsHTML = top.prepared.map(ev => buildBarHTML(ev, 'top')).join('');
-    const bottomBarsHTML = bottom.prepared.map(ev => buildBarHTML(ev, 'bottom')).join('');
-
-    // Height of each half derived from number of lanes
-    const topHeight = 20 + top.laneCount * LANE_HEIGHT_PX;
-    const bottomHeight = 20 + bottom.laneCount * LANE_HEIGHT_PX;
-
-    container.innerHTML = `
-        <div class="tl-half tl-half-top" style="height: ${topHeight}px;">
-            ${buildBridgesHTML(top.prepared, 'top')}
-            ${topBarsHTML}
-        </div>
-        <div class="tl-axis">
-            ${yearsHTML}
-        </div>
-        <div class="tl-half tl-half-bottom" style="height: ${bottomHeight}px;">
-            ${bottomBarsHTML}
-        </div>
-    `;
+function setupTimelineResize() {
+    const container = document.getElementById('timeline-container');
+    let width = container.clientWidth;
+    let frame;
+    new ResizeObserver(() => {
+        if (width === container.clientWidth) return;
+        width = container.clientWidth;
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(renderTimeline);
+    }).observe(container);
 }
 
 function formatMonthYear(ym) {
@@ -457,7 +379,7 @@ function createExperienceCard(exp) {
                     <p class="card-subtitle">${exp.company}</p>
                 </div>
             </div>
-            <span class="card-date">${exp.date}</span>
+            <div class="card-meta"><span class="card-date">${exp.date}</span><span class="card-location">${exp.location}</span></div>
         </div>
         <p class="card-description">${exp.description}</p>
         ${linkHTML}
@@ -508,7 +430,7 @@ function createEducationCard(edu) {
                     <p class="card-subtitle">${edu.institution}</p>
                 </div>
             </div>
-            <span class="card-date">${edu.date}</span>
+            <div class="card-meta"><span class="card-date">${edu.date}</span><span class="card-location">${edu.location}</span></div>
         </div>
         <p class="card-description">${edu.description}</p>
         ${honorsHTML}
@@ -535,11 +457,12 @@ function renderProjects() {
 function createProjectCard(project) {
     const card = document.createElement('div');
     card.className = 'project-card';
+    card.id = project.imageId;
     
     const linkText = translations[currentLanguage].links.viewProject;
     const linkHTML = project.link 
-        ? `<a href="${project.link}" class="project-link" target="_blank" rel="noopener">${linkText}</a>`
-        : '';
+        ? `<a href="${project.link}" class="project-link project-repo-link" aria-label="${linkText.replace(' →', '')}: ${project.title}" target="_blank" rel="noopener">${linkText}</a>`
+        : `<span class="project-private">${currentLanguage === 'es' ? 'Repositorio privado' : 'Private repository'}</span>`;
     
     const positionAttr = project.imagePosition
         ? ` style="object-position: ${project.imagePosition};"`
@@ -600,12 +523,11 @@ function renderSkills() {
 // leaking to someone else's server. Brand colors are baked into each SVG.
 // Skills not in this map render as plain text tags — that's intentional for
 // abstract concepts (Deep Learning, Linear Algebra, Robotics, PINNs, etc.)
-// and for technologies without an official simple-icons logo (MATLAB, C#).
+// and for technologies without an official simple-icons logo.
 const SKILL_ICONS = {
     "python":      "python",
     "pytorch":     "pytorch",
     "ros":         "ros",
-    "opencv":      "opencv",
     "git":         "git",
     "docker":      "docker",
     "n8n":         "n8n"
@@ -703,27 +625,30 @@ function createAwardCard(award) {
 // ===================================
 function setupSmoothScrolling() {
     // Delegated listener: also covers anchors rendered later
-    // (timeline bars, cards re-rendered on language switch).
+    // (timeline milestones, cards re-rendered on language switch).
     document.addEventListener('click', (e) => {
         const anchor = e.target.closest('a[href^="#"]');
-        if (!anchor) return;
+        if (!anchor || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
         const targetId = anchor.getAttribute('href');
 
         if (targetId === '#') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
             return;
         }
 
-        // A timeline bar goes to its own card rather than the section heading,
+        // A timeline milestone goes to its own card rather than the section heading,
         // and flags it on arrival. Falls back to the section if there's no ref.
-        const linkedCard = findLinkedCard(anchor.closest('.tl-event'));
+        const linkedCard = findLinkedCard(anchor.closest('.journey-milestone'));
         const targetElement = linkedCard || document.querySelector(targetId);
 
         if (targetElement) {
             const navHeight = document.getElementById('navbar').offsetHeight;
             const targetPosition = offsetTopOf(targetElement) - navHeight - 20;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            window.scrollTo({ top: targetPosition, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+            history.replaceState(null, '', targetId);
+            targetElement.setAttribute('tabindex', '-1');
+            targetElement.focus({ preventScroll: true });
             if (linkedCard) flashLinkedCard(linkedCard);
         }
     });
@@ -762,14 +687,14 @@ function flashLinkedCard(card) {
     linkFlashTimer = setTimeout(() => card.classList.remove('is-flash'), LINK_FLASH_MS);
 }
 
-// Hovering (or tabbing to) a timeline bar marks its card. Bound to the
+// Hovering (or tabbing to) a timeline milestone marks its card. Bound to the
 // container, which outlives the re-renders of its contents.
 function setupJourneyLinking() {
     const container = document.getElementById('timeline-container');
     if (!container) return;
 
     const setHighlight = (on) => (e) => {
-        const card = findLinkedCard(e.target.closest('.tl-event'));
+        const card = findLinkedCard(e.target.closest('.journey-milestone'));
         if (card) card.classList.toggle('is-linked', on);
     };
 
@@ -806,7 +731,7 @@ function setupNavbarScroll() {
 function scrollToTop() {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
     });
 }
 
@@ -819,6 +744,11 @@ function setupScrollAnimations() {
     // so stale observers would pile up otherwise).
     if (revealObserver) revealObserver.disconnect();
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
     const observerOptions = {
         threshold: 0.01,
         rootMargin: '0px 0px 140px 0px'
@@ -827,10 +757,6 @@ function setupScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                const parent = entry.target.parentElement;
-                const siblings = parent ? [...parent.children].filter(c => c.classList.contains('reveal')) : [];
-                const idx = siblings.indexOf(entry.target);
-                entry.target.style.transitionDelay = `${Math.min(idx, 3) * 30}ms`;
                 entry.target.classList.add('is-visible');
                 observer.unobserve(entry.target);
             }
@@ -872,7 +798,7 @@ function setupReadingProgress() {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const pct = height > 0 ? (scrollTop / height) * 100 : 0;
-        bar.style.width = `${pct}%`;
+        bar.style.transform = `scaleX(${pct / 100})`;
     };
 
     // Coalesce scroll events into one style write per frame
@@ -888,5 +814,6 @@ function setupReadingProgress() {
 
     window.addEventListener('scroll', requestUpdate, { passive: true });
     window.addEventListener('resize', requestUpdate);
+    new ResizeObserver(requestUpdate).observe(document.body);
     update();
 }
