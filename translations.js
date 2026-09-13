@@ -6,7 +6,7 @@ const translations = {
     en: {
         meta: {
             title: "Manuel Rodríguez Villegas - AI Engineer",
-            description: "Geometric AI Intern at Audi AG, building AI systems for geometry, computer vision and robotics. Selected work in visual topological mapping and geometric deep learning."
+            description: "Geometric AI Intern at Audi AG. TopoSIGMA, my visual mapping paper, has been submitted to Robotics and Autonomous Systems."
         },
         nav: {
             journey: "Journey",
@@ -53,7 +53,7 @@ const translations = {
     es: {
         meta: {
             title: "Manuel Rodríguez Villegas - AI Engineer",
-            description: "Geometric AI Intern en Audi AG. Desarrollo sistemas de IA para geometría, visión por computador y robótica."
+            description: "Geometric AI Intern en Audi AG. TopoSIGMA, mi trabajo de mapeo visual, está enviado a Robotics and Autonomous Systems."
         },
         nav: {
             journey: "Trayectoria",
@@ -191,7 +191,7 @@ const portfolioDataTranslations = {
             {
                 title: "TopoSIGMA",
                 tech: "ROS 2 · DINOv2 · Computer Vision · Robotics · Information Geometry",
-                description: "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while uncertainty-aware loop closure connects them into a compact, queryable graph.",
+                description: "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while uncertainty-aware loop closure connects them into a compact, queryable graph. The TopoSIGMA paper has been submitted to Robotics and Autonomous Systems.",
                 link: "https://github.com/manuel-rodriguezvillegas/topo_sigma",
                 image: "assets/projects/toposigma.png",
                 imageWebp: "assets/projects/toposigma.webp",
@@ -277,6 +277,7 @@ const portfolioDataTranslations = {
             "Tools & Frameworks": [
                 "Python",
                 "PyTorch",
+                "JAX",
                 "ROS 2",
                 "Git",
                 "Docker",
@@ -418,7 +419,7 @@ const portfolioDataTranslations = {
             {
                 title: "TopoSIGMA",
                 tech: "ROS 2 · DINOv2 · Visión por Computador · Robótica · Geometría de la Información",
-                description: "Un sistema de mapeo topológico visual que construye el mapa sobre la marcha y no requiere entrenamiento. Detecta lugares a partir de descriptores DINOv2, gestiona los cierres de bucle teniendo en cuenta la incertidumbre y genera grafos compactos a partir de imágenes RGB y odometría de ruedas.",
+                description: "Un sistema de mapeo topológico visual que construye el mapa sobre la marcha y no requiere entrenamiento. Detecta lugares a partir de descriptores DINOv2, gestiona los cierres de bucle teniendo en cuenta la incertidumbre y genera grafos compactos a partir de imágenes RGB y odometría de ruedas. El paper de TopoSIGMA ya está enviado a Robotics and Autonomous Systems.",
                 link: "https://github.com/manuel-rodriguezvillegas/topo_sigma",
                 image: "assets/projects/toposigma.png",
                 imageWebp: "assets/projects/toposigma.webp",
@@ -504,6 +505,7 @@ const portfolioDataTranslations = {
             "Herramientas y Frameworks": [
                 "Python",
                 "PyTorch",
+                "JAX",
                 "ROS 2",
                 "Git",
                 "Docker",

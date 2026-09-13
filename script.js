@@ -518,15 +518,17 @@ function renderSkills() {
 }
 
 // Mapping: skill name (normalized) -> icon file in assets/icons/tech.
-// These are simple-icons (CC0) served from this repo rather than a CDN: one
+// Most are Simple Icons (CC0); JAX uses its official project SVG. Served
+// from this repo rather than a CDN: one
 // less third party in the critical path, works offline, and no visitor IPs
 // leaking to someone else's server. Brand colors are baked into each SVG.
 // Skills not in this map render as plain text tags — that's intentional for
 // abstract concepts (Deep Learning, Linear Algebra, Robotics, PINNs, etc.)
-// and for technologies without an official simple-icons logo.
+// and for technologies without a suitable local logo.
 const SKILL_ICONS = {
     "python":      "python",
     "pytorch":     "pytorch",
+    "jax":         "jax",
     "ros":         "ros",
     "git":         "git",
     "docker":      "docker",
