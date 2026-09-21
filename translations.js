@@ -300,6 +300,13 @@ const portfolioDataTranslations = {
         },
         awards: [
             {
+                title: "First Ascent Spain Hackathon Winner",
+                year: "2026",
+                description: "One of 20 participants selected from around 2,500 applicants for Bending Spoons' First Ascent Spain.",
+                icon: "assets/icons/awards/trophy.png",
+                link: "https://spain.firstascent.io/"
+            },
+            {
                 title: "Winner of the 10th Smart Industry Hackathon",
                 year: "2025",
                 description: "Built a virtual assistant with recommendations for train operators.",
@@ -527,6 +534,13 @@ const portfolioDataTranslations = {
             ]
         },
         awards: [
+            {
+                title: "Ganador del hackathon de First Ascent Spain",
+                year: "2026",
+                description: "Uno de los 20 participantes seleccionados entre unas 2.500 candidaturas para el evento de Bending Spoons.",
+                icon: "assets/icons/awards/trophy.png",
+                link: "https://spain.firstascent.io/"
+            },
             {
                 title: "Ganador del X Hackathon de Industria Inteligente",
                 year: "2025",
