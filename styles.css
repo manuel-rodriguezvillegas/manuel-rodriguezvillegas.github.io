@@ -47,6 +47,10 @@
     filter: invert(1);
 }
 
+:root[data-theme="dark"] img[src*="awards/bending-spoons.svg"] {
+    filter: invert(1);
+}
+
 /* The ROS brand navy (#22314E) all but disappears on a dark card */
 :root[data-theme="dark"] img[src*="tech/ros.svg"] {
     filter: brightness(2.4);
