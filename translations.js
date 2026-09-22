@@ -302,7 +302,7 @@ const portfolioDataTranslations = {
             {
                 title: "First Ascent Spain Hackathon Winner",
                 year: "2026",
-                description: "One of 20 participants selected from around 2,500 applicants for Bending Spoons' First Ascent Spain.",
+                description: "One of the selected top 20 tech students from Spain and winning the event's hackathon.",
                 icon: "assets/icons/awards/bending-spoons.svg",
                 link: "https://spain.firstascent.io/"
             },
@@ -537,7 +537,7 @@ const portfolioDataTranslations = {
             {
                 title: "Ganador del hackathon de First Ascent Spain",
                 year: "2026",
-                description: "Uno de los 20 participantes seleccionados entre unas 2.500 candidaturas para el evento de Bending Spoons.",
+                description: "Seleccionado entre el top 20 estudiantes de tecnología en España y ganador del hackathon del evento.",
                 icon: "assets/icons/awards/bending-spoons.svg",
                 link: "https://spain.firstascent.io/"
             },
