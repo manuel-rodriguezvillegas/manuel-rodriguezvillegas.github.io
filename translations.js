@@ -302,7 +302,7 @@ const portfolioDataTranslations = {
             {
                 title: "First Ascent Spain Hackathon Winner",
                 year: "2026",
-                description: "One of the selected top 20 tech students from Spain and winning the event's hackathon.",
+                description: "One of the selected top 20 tech students from Spain and winner of the event's hackathon.",
                 icon: "assets/icons/awards/bending-spoons.svg",
                 link: "https://spain.firstascent.io/"
             },
