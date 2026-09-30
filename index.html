@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Geometric AI Intern at Audi AG. TopoSIGMA, my visual mapping paper, has been submitted to Robotics and Autonomous Systems.">
+    <meta name="description" content="AI engineer working on geometry, computer vision and robotics. Explore my projects, research and experience.">
     <title>Manuel Rodríguez Villegas - AI Engineer</title>
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -12,20 +12,15 @@
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Manuel Rodríguez Villegas - AI Engineer">
-    <meta property="og:description" content="Geometric AI Intern at Audi AG. TopoSIGMA has been submitted to Robotics and Autonomous Systems.">
+    <meta property="og:description" content="AI engineer working on geometry, computer vision and robotics. Explore my projects, research and experience.">
     <meta property="og:url" content="https://manuel-rodriguezvillegas.github.io/">
     <meta property="og:image" content="https://manuel-rodriguezvillegas.github.io/assets/pictures/profile.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Manuel Rodríguez Villegas - AI Engineer">
-    <meta name="twitter:description" content="Geometric AI Intern at Audi AG. TopoSIGMA has been submitted to Robotics and Autonomous Systems.">
+    <meta name="twitter:description" content="AI engineer working on geometry, computer vision and robotics. Explore my projects, research and experience.">
     <meta name="twitter:image" content="https://manuel-rodriguezvillegas.github.io/assets/pictures/profile.jpg">
 
-    <!-- Language alternates. The switcher keeps ?lang= in sync so either
-         version can be linked and indexed on its own. -->
     <link rel="canonical" href="https://manuel-rodriguezvillegas.github.io/">
-    <link rel="alternate" hreflang="en" href="https://manuel-rodriguezvillegas.github.io/?lang=en">
-    <link rel="alternate" hreflang="es" href="https://manuel-rodriguezvillegas.github.io/?lang=es">
-    <link rel="alternate" hreflang="x-default" href="https://manuel-rodriguezvillegas.github.io/">
 
     <script type="application/ld+json">
     {
@@ -69,18 +64,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=d219524139">
-    <script>
-        // Set theme before first paint to avoid a light-mode flash
-        (function () {
-            var saved;
-            try { saved = localStorage.getItem('preferredTheme'); } catch (_) {}
-            var theme = (saved === 'dark' || saved === 'light')
-                ? saved
-                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.dataset.theme = theme;
-        })();
-    </script>
+    <link rel="stylesheet" href="styles.css?v=20260930-polished">
+    <script src="dist/theme.js?v=20260930-typescript"></script>
 </head>
 <body>
     <a class="skip-link" href="#projects">Skip to projects</a>
@@ -88,25 +73,15 @@
     <nav id="navbar">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#journey" data-i18n="nav.journey">Journey</a></li>
-                <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-                <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-                <li><a href="#education" data-i18n="nav.education">Education</a></li>
-                <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
             </ul>
-            <div class="language-switcher">
-                <button class="theme-toggle" aria-label="Toggle dark mode">
-                    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                </button>
-                <button class="lang-btn active" data-lang="en" aria-label="Switch to English">
-                    <img src="assets/icons/flags/uk.png" alt="UK flag" class="flag">
-                    <span class="lang-code">EN</span>
-                </button>
-                <span class="lang-divider">/</span>
-                <button class="lang-btn" data-lang="es" aria-label="Cambiar a Español">
-                    <img src="assets/icons/flags/spain.png" alt="Spain flag" class="flag">
-                    <span class="lang-code">ES</span>
+            <div class="nav-controls">
+                <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode">
+                    <span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span>
                 </button>
             </div>
         </div>
@@ -122,7 +97,6 @@
             <p class="hero-personal">Outside of work, I enjoy reading, fitness, and spending as much time outdoors as I can.</p>
             
             <div class="cta-buttons">
-                <a href="mailto:manuel.rodriguezvillegas09@gmail.com" class="btn btn-primary">Get in Touch</a>
                 <a href="assets/CV/CV.pdf" class="btn btn-secondary btn-cv" target="_blank" rel="noopener">View CV</a>
                 <a href="#projects" class="btn btn-secondary">View Projects</a>
             </div>
@@ -175,7 +149,7 @@
 
             <div class="timeline-scroll">
                 <div class="timeline" id="timeline-container">
-                    <!-- Timeline dynamically rendered from translations.js -->
+                    <!-- Timeline dynamically rendered from src/content.ts -->
                 </div>
             </div>
         </div>
@@ -184,8 +158,8 @@
     <!-- Projects Section -->
     <section id="projects" class="portfolio-section" aria-labelledby="projects-heading">
         <h2 class="section-title" id="projects-heading">Selected projects</h2>
-        <div class="projects-grid" id="projects-container">
-            <!-- Project cards will be dynamically loaded from translations.js -->
+        <div class="work-gallery" id="projects-container">
+            <!-- Project entries are rendered from src/content.ts. -->
         </div>
     </section>
 
@@ -193,7 +167,7 @@
     <section id="experience" class="portfolio-section" aria-labelledby="experience-heading">
         <h2 class="section-title" id="experience-heading">Experience</h2>
         <div class="experience-grid" id="experience-container">
-            <!-- Experience cards will be dynamically loaded from translations.js -->
+            <!-- Experience cards will be dynamically loaded from src/content.ts -->
         </div>
     </section>
 
@@ -201,7 +175,7 @@
     <section id="education" class="portfolio-section" aria-labelledby="education-heading">
         <h2 class="section-title" id="education-heading">Education</h2>
         <div class="education-grid" id="education-container">
-            <!-- Education cards will be dynamically loaded from translations.js -->
+            <!-- Education cards will be dynamically loaded from src/content.ts -->
         </div>
     </section>
 
@@ -209,7 +183,7 @@
     <section id="skills" class="portfolio-section" aria-labelledby="skills-heading">
         <h2 class="section-title" id="skills-heading">Skills & Technologies</h2>
         <div class="skills-grid" id="skills-container">
-            <!-- Skills will be dynamically loaded from translations.js -->
+            <!-- Skills will be dynamically loaded from src/content.ts -->
         </div>
     </section>
 
@@ -217,7 +191,7 @@
     <section id="awards" class="portfolio-section" aria-labelledby="awards-heading">
         <h2 class="section-title" id="awards-heading">Honors & Awards</h2>
         <div class="awards-grid" id="awards-container">
-            <!-- Awards will be dynamically loaded from translations.js -->
+            <!-- Awards will be dynamically loaded from src/content.ts -->
         </div>
     </section>
 
@@ -226,10 +200,6 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-intro">
-                <h2 data-i18n="footer.heading">Let’s talk.</h2>
-                <p data-i18n="footer.invitation">About a project, an idea, or a shared interest in AI.</p>
-            </div>
             <div class="footer-links">
                 <a href="https://www.linkedin.com/in/mrodriguezvillegas" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="https://github.com/manuel-rodriguezvillegas" target="_blank" rel="noopener">GitHub</a>
@@ -239,7 +209,6 @@
         </div>
     </footer>
 
-    <script src="translations.js?v=20260913"></script>
-    <script src="script.js?v=20260913"></script>
+    <script type="module" src="dist/main.js?v=20260930-polished"></script>
 </body>
 </html>

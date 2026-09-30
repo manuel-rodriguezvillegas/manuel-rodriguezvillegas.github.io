@@ -1,29 +1,34 @@
 # Manuel Rodríguez – Personal Portfolio
 
-Welcome to my personal portfolio website. Here I showcase my background, projects and skills.
+A personal portfolio covering AI research, projects, experience, education and skills.
+Built with HTML, CSS and strict TypeScript, without a runtime framework.
 
-## About Me
+## Development
 
-I am a Master’s student in Advanced Artificial Intelligence, committed to optimization, efficiency and well-used AI. I build projects to sharpen these values and demonstrate my technical and analytical abilities.
+Requires Node.js 24 or newer and Python 3 for the local preview server.
 
-## Portfolio
+```sh
+npm ci
+npm run build
+npm run serve
+```
 
-The site includes:  
-- Education and experiences.
-- A selection of my projects.  
-- Description of my skills and tools.  
-- Contact information to get in touch.
+Open http://127.0.0.1:8765. In another terminal, run `npm run watch` while editing.
+The website uses ES modules, so preview it through a server rather than opening
+`index.html` as a local file.
 
-## Technologies Used
+- `src/content.ts`: portfolio entries and interface labels.
+- `src/types.ts`: typed content models.
+- `src/main.ts`: rendering, navigation, timeline and interactions.
+- `src/theme.ts`: applies the theme before the first paint.
+- `styles.css` and `index.html`: presentation and static content.
 
-- HTML, CSS, JavaScript  
+Run `npm run check` to check types without generating files. Run `npm run build`
+after editing TypeScript and include the generated `dist/` files with the source
+changes. Keeping the compiled files in the repository allows ordinary static
+hosting, including GitHub Pages, without a deployment build service. CI checks
+types and verifies that the generated files match their sources.
 
-## Usage
+## Website
 
-Simply open `index.html` in a modern browser to view the site. You can also check `https://manuel-rodriguezvillegas.github.io` to access the website.
-If you wish to reuse or adapt the code, feel free to clone the repository and modify as needed.
-
-## Contact
-
-You can reach me via my GitHub profile or any contact info I provided on the site.  
-
+[manuel-rodriguezvillegas.github.io](https://manuel-rodriguezvillegas.github.io)
