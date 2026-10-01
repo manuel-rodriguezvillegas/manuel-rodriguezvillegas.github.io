@@ -27,7 +27,7 @@ export const portfolioData = {
             "company": "Audi AG",
             "location": "Ingolstadt, Germany",
             "date": "Jul – Nov 2026",
-            "description": "I work on two complementary areas at Audi: classifying 3D structures with deep learning and applying AI to requirements engineering. For the latter, I combine API integrations, bi-encoder models and fine-tuning to support the analysis and retrieval of engineering requirements.",
+            "description": "At Audi, I work on classifying 3D structures with deep learning and applying AI to requirements engineering, combining API integrations, bi-encoder models and fine-tuning to analyse and retrieve engineering requirements. I’m also developing several skills for an internal AI coworker, including one that queries a database with over 100,000 entries, focusing on high performance, low latency and minimal token usage.",
             "link": "https://www.audi.com/en.html",
             "logo": "assets/icons/experience/audi.png"
         },

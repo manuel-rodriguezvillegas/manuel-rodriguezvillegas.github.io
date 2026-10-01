@@ -525,18 +525,48 @@ function setupJourneyLinking(): void {
 // ===================================
 function setupNavbarScroll(): void {
     const navbar = getElement('#navbar');
-    let scrolled = false;
+    let previousY = window.scrollY;
+    let direction = 0;
+    let distance = 0;
+    let ticking = false;
 
-    const onScroll = () => {
-        const isScrolled = window.scrollY > 0;
-        if (isScrolled !== scrolled) {
-            scrolled = isScrolled;
-            navbar.classList.toggle('is-scrolled', scrolled);
+    const update = (): void => {
+        // Clamp elastic overscroll so bouncing at either edge cannot flip direction.
+        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const y = Math.max(0, Math.min(window.scrollY, maxY));
+        const delta = y - previousY;
+        const nextDirection = Math.sign(delta);
+        navbar.classList.toggle('is-scrolled', y > 0);
+
+        if (nextDirection !== 0) {
+            distance = nextDirection === direction ? distance + Math.abs(delta) : Math.abs(delta);
+            direction = nextDirection;
         }
+
+        if (y <= navbar.offsetHeight || navbar.querySelector(':focus-visible')) {
+            navbar.classList.remove('is-hidden');
+            distance = 0;
+        } else if (distance >= (direction > 0 ? 12 : 8)) {
+            navbar.classList.toggle('is-hidden', direction > 0);
+            distance = 0;
+        }
+        previousY = y;
+        ticking = false;
     };
 
+    const onScroll = (): void => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+    };
+
+    // Tabbing into the off-screen navigation brings it back into view.
+    navbar.addEventListener('focusin', () => {
+        navbar.classList.remove('is-hidden');
+        distance = 0;
+    });
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    update();
 }
 
 // ===================================

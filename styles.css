@@ -74,7 +74,12 @@ nav {
     background: var(--nav-bg);
     z-index: 1000;
     border-bottom: 1px solid var(--bg-secondary);
-    transition: box-shadow 0.25s ease;
+    transition: transform 280ms cubic-bezier(.22, 1, .36, 1), box-shadow 0.25s ease;
+}
+
+nav.is-hidden {
+    transform: translateY(-100%);
+    pointer-events: none;
 }
 
 nav.is-scrolled {
@@ -992,7 +997,9 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
     transition: opacity 300ms ease, transform 300ms ease;
 }
 .work-card:first-child { padding-top: 0; border-top: 0; }
-.work-figure { min-width: 0; }
+.work-figure {
+    min-width: 0; display: grid; justify-items: center; align-self: center;
+}
 .work-image {
     position: relative; display: inline-flex; max-width: 100%; vertical-align: top;
     border: 0; background: transparent;
@@ -1118,7 +1125,7 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 .work-link, .work-details summary { font-size: .9375rem; }
 .work-description { font-size: .9375rem; line-height: 1.85; }
 .work-tech { font-size: .75rem; }
-.work-figure figcaption { text-align: left; margin-top: .5rem; }
+.work-figure figcaption { text-align: center; margin-top: .5rem; }
 .nav-links { font-size: .9375rem; }
 nav.is-scrolled { box-shadow: 0 2px 8px #211d1806; }
 ::selection { background: var(--accent); color: #211d18; }
