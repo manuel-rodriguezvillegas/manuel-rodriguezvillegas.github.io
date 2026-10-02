@@ -1069,10 +1069,11 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 }
 @media (max-width: 768px) {
     .hero { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
-    .hero-image { justify-content: flex-start; }
+    .hero-image { justify-content: center; }
     .profile-pic { width: 240px; }
     .hero-content h1 { max-width: 34rem; }
-    .cta-buttons { flex-direction: row; flex-wrap: wrap; }
+    .cta-buttons { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .social-links { justify-content: center; }
     .btn { text-align: left; }
     .work-title { font-size: 1.65rem; }
     .section-title { font-size: 2.3rem; }
@@ -1089,12 +1090,28 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
     .section-title { font-size: 2.1rem; }
 }
 
-/* Preserve the same clear gutter on narrow screens. */
+/* Mobile controls use the top edge so the content gets the full screen width. */
 @media (max-width: 768px) {
-    :root { --navigation-width: 96px; --navigation-left: 12px; --navigation-top: 16px; }
-    #navbar { width: calc(var(--navigation-width) - var(--navigation-left) - 12px); }
-    .nav-links { font-size: .8125rem; }
-    .hero { padding: 3rem 1rem 3rem; }
+    main, footer { margin-left: 0; }
+    html { scroll-padding-top: calc(84px + env(safe-area-inset-top)); }
+    #navbar {
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-height: 100dvh;
+        padding: calc(.5rem + env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) .5rem max(1rem, env(safe-area-inset-left));
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--rule);
+        transition: transform 240ms ease;
+    }
+    #navbar.is-hidden { transform: translateY(-100%); pointer-events: none; }
+    .menu-toggle { margin-left: auto; }
+    #page-menu { max-height: calc(100dvh - 76px - env(safe-area-inset-top)); }
+    .nav-links { font-size: .9375rem; }
+    .hero { padding: calc(84px + env(safe-area-inset-top)) 1rem 3rem; }
     .portfolio-section, .journey-inner { padding-inline: 1rem; }
 }
 @media (max-width: 480px) {

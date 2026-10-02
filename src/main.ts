@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePortfolio();
     setupSmoothScrolling();
     setupNavigationMenu();
+    setupMobileNavigationScroll();
     setupThemeToggle();
     setupJourneyLinking();
     setupTimelineResize();
@@ -470,7 +471,8 @@ function setupSmoothScrolling(): void {
         const targetElement = linkedCard || document.querySelector<HTMLElement>(targetId);
 
         if (targetElement) {
-            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 24;
+            const scrollOffset = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 24;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - scrollOffset;
             window.scrollTo({ top: targetPosition, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
             history.replaceState(null, '', targetId);
             targetElement.setAttribute('tabindex', '-1');
@@ -551,6 +553,56 @@ function setupNavigationMenu(): void {
     });
     navbar.addEventListener('focusout', (event) => {
         if (event.relatedTarget instanceof Node && !navbar.contains(event.relatedTarget)) setOpen(false);
+    });
+}
+
+// The mobile header follows scroll direction; the desktop sidebar stays fixed.
+function setupMobileNavigationScroll(): void {
+    const navbar = getElement('#navbar');
+    const button = getElement<HTMLButtonElement>('.menu-toggle');
+    const mobile = window.matchMedia('(max-width: 768px)');
+    let previousY = window.scrollY;
+    let direction = 0;
+    let distance = 0;
+    let frame = 0;
+
+    const update = (): void => {
+        frame = 0;
+        // Ignore elastic overscroll at either end of the document.
+        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const y = Math.max(0, Math.min(window.scrollY, maxY));
+        const delta = y - previousY;
+        previousY = y;
+        if (!mobile.matches) return;
+
+        const nextDirection = Math.sign(delta);
+        if (nextDirection !== 0) {
+            distance = nextDirection === direction ? distance + Math.abs(delta) : Math.abs(delta);
+            direction = nextDirection;
+        }
+
+        if (y <= navbar.offsetHeight || button.getAttribute('aria-expanded') === 'true' ||
+            navbar.querySelector(':focus-visible')) {
+            navbar.classList.remove('is-hidden');
+            distance = 0;
+        } else if (distance >= (direction > 0 ? 12 : 8)) {
+            navbar.classList.toggle('is-hidden', direction > 0);
+            distance = 0;
+        }
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!frame && mobile.matches) frame = requestAnimationFrame(update);
+    }, { passive: true });
+    mobile.addEventListener('change', () => {
+        navbar.classList.remove('is-hidden');
+        previousY = window.scrollY;
+        direction = 0;
+        distance = 0;
+    });
+    navbar.addEventListener('focusin', () => {
+        navbar.classList.remove('is-hidden');
+        distance = 0;
     });
 }
 
