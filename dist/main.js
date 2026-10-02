@@ -11,9 +11,8 @@ function getElement(selector) {
 document.addEventListener('DOMContentLoaded', () => {
     initializePortfolio();
     setupSmoothScrolling();
-    setupNavbarScroll();
+    setupNavigationMenu();
     setupThemeToggle();
-    setupReadingProgress();
     setupJourneyLinking();
     setupTimelineResize();
 });
@@ -437,8 +436,7 @@ function setupSmoothScrolling() {
         const linkedCard = findLinkedCard(anchor.closest('.journey-milestone'));
         const targetElement = linkedCard || document.querySelector(targetId);
         if (targetElement) {
-            const navHeight = getElement('#navbar').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 24;
             window.scrollTo({ top: targetPosition, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
             history.replaceState(null, '', targetId);
             targetElement.setAttribute('tabindex', '-1');
@@ -483,49 +481,42 @@ function setupJourneyLinking() {
     container.addEventListener('focusout', setHighlight(false));
 }
 // ===================================
-// Navbar Scroll Effect
+// Collapsible page navigation
 // ===================================
-function setupNavbarScroll() {
+function setupNavigationMenu() {
     const navbar = getElement('#navbar');
-    let previousY = window.scrollY;
-    let direction = 0;
-    let distance = 0;
-    let ticking = false;
-    const update = () => {
-        // Clamp elastic overscroll so bouncing at either edge cannot flip direction.
-        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-        const y = Math.max(0, Math.min(window.scrollY, maxY));
-        const delta = y - previousY;
-        const nextDirection = Math.sign(delta);
-        navbar.classList.toggle('is-scrolled', y > 0);
-        if (nextDirection !== 0) {
-            distance = nextDirection === direction ? distance + Math.abs(delta) : Math.abs(delta);
-            direction = nextDirection;
-        }
-        if (y <= navbar.offsetHeight || navbar.querySelector(':focus-visible')) {
-            navbar.classList.remove('is-hidden');
-            distance = 0;
-        }
-        else if (distance >= (direction > 0 ? 12 : 8)) {
-            navbar.classList.toggle('is-hidden', direction > 0);
-            distance = 0;
-        }
-        previousY = y;
-        ticking = false;
+    const button = getElement('.menu-toggle');
+    const menu = getElement('#page-menu');
+    const setOpen = (open) => {
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        menu.hidden = !open;
     };
-    const onScroll = () => {
-        if (ticking)
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element))
             return;
-        ticking = true;
-        requestAnimationFrame(update);
-    };
-    // Tabbing into the off-screen navigation brings it back into view.
-    navbar.addEventListener('focusin', () => {
-        navbar.classList.remove('is-hidden');
-        distance = 0;
+        if (event.target.closest('a') && !(event instanceof MouseEvent &&
+            (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey))) {
+            setOpen(false);
+        }
     });
-    window.addEventListener('scroll', onScroll, { passive: true });
-    update();
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || menu.hidden)
+            return;
+        const restoreFocus = menu.contains(document.activeElement);
+        setOpen(false);
+        if (restoreFocus)
+            button.focus();
+    });
+    document.addEventListener('click', (event) => {
+        if (event.target instanceof Node && !navbar.contains(event.target))
+            setOpen(false);
+    });
+    navbar.addEventListener('focusout', (event) => {
+        if (event.relatedTarget instanceof Node && !navbar.contains(event.relatedTarget))
+            setOpen(false);
+    });
 }
 // ===================================
 // Utility Functions
@@ -567,33 +558,4 @@ function setupScrollAnimations() {
             }
         });
     }, 600);
-}
-// ===================================
-// Reading progress bar
-// ===================================
-function setupReadingProgress() {
-    const bar = document.createElement('div');
-    bar.className = 'reading-progress';
-    document.body.appendChild(bar);
-    const update = () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const pct = height > 0 ? (scrollTop / height) * 100 : 0;
-        bar.style.transform = `scaleX(${pct / 100})`;
-    };
-    // Coalesce scroll events into one style write per frame
-    let ticking = false;
-    const requestUpdate = () => {
-        if (ticking)
-            return;
-        ticking = true;
-        requestAnimationFrame(() => {
-            update();
-            ticking = false;
-        });
-    };
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-    new ResizeObserver(requestUpdate).observe(document.body);
-    update();
 }

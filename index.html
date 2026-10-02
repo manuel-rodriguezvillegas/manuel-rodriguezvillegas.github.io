@@ -64,32 +64,35 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=20261001-navigation">
+    <link rel="stylesheet" href="styles.css?v=20261002-sidebar">
     <script src="dist/theme.js?v=20260930-typescript"></script>
 </head>
 <body>
     <a class="skip-link" href="#projects">Skip to projects</a>
     <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
+    <nav id="navbar" aria-label="Page navigation">
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode">
+            <span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span>
+        </button>
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="page-menu" aria-label="Open navigation">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div id="page-menu" hidden>
             <ul class="nav-links">
+                <li><a href="#profile">Profile</a></li>
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#awards">Awards</a></li>
             </ul>
-            <div class="nav-controls">
-                <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode">
-                    <span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span>
-                </button>
-            </div>
         </div>
     </nav>
 
     <main id="main-content">
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="profile" class="hero">
         <div class="hero-content">
             <h1>Manuel Rodríguez Villegas</h1>
             <p class="subtitle">Geometric AI Intern @ Audi AG</p>
@@ -97,7 +100,7 @@
             <p class="hero-personal">Outside of work, I enjoy reading, fitness, and spending as much time outdoors as I can.</p>
             
             <div class="cta-buttons">
-                <a href="assets/CV/main.pdf" class="btn btn-secondary btn-cv" target="_blank" rel="noopener">View CV</a>
+                <a href="assets/CV/main.pdf?v=20261002-audi" class="btn btn-secondary btn-cv" target="_blank" rel="noopener">View CV</a>
                 <a href="#projects" class="btn btn-secondary">View Projects</a>
             </div>
 
@@ -209,6 +212,6 @@
         </div>
     </footer>
 
-    <script type="module" src="dist/main.js?v=20261001-navigation"></script>
+    <script type="module" src="dist/main.js?v=20261002-sidebar"></script>
 </body>
 </html>

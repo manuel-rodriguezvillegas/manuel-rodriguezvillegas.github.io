@@ -17,7 +17,9 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
+\ifdefined\pdfglyphtounicode
+  \input{glyphtounicode}
+\fi
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -40,7 +42,9 @@
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 \titlespacing*{\section}{0pt}{10pt}{8pt}
 
-\pdfgentounicode=1
+\ifdefined\pdfgentounicode
+  \pdfgentounicode=1
+\fi
 
 % Custom commands
 \newcommand{\resumeItem}[1]{\item\small{{#1 \vspace{-2pt}}}}
@@ -106,7 +110,7 @@ AI engineering Master's student passionate about efficienct, simple solutions an
     {AUDI AG}{Ingolstadt, Germany}
     {Geometric AI Intern}{July 2026 -- Nov 2026}
     \resumeItemListStart
-    \resumeItem{Working on 3D structure classification and internal agentic systems development.}
+    \resumeItem{Developing 3D structure classifiers and AI coworker skills for fast, token-efficient access to 100,000+ records.}
   \resumeItemListEnd
 \resumeSubheading
     {Comillas Pontifical University}{Madrid, Spain}
