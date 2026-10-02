@@ -824,7 +824,7 @@ a:focus-visible, button:focus-visible {
 }
 .skip-link:focus { top: 1rem; }
 
-.hero-description { max-width: 36rem; }
+.hero-description, .hero-personal { max-width: 36rem; }
 .hero-content h1 { letter-spacing: -.045em; }
 .profile-pic { max-width: 100%; height: auto; aspect-ratio: 1; }
 .portfolio-section { padding-block: 3rem; }
@@ -939,7 +939,7 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 }
 .work-card:first-child { padding-top: 0; border-top: 0; }
 .work-figure {
-    min-width: 0; display: grid; justify-items: center; align-self: center;
+    min-width: 0; display: grid; justify-items: center; align-self: start;
 }
 .work-image {
     position: relative; display: inline-flex; max-width: 100%; vertical-align: top;
@@ -1032,8 +1032,8 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 }
 .hero-content h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.06; margin-bottom: 1.5rem; }
 .hero-content .subtitle { font-size: 1rem; color: var(--accent-dark); margin-bottom: 1.5rem; letter-spacing: .025em; }
-.hero-content .hero-description { font-family: var(--font-editorial); font-size: 1.25rem; line-height: 1.65; color: var(--text-primary); }
-.hero-content .hero-personal { font-size: .9375rem; line-height: 1.8; margin-top: .85rem; }
+.hero-content .hero-description, .hero-content .hero-personal { font-family: var(--font-editorial); font-size: 1.25rem; line-height: 1.65; color: var(--text-primary); }
+.hero-content .hero-personal { margin-top: .85rem; }
 .hero { gap: 4rem; padding-bottom: 3rem; }
 .profile-pic { border-radius: 4px; box-shadow: none; }
 .profile-pic:hover { box-shadow: none; transform: none; }
@@ -1086,7 +1086,7 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 @media (max-width: 480px) {
 
     .hero-content h1 { font-size: 2.85rem; }
-    .hero-content .hero-description { font-size: 1.125rem; }
+    .hero-content .hero-description, .hero-content .hero-personal { font-size: 1.125rem; }
     .section-title { font-size: 2.1rem; }
 }
 
