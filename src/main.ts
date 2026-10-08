@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileNavigationScroll();
     setupThemeToggle();
     setupJourneyLinking();
+    setupTimelineInteraction();
     setupTimelineResize();
 });
 
@@ -83,77 +84,87 @@ function parseYearMonth(ym: TimelineDate): { year: number; month: number } {
     return { year: Number(year), month: Number(month) };
 }
 
+function timelineName(event: TimelineEvent): string {
+    if (event.ref === 'bsc-math-ai') return 'ICAI · BEng';
+    if (event.ref === 'msc-ai') return 'ICAI · Master’s';
+    if (event.institution === 'Imperial College London') return 'Imperial';
+    if (event.institution === 'Cornell University') return 'Cornell';
+    if (event.institution === 'Azzulei Technologies') return 'Azzulei';
+    return event.institution;
+}
+
 function renderTimeline(): void {
     const container = getElement('#timeline-container');
     const labels = siteContent.journey;
-    const events = timelineData.events;
-    const monthIndex = (value: TimelineDate) => {
+    const events = [...timelineData.events].sort((a, b) => a.start.localeCompare(b.start));
+    const monthIndex = (value: TimelineDate): number => {
         const { year, month } = parseYearMonth(value);
         return year * 12 + month - 1;
     };
     const start = Math.floor(Math.min(...events.map(event => monthIndex(event.start))) / 12) * 12;
     const end = Math.ceil(Math.max(...events.map(event => monthIndex(event.end) + 1)) / 12) * 12;
-    const span = end - start;
-    const width = Math.max(1, container.clientWidth);
-    const labelWidth = Math.min(width, width < 600 ? 140 : 170);
-    const laneHeight = 88;
-    const position = (month: number) => (month - start) / span * 100;
+    const position = (month: number): number => (month - start) / (end - start) * 100;
     const years: string[] = [];
     for (let year = start / 12; year < end / 12; year++) {
-        years.push(`<span style="left:${position(year * 12)}%">${year}</span>`);
+        years.push(`<span style="--year-position:${position(year * 12)}%">${year}</span>`);
     }
-    function renderHalf(list: TimelineEvent[], side: 'above' | 'below'): string {
-        const lanes: number[] = [];
-        const placedLabels: { lane: number; left: number; right: number }[] = [];
-        const paths = [...list].sort((a,b) => a.start.localeCompare(b.start)).map(event => {
-            const left = position(monthIndex(event.start));
-            const length = (monthIndex(event.end) + 1 - monthIndex(event.start)) / span * 100;
-            const midpoint = (left + length / 2) / 100 * width;
-            const labelLeft = Math.max(0, Math.min(midpoint - labelWidth / 2, width - labelWidth));
-            const occupiedStart = Math.min(labelLeft, left / 100 * width);
-            const occupiedEnd = Math.max(labelLeft + labelWidth, (left + length) / 100 * width) + 14;
-            let lane = lanes.findIndex(end => end <= occupiedStart);
-            if (lane < 0) lane = lanes.length;
-            lanes[lane] = occupiedEnd;
-            // Keep long stems clear of labels closer to the shared baseline.
-            let corridors: [number, number][] = [[Math.max(labelLeft + 6, left / 100 * width),
-                Math.min(labelLeft + labelWidth - 6, (left + length) / 100 * width)]];
-            for (const label of placedLabels.filter(label => label.lane < lane)) {
-                corridors = corridors.flatMap(([from, to]): [number, number][] => {
-                    if (to <= label.left - 6 || from >= label.right + 6) return [[from, to]];
-                    const segments: [number, number][] = [[from, Math.min(to, label.left - 6)],
-                        [Math.max(from, label.right + 6), to]];
-                    return segments.filter(([a, b]) => b > a);
-                });
-            }
-            const connector = corridors.map(([from, to]) => Math.max(from, Math.min(midpoint, to)))
-                .sort((a, b) => Math.abs(a - midpoint) - Math.abs(b - midpoint))[0] ?? midpoint;
-            placedLabels.push({ lane, left: labelLeft, right: labelLeft + labelWidth });
-            const endLabel = event.end === 'present' ? labels.present : formatMonthYear(event.end);
-            const name = event.ref === 'bsc-math-ai'
-                ? 'ICAI · BEng'
-                : event.ref === 'msc-ai'
-                    ? 'ICAI · Master’s'
-                    : event.institution === 'Imperial College London' ? 'Imperial' : event.institution;
-            const startLabel = event.end !== 'present' && event.start.slice(0, 4) === event.end.slice(0, 4)
-                ? formatMonthYear(event.start).split(' ')[0]
-                : formatMonthYear(event.start);
-            const description = `${event.institution}, ${event.title}, ${formatMonthYear(event.start)} — ${endLabel}`;
-            return `<a class="journey-milestone compact-event compact-${event.type}" href="${event.type === 'professional' ? '#experience' : '#education'}" data-ref="${event.ref}" aria-label="${description}" title="${event.title}"
-                style="--bar-left:${left}%;--bar-width:${length}%;--label-left:${labelLeft}px;--label-width:${labelWidth}px;--connector-left:${connector}px;--label-offset:${lane * laneHeight}px;${side === 'above' ? 'bottom' : 'top'}:0px">
-                <span class="compact-label"><img src="${event.logo}" alt="" width="24" height="24" loading="lazy" decoding="async"><span><strong>${name}</strong><small>${startLabel} – ${endLabel}</small></span></span>
-                <span class="compact-connector" aria-hidden="true"></span>
-                <span class="compact-bar" aria-hidden="true"></span>
-            </a>`;
-        }).join('');
-        return `<div class="compact-half compact-${side}" style="height:${lanes.length * laneHeight}px">${paths}</div>`;
+    const milestones = events.map(event => {
+        const professional = event.type === 'professional';
+        const dates = `${formatMonthYear(event.start)} – ${formatMonthYear(event.end)}`;
+        const left = position(monthIndex(event.start));
+        const length = position(monthIndex(event.end) + 1) - left;
+        return `<li class="journey-milestone journey-${professional ? 'professional' : 'academic'}${event.type === 'exchange' ? ' journey-exchange' : ''}" data-ref="${event.ref}"
+            style="--date-position:${left}%;--duration:${length}%">
+            <span class="journey-duration" aria-hidden="true"></span>
+            <div class="journey-marker">
+            <button class="journey-node" id="journey-${event.ref}" type="button" aria-expanded="false"
+                aria-controls="journey-detail-${event.ref}" aria-label="${event.institution}, ${event.title}, ${dates}">
+                <span class="journey-logo"><img src="${event.logo}" alt="" width="36" height="36" loading="lazy" decoding="async"></span>
+                <span class="journey-node-text"><strong>${timelineName(event)}</strong></span>
+            </button>
+            <div class="journey-detail" id="journey-detail-${event.ref}" role="region" aria-labelledby="journey-${event.ref}" hidden>
+                <a href="#${professional ? 'experience' : 'education'}" class="journey-detail-link">
+                    <span class="journey-detail-brand"><img src="${event.logo}" alt="" width="30" height="30"><span>${event.institution}</span></span>
+                    <strong>${event.title}</strong><span class="journey-dates">${dates}</span>
+                    <span class="journey-detail-action">View ${professional ? 'experience' : 'education'} <span aria-hidden="true">↗</span></span>
+                </a>
+                <button type="button" class="journey-close" aria-label="Close ${timelineName(event)} details">×</button>
+            </div>
+            </div>
+        </li>`;
+    }).join('');
+    container.innerHTML = `<div class="journey-legend"><span>${labels.academic}</span><span>${labels.professional}</span></div>
+        <div class="journey-chart"><div class="journey-axis" aria-hidden="true">${years.join('')}</div>
+            <ol class="journey-events">${milestones}</ol></div>`;
+    layoutTimeline();
+}
+
+// Labels stay over their own duration bar. Where short periods are close,
+// use the space within the next bar rather than adding lanes or connectors.
+function layoutTimeline(): void {
+    const container = getElement('#timeline-container');
+    const width = container.clientWidth;
+    const mobile = window.matchMedia('(max-width: 768px)').matches;
+    const length = mobile ? getElement('.journey-chart').clientHeight : width;
+    const gap = mobile ? 76 : Math.min(84, width * .095);
+    for (const category of ['academic', 'professional']) {
+        const labelWidth = mobile ? 76 : category === 'academic' ? 110 : Math.min(76, gap - 6);
+        let previous = -gap;
+        const items = container.querySelectorAll<HTMLElement>(`.journey-${category}`);
+        items.forEach(item => {
+            const start = Number.parseFloat(item.style.getPropertyValue('--date-position')) / 100 * length;
+            const duration = Number.parseFloat(item.style.getPropertyValue('--duration')) / 100 * length;
+            const center = Math.min(start + duration, Math.max(start + duration / 2, previous + gap));
+            previous = center;
+            item.style.setProperty('--node-width', `${labelWidth}px`);
+            item.style.setProperty('--node-position', `${center / length * 100}%`);
+            const markerX = mobile ? width / 2 + (category === 'academic' ? -89 : 89) : center;
+            const detailWidth = Math.min(260, width);
+            const detailLeft = Math.max(0, Math.min(markerX - detailWidth / 2, width - detailWidth));
+            item.style.setProperty('--detail-offset', `${detailLeft - markerX + labelWidth / 2}px`);
+            item.style.setProperty('--detail-origin', `${markerX - detailLeft}px`);
+        });
     }
-    container.innerHTML = `<div class="compact-timeline">
-        ${renderHalf(events.filter(event => event.type !== 'professional'), 'above')}
-        <div class="compact-axis" aria-hidden="true">${years.join('')}</div>
-        ${renderHalf(events.filter(event => event.type === 'professional'), 'below')}
-        <div class="compact-legend"><span>${labels.academic}</span><span>${labels.professional}</span></div>
-    </div>`;
 }
 
 function setupTimelineResize(): void {
@@ -164,8 +175,57 @@ function setupTimelineResize(): void {
         if (width === container.clientWidth) return;
         width = container.clientWidth;
         cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(renderTimeline);
+        frame = requestAnimationFrame(layoutTimeline);
     }).observe(container);
+}
+
+function setupTimelineInteraction(): void {
+    const container = getElement('#timeline-container');
+    const select = (button: HTMLButtonElement | null): void => {
+        container.querySelectorAll<HTMLButtonElement>('.journey-node').forEach(node => {
+            const active = node === button;
+            node.setAttribute('aria-expanded', String(active));
+            node.closest('.journey-milestone')?.classList.toggle('is-active', active);
+            getElement(`#${node.getAttribute('aria-controls')}`).hidden = !active;
+        });
+    };
+    const close = (restoreFocus: boolean): void => {
+        const active = container.querySelector<HTMLButtonElement>('.journey-node[aria-expanded="true"]');
+        select(null);
+        if (restoreFocus) active?.focus({ preventScroll: true });
+    };
+    // The logo and its expanded card share a hover boundary, so moving onto
+    // the detail link keeps it open. Touch continues to use the click handler.
+    container.addEventListener('pointerover', event => {
+        if (event.pointerType !== 'mouse' || !(event.target instanceof Element)) return;
+        const marker = event.target.closest('.journey-marker');
+        if (!marker || (event.relatedTarget instanceof Node && marker.contains(event.relatedTarget))) return;
+        if (container.querySelector('.journey-detail:focus-within')) return;
+        select(marker.querySelector<HTMLButtonElement>('.journey-node'));
+    });
+    container.addEventListener('pointerout', event => {
+        if (event.pointerType !== 'mouse' || !(event.target instanceof Element)) return;
+        const marker = event.target.closest('.journey-milestone.is-active .journey-marker');
+        if (!marker || (event.relatedTarget instanceof Node && marker.contains(event.relatedTarget))) return;
+        if (!marker.contains(document.activeElement)) close(false);
+    });
+    container.addEventListener('click', event => {
+        if (!(event.target instanceof Element)) return;
+        const button = event.target.closest<HTMLButtonElement>('.journey-node');
+        if (button) select(button.getAttribute('aria-expanded') === 'true' ? null : button);
+        if (event.target.closest('.journey-close')) close(true);
+        if (event.target.closest('.journey-detail-link')) close(false);
+    });
+    document.addEventListener('click', event => {
+        if (event.target instanceof Element && !event.target.closest('.journey-marker')) close(false);
+    });
+    container.addEventListener('keydown', event => {
+        if (event.key === 'Escape') close(true);
+    });
+    container.addEventListener('focusout', event => {
+        const active = container.querySelector('.journey-milestone.is-active');
+        if (active && event.relatedTarget instanceof Node && !active.contains(event.relatedTarget)) close(false);
+    });
 }
 
 function formatMonthYear(ym: TimelineDate): string {
