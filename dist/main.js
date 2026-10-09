@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigationMenu();
     setupMobileNavigationScroll();
     setupThemeToggle();
-    setupJourneyLinking();
     setupTimelineInteraction();
     setupTimelineResize();
 });
@@ -526,22 +525,6 @@ function setupSmoothScrolling() {
 function findLinkedCard(timelineEvent) {
     const ref = timelineEvent?.getAttribute('data-ref');
     return ref ? document.querySelector(`[data-item-id="${ref}"]`) : null;
-}
-// Hovering (or tabbing to) a timeline milestone marks its card. Bound to the
-// container, which outlives the re-renders of its contents.
-function setupJourneyLinking() {
-    const container = getElement('#timeline-container');
-    const setHighlight = (on) => (e) => {
-        if (!(e.target instanceof Element))
-            return;
-        const card = findLinkedCard(e.target.closest('.journey-milestone'));
-        if (card)
-            card.classList.toggle('is-linked', on);
-    };
-    container.addEventListener('mouseover', setHighlight(true));
-    container.addEventListener('mouseout', setHighlight(false));
-    container.addEventListener('focusin', setHighlight(true));
-    container.addEventListener('focusout', setHighlight(false));
 }
 // ===================================
 // Collapsible page navigation

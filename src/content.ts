@@ -233,7 +233,7 @@ export const portfolioData: PortfolioData = {
             "title": "Bending Spoons Hackathon Winner",
             "year": "2026",
             "location": "Milan, Italy",
-            "description": "Selected among Spain's top 20 students for First Ascent; winner of the event's hackathon.",
+            "description": "Selected among Spain's top 20 tech students for First Ascent and winner of the event's hackathon.",
             "icon": "assets/icons/awards/bending-spoons.svg",
             "link": "https://spain.firstascent.io/"
         },

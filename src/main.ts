@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigationMenu();
     setupMobileNavigationScroll();
     setupThemeToggle();
-    setupJourneyLinking();
     setupTimelineInteraction();
     setupTimelineResize();
 });
@@ -547,23 +546,6 @@ function setupSmoothScrolling(): void {
 function findLinkedCard(timelineEvent: Element | null): HTMLElement | null {
     const ref = timelineEvent?.getAttribute('data-ref');
     return ref ? document.querySelector<HTMLElement>(`[data-item-id="${ref}"]`) : null;
-}
-
-// Hovering (or tabbing to) a timeline milestone marks its card. Bound to the
-// container, which outlives the re-renders of its contents.
-function setupJourneyLinking(): void {
-    const container = getElement('#timeline-container');
-
-    const setHighlight = (on: boolean) => (e: Event): void => {
-        if (!(e.target instanceof Element)) return;
-        const card = findLinkedCard(e.target.closest('.journey-milestone'));
-        if (card) card.classList.toggle('is-linked', on);
-    };
-
-    container.addEventListener('mouseover', setHighlight(true));
-    container.addEventListener('mouseout', setHighlight(false));
-    container.addEventListener('focusin', setHighlight(true));
-    container.addEventListener('focusout', setHighlight(false));
 }
 
 // ===================================
