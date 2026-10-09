@@ -156,7 +156,7 @@ function layoutTimeline() {
             item.style.setProperty('--node-width', `${labelWidth}px`);
             item.style.setProperty('--node-position', `${center / length * 100}%`);
             const markerX = mobile ? width / 2 + (category === 'academic' ? -89 : 89) : center;
-            const detailWidth = Math.min(260, width);
+            const detailWidth = Math.min(236, width);
             const detailLeft = Math.max(0, Math.min(markerX - detailWidth / 2, width - detailWidth));
             item.style.setProperty('--detail-offset', `${detailLeft - markerX + labelWidth / 2}px`);
             item.style.setProperty('--detail-origin', `${markerX - detailLeft}px`);
@@ -503,15 +503,19 @@ function setupSmoothScrolling() {
         }
         // A timeline milestone goes to its own card rather than the section heading,
         // falling back to the section if there's no ref.
-        const linkedCard = findLinkedCard(anchor.closest('.journey-milestone'));
+        const milestone = anchor.closest('.journey-milestone');
+        const linkedCard = findLinkedCard(milestone);
         const targetElement = linkedCard || document.querySelector(targetId);
         if (targetElement) {
             const scrollOffset = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 24;
             const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - scrollOffset;
             window.scrollTo({ top: targetPosition, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
             history.replaceState(null, '', targetId);
-            targetElement.setAttribute('tabindex', '-1');
-            targetElement.focus({ preventScroll: true });
+            // Timeline links only scroll; focusing the destination can draw a frame.
+            if (!milestone) {
+                targetElement.setAttribute('tabindex', '-1');
+                targetElement.focus({ preventScroll: true });
+            }
             if (linkedCard)
                 linkedCard.classList.add('is-visible');
         }
