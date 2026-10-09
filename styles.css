@@ -396,24 +396,9 @@ section {
     box-shadow: 0 8px 30px var(--shadow);
 }
 
-/* Marked from the journey timeline: is-linked while a bar is hovered/focused,
-   is-flash for a moment after clicking through to this card. */
-.card.is-linked,
-.card.is-flash {
+/* Marked while its journey milestone is hovered or focused. */
+.card.is-linked {
     box-shadow: 0 8px 30px var(--shadow), inset 0 0 0 2px var(--accent);
-}
-
-.card.is-flash {
-    animation: card-flash 1.8s ease-out;
-}
-
-@keyframes card-flash {
-    0%, 55% {
-        background: var(--card-bg-hover);
-    }
-    100% {
-        background: var(--card-bg);
-    }
 }
 
 .card-header {
@@ -604,11 +589,19 @@ section {
     margin-bottom: 0.5rem;
 }
 
+.award-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem 1rem;
+    color: var(--text-secondary);
+    font-size: .95rem;
+    margin-bottom: .5rem;
+}
+
 .award-year {
     color: var(--accent-dark);
     font-weight: 600;
     font-size: 0.95rem;
-    margin-bottom: 0.5rem;
 }
 
 .award-description {
@@ -687,14 +680,10 @@ footer p {
 .journey-professional .journey-detail::before { top: -5px; bottom: auto; transform: rotate(225deg); }
 .journey-detail[hidden] { display: none; }
 .journey-detail-link { display: flex; flex-direction: column; gap: .35rem; padding: .875rem 1rem; color: var(--text-primary); text-decoration: none; border-radius: inherit; }
-.journey-detail-link:hover .journey-detail-action { text-decoration: underline; text-underline-offset: 3px; }
-.journey-detail-brand { display: flex; align-items: center; gap: .625rem; padding-right: 1rem; margin-bottom: .2rem; font-size: .75rem; }
+.journey-detail-brand { display: flex; align-items: center; gap: .625rem; margin-bottom: .2rem; font-size: .75rem; }
 .journey-detail-brand img { flex-shrink: 0; object-fit: contain; }
 .journey-detail strong { font-size: .875rem; font-weight: 500; line-height: 1.35; }
 .journey-dates { color: var(--text-secondary); font-size: .75rem; font-variant-numeric: tabular-nums; }
-.journey-detail-action { margin-top: .25rem; font-size: .75rem; color: var(--text-secondary); }
-.journey-close { position: absolute; top: 2px; right: 2px; width: 32px; height: 32px; border: 0; border-radius: 6px; background: transparent; color: var(--text-secondary); font: inherit; font-size: 1.25rem; cursor: pointer; }
-.journey-close:hover { color: var(--text-primary); background: var(--band-warm); }
 .journey-marker:has(.journey-node:focus-visible) .journey-detail { outline: 2px solid var(--accent-dark); outline-offset: 3px; }
 @keyframes journey-expand { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
 @media (max-width: 768px) {
@@ -712,7 +701,6 @@ footer p {
     .journey-node strong { font-size: .75rem; }
     .journey-detail, .journey-professional .journey-detail { top: -8px; bottom: auto; transform-origin: var(--detail-origin) top; }
     .journey-detail::before { display: none; }
-    .journey-close { width: 36px; height: 36px; }
 }
 
 /* ===================================
@@ -738,11 +726,6 @@ footer p {
         transform: none;
     }
 
-    /* Bars, the connector between them, and the card flash all end up in the
-       same place without the motion — just skip straight to the final state. */
-    .card.is-flash {
-        animation: none;
-    }
 }
 
 /* ===================================
@@ -872,7 +855,7 @@ a:focus-visible, button:focus-visible {
 .card-date { font-size: .875rem; white-space: normal; }
 .card-description { line-height: 1.75; }
 .card-logo { width: 2.5rem; height: 2.5rem; }
-.card.is-linked, .card.is-flash { box-shadow: -4px 0 0 var(--accent); }
+.card.is-linked { box-shadow: -4px 0 0 var(--accent); }
 .card-honors { border-color: var(--rule); font-size: .9375rem; }
 #skills { border-top: 1px solid var(--rule); }
 .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 4rem; }

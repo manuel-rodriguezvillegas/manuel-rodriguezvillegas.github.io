@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1791386441.09336 "/Users/manue/Manuel/portfolio/assets/CV/main.tex" "main.pdf" "main" 1791386441.56592 0
-  "/Users/manue/Manuel/portfolio/assets/CV/main.tex" 1791386440.87993 6961 947b818ba149a1e748900edff3648c99 ""
+["pdflatex"] 1791555587.56304 "/Users/manue/Manuel/portfolio/assets/CV/main.tex" "main.pdf" "main" 1791555588.08453 0
+  "/Users/manue/Manuel/portfolio/assets/CV/main.tex" 1791555587.30324 7384 027a4fefa55308ee2da27f268df0fe82 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
@@ -104,9 +104,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1769432877 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1769432784 3345740 856c7cef47ecae50d42b0e22a1d79a2b ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1791386441.52152 1033 3a6f1a0f28bb205ce7ed70c8b6a04973 "pdflatex"
-  "main.out" 1791386441.52194 678 03e2a35ac0026b052569ab8a0eb524a6 "pdflatex"
-  "main.tex" 1791386440.87993 6961 947b818ba149a1e748900edff3648c99 ""
+  "main.aux" 1791555588.03983 1033 3a6f1a0f28bb205ce7ed70c8b6a04973 "pdflatex"
+  "main.out" 1791555588.04026 678 03e2a35ac0026b052569ab8a0eb524a6 "pdflatex"
+  "main.tex" 1791555587.30324 7384 027a4fefa55308ee2da27f268df0fe82 ""
   (generated)
   "main.aux"
   "main.log"

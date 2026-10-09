@@ -127,9 +127,7 @@ function renderTimeline() {
                 <a href="#${professional ? 'experience' : 'education'}" class="journey-detail-link">
                     <span class="journey-detail-brand"><img src="${event.logo}" alt="" width="30" height="30"><span>${event.institution}</span></span>
                     <strong>${event.title}</strong><span class="journey-dates">${dates}</span>
-                    <span class="journey-detail-action">View ${professional ? 'experience' : 'education'} <span aria-hidden="true">↗</span></span>
                 </a>
-                <button type="button" class="journey-close" aria-label="Close ${timelineName(event)} details">×</button>
             </div>
             </div>
         </li>`;
@@ -221,8 +219,6 @@ function setupTimelineInteraction() {
         const button = event.target.closest('.journey-node');
         if (button)
             select(button.getAttribute('aria-expanded') === 'true' ? null : button);
-        if (event.target.closest('.journey-close'))
-            close(true);
         if (event.target.closest('.journey-detail-link'))
             close(false);
     });
@@ -479,7 +475,7 @@ function createAwardCard(award) {
         ${iconHTML}
         <div class="award-content">
             <h3 class="award-title">${award.title}</h3>
-            <p class="award-year">${award.year}</p>
+            <p class="award-meta"><span class="award-year">${award.year}</span><span class="award-location">${award.location}</span></p>
             <p class="award-description">${award.description}</p>
             ${linkHTML}
         </div>
@@ -507,7 +503,7 @@ function setupSmoothScrolling() {
             return;
         }
         // A timeline milestone goes to its own card rather than the section heading,
-        // and flags it on arrival. Falls back to the section if there's no ref.
+        // falling back to the section if there's no ref.
         const linkedCard = findLinkedCard(anchor.closest('.journey-milestone'));
         const targetElement = linkedCard || document.querySelector(targetId);
         if (targetElement) {
@@ -518,7 +514,7 @@ function setupSmoothScrolling() {
             targetElement.setAttribute('tabindex', '-1');
             targetElement.focus({ preventScroll: true });
             if (linkedCard)
-                flashLinkedCard(linkedCard);
+                linkedCard.classList.add('is-visible');
         }
     });
 }
@@ -527,18 +523,9 @@ function setupSmoothScrolling() {
 // ===================================
 // Timeline events carry a "ref" matching the "id" of an experience/education
 // entry, so a bar and its card can find each other reliably.
-const LINK_FLASH_MS = 1800;
-let linkFlashTimer;
 function findLinkedCard(timelineEvent) {
     const ref = timelineEvent?.getAttribute('data-ref');
     return ref ? document.querySelector(`[data-item-id="${ref}"]`) : null;
-}
-function flashLinkedCard(card) {
-    clearTimeout(linkFlashTimer);
-    document.querySelectorAll('.is-flash').forEach(el => el.classList.remove('is-flash'));
-    // The card may still be waiting on the scroll observer
-    card.classList.add('is-visible', 'is-flash');
-    linkFlashTimer = window.setTimeout(() => card.classList.remove('is-flash'), LINK_FLASH_MS);
 }
 // Hovering (or tabbing to) a timeline milestone marks its card. Bound to the
 // container, which outlives the re-renders of its contents.

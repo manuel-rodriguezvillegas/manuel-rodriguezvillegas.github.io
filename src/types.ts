@@ -41,6 +41,7 @@ export interface Project {
 export interface Award {
     title: string;
     year: string;
+    location: string;
     description: string;
     icon: string;
     image?: string;

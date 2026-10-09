@@ -78,7 +78,7 @@ export const portfolioData = {
             "degree": "Master's Degree in Artificial Intelligence",
             "institution": "Comillas Pontifical University, ETSI ICAI",
             "location": "Madrid, Spain",
-            "date": "Sep 2025 – 2026",
+            "date": "Sep 2025 – Dec 2026",
             "description": "Class representative and member of the Academic Council. Coursework in generative models, probabilistic AI, MLOps, deep reinforcement learning, geometric deep learning and explainability. Won the 10th Smart Industry Hackathon.",
             "link": "https://www.comillas.edu/en/master-en-inteligencia-artificial-avanzada/",
             "logo": "assets/icons/education/comillas.png"
@@ -226,15 +226,17 @@ export const portfolioData = {
     },
     "awards": [
         {
-            "title": "First Ascent Spain Hackathon Winner",
+            "title": "Bending Spoons Hackathon Winner",
             "year": "2026",
-            "description": "One of the selected top 20 tech students from Spain and winner of the event's hackathon.",
+            "location": "Milan, Italy",
+            "description": "Selected among Spain's top 20 students for First Ascent; winner of the event's hackathon.",
             "icon": "assets/icons/awards/bending-spoons.svg",
             "link": "https://spain.firstascent.io/"
         },
         {
             "title": "Winner of the 10th Smart Industry Hackathon",
             "year": "2025",
+            "location": "Madrid, Spain",
             "description": "Built a virtual assistant with recommendations for train operators.",
             "icon": "assets/icons/awards/caf.png",
             "link": "https://github.com/manuel-rodriguezvillegas/hackathon_kearney"
@@ -242,6 +244,7 @@ export const portfolioData = {
         {
             "title": "Winner of UNIJES Social Tech Challenge",
             "year": "2024",
+            "location": "Bilbao, Spain",
             "description": "Developed a voice-controlled wheelchair.",
             "icon": "assets/icons/awards/trophy.png",
             "link": "https://socialtech-challenge.org"
@@ -249,6 +252,7 @@ export const portfolioData = {
         {
             "title": "Academic Excellence Scholarship",
             "year": "2021, 2023, 2024",
+            "location": "Madrid, Spain",
             "description": "Awarded to university students with outstanding academic records in the Community of Madrid.",
             "icon": "assets/icons/awards/madrid.png",
             "link": "https://www.comunidad.madrid/servicios/educacion/becas-excelencia-universitarios"
@@ -256,6 +260,7 @@ export const portfolioData = {
         {
             "title": "Baccalaureate Academic Honours",
             "year": "2021",
+            "location": "Madrid, Spain",
             "description": "Second-highest GPA in the Community of Madrid.",
             "icon": "assets/icons/awards/madrid.png",
             "link": null
@@ -288,7 +293,7 @@ export const timelineData = {
             "title": "Master's Degree in Artificial Intelligence",
             "institution": "Comillas ICAI",
             "start": "2025-09",
-            "end": "present",
+            "end": "2026-12",
             "logo": "assets/icons/education/comillas.png"
         },
         {
