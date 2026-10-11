@@ -124,7 +124,7 @@ export const portfolioData = {
         {
             "title": "Geometric GNNs for Molecular Property Prediction",
             "tech": "PyTorch Geometric · GIN · EGNN · QM9",
-            "description": "How much does 3D geometry help predict a molecule’s properties? I compared topology-only, distance-aware and equivariant graph networks on four quantum properties, testing their sensitivity to coordinate noise and exploring the link between graph curvature and over-squashing.",
+            "description": "I benchmarked five graph neural network architectures on four QM9 properties, with matched parameter budgets and three random seeds per model. EGNN reduced average normalised test MAE by 49% over the topology-only baseline. Noise augmentation preserved its clean-data accuracy while substantially improving robustness to coordinate perturbations. Curvature analysis controlling for molecule size found only weak evidence of over-squashing.",
             "link": "https://github.com/manuel-rodriguezvillegas/molecular_prediction",
             "image": "assets/projects/molecular_gnn.png",
             "imageWebp": "assets/projects/molecular_gnn.webp",
@@ -133,7 +133,7 @@ export const portfolioData = {
             "imageHeight": 1805,
             "imageAlt": "Molecular graph illustrating messages exchanged between atoms and functional groups.",
             "category": "Geometric deep learning",
-            "summary": "Comparing topology, distance and equivariance in graph networks for molecular property prediction.",
+            "summary": "Benchmarking five GNN architectures on QM9, with equivariant models nearly halving prediction error over a topology-only baseline.",
             "imageId": "molecular-gnn",
             "imageCredit": {
                 "text": "Image: TUM DAML",
