@@ -27,7 +27,7 @@ export const portfolioData: PortfolioData = {
     "experience": [
         {
             "id": "audi",
-            "title": "Geometric AI Intern",
+            "title": "AI Engineering Intern",
             "company": "Audi AG",
             "location": "Ingolstadt, Germany",
             "date": "Jul – Nov 2026",
@@ -43,7 +43,7 @@ export const portfolioData: PortfolioData = {
             "date": "Sep 2025 – Apr 2026",
             "description": "Helped design and deploy a GPU cluster now used by AI students for their deep learning coursework.",
             "link": "https://www.comillas.edu/en/",
-            "logo": "assets/icons/experience/comillas.png"
+            "logo": "assets/icons/education/comillas.png"
         },
         {
             "id": "azzulei",
@@ -272,79 +272,71 @@ export const portfolioData: PortfolioData = {
     ]
 };
 
+// Each event references an experience or education entry by "ref". Its title,
+// institution and logo come from that entry unless overridden here.
 export const timelineData: { events: TimelineEvent[] } = {
     "events": [
         {
             "type": "academic",
             "ref": "bsc-math-ai",
+            "label": "ICAI · BEng",
             "title": "BE Mathematical Engineering & AI",
             "institution": "Comillas ICAI",
             "start": "2021-09",
-            "end": "2024-12",
-            "logo": "assets/icons/education/comillas.png"
+            "end": "2024-12"
         },
         {
             "type": "exchange",
             "ref": "cornell-exchange",
+            "label": "Cornell",
             "title": "Exchange — ECE",
-            "institution": "Cornell University",
             "start": "2025-01",
-            "end": "2025-05",
-            "logo": "assets/icons/education/cornell.png"
+            "end": "2025-05"
         },
         {
             "type": "academic",
             "ref": "msc-ai",
-            "title": "Master's Degree in Artificial Intelligence",
+            "label": "ICAI · Master’s",
             "institution": "Comillas ICAI",
             "start": "2025-09",
-            "end": "2026-12",
-            "logo": "assets/icons/education/comillas.png"
+            "end": "2026-12"
         },
         {
             "type": "professional",
             "ref": "endesa",
-            "title": "Energy Data Analyst Intern",
-            "institution": "Endesa",
+            "label": "Endesa",
             "start": "2023-06",
-            "end": "2023-08",
-            "logo": "assets/icons/experience/endesa-square.png"
+            "end": "2023-08"
         },
         {
             "type": "professional",
             "ref": "imperial-urop",
+            "label": "Imperial",
             "title": "Research Assistant (UROP)",
-            "institution": "Imperial College London",
             "start": "2024-06",
-            "end": "2024-08",
-            "logo": "assets/icons/experience/imperial-square.png"
+            "end": "2024-08"
         },
         {
             "type": "professional",
             "ref": "azzulei",
-            "title": "Computer Vision Intern",
-            "institution": "Azzulei Technologies",
+            "label": "Azzulei",
             "start": "2025-06",
-            "end": "2025-08",
-            "logo": "assets/icons/experience/azzulei.png"
+            "end": "2025-08"
         },
         {
             "type": "professional",
             "ref": "comillas-ta",
-            "title": "Teaching Assistant",
+            "label": "Comillas ICAI",
             "institution": "Comillas ICAI",
             "start": "2025-09",
-            "end": "2026-04",
-            "logo": "assets/icons/experience/comillas.png"
+            "end": "2026-04"
         },
         {
             "type": "professional",
             "ref": "audi",
-            "title": "Geometric AI Intern",
-            "institution": "Audi AG",
+            "label": "Audi AG",
             "start": "2026-07",
-            "end": "2026-11",
-            "logo": "assets/icons/experience/audi.png"
+            "end": "2026-11"
         }
     ]
 };

@@ -1,5 +1,5 @@
 import { portfolioData, siteContent, timelineData } from './content.js';
-import type { Award, Education, Experience, Project, TimelineDate, TimelineEvent } from './types.js';
+import type { Award, Education, Experience, Project, ResolvedTimelineEvent, TimelineDate, TimelineEvent } from './types.js';
 
 function getElement<T extends HTMLElement = HTMLElement>(selector: string): T {
     const element = document.querySelector<T>(selector);
@@ -83,19 +83,26 @@ function parseYearMonth(ym: TimelineDate): { year: number; month: number } {
     return { year: Number(year), month: Number(month) };
 }
 
-function timelineName(event: TimelineEvent): string {
-    if (event.ref === 'bsc-math-ai') return 'ICAI · BEng';
-    if (event.ref === 'msc-ai') return 'ICAI · Master’s';
-    if (event.institution === 'Imperial College London') return 'Imperial';
-    if (event.institution === 'Cornell University') return 'Cornell';
-    if (event.institution === 'Azzulei Technologies') return 'Azzulei';
-    return event.institution;
+// Fills in title, institution and logo from the experience or education entry
+// the event references, so each detail is maintained in one place.
+function resolveTimelineEvent(event: TimelineEvent): ResolvedTimelineEvent {
+    const experience = portfolioData.experience.find(entry => entry.id === event.ref);
+    const education = portfolioData.education.find(entry => entry.id === event.ref);
+    if (experience) {
+        return { ...event, title: event.title ?? experience.title,
+            institution: event.institution ?? experience.company, logo: experience.logo };
+    }
+    if (education) {
+        return { ...event, title: event.title ?? education.degree,
+            institution: event.institution ?? education.institution, logo: education.logo };
+    }
+    throw new Error(`Timeline event references unknown entry: ${event.ref}`);
 }
 
 function renderTimeline(): void {
     const container = getElement('#timeline-container');
     const labels = siteContent.journey;
-    const events = [...timelineData.events].sort((a, b) => a.start.localeCompare(b.start));
+    const events = timelineData.events.map(resolveTimelineEvent).sort((a, b) => a.start.localeCompare(b.start));
     const monthIndex = (value: TimelineDate): number => {
         const { year, month } = parseYearMonth(value);
         return year * 12 + month - 1;
@@ -119,7 +126,7 @@ function renderTimeline(): void {
             <button class="journey-node" id="journey-${event.ref}" type="button" aria-expanded="false"
                 aria-controls="journey-detail-${event.ref}" aria-label="${event.institution}, ${event.title}, ${dates}">
                 <span class="journey-logo"><img src="${event.logo}" alt="" width="36" height="36" loading="lazy" decoding="async"></span>
-                <span class="journey-node-text"><strong>${timelineName(event)}</strong></span>
+                <span class="journey-node-text"><strong>${event.label}</strong></span>
             </button>
             <div class="journey-detail" id="journey-detail-${event.ref}" role="region" aria-labelledby="journey-${event.ref}" hidden>
                 <a href="#${professional ? 'experience' : 'education'}" class="journey-detail-link">
@@ -256,7 +263,7 @@ function createExperienceCard(exp: Experience): HTMLDivElement {
         : '';
 
     const logoHTML = exp.logo
-        ? `<img src="${exp.logo}" alt="${exp.company}" class="card-logo" loading="lazy" decoding="async">`
+        ? `<img src="${exp.logo}" alt="${exp.company}" class="card-logo" width="48" height="48" loading="lazy" decoding="async">`
         : '';
 
     card.innerHTML = `
@@ -302,7 +309,7 @@ function createEducationCard(edu: Education): HTMLDivElement {
         : '';
 
     const logoHTML = edu.logo
-        ? `<img src="${edu.logo}" alt="${edu.institution}" class="card-logo" loading="lazy" decoding="async">`
+        ? `<img src="${edu.logo}" alt="${edu.institution}" class="card-logo" width="48" height="48" loading="lazy" decoding="async">`
         : '';
 
     // Handle honors section separately if it exists
@@ -364,7 +371,7 @@ function createProjectCard(project: Project, index: number): HTMLElement {
         : '';
     card.innerHTML = `
         <figure class="work-figure">
-            <a class="work-image" href="${project.image}" target="_blank" rel="noopener" aria-label="Open image: ${project.title}">${pictureHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
+            <a class="work-image" href="${project.imageWebp ?? project.image}" target="_blank" rel="noopener" aria-label="Open image: ${project.title}">${pictureHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
             ${creditHTML ? `<figcaption>${creditHTML}</figcaption>` : ''}
         </figure>
         <div class="work-content">
@@ -486,8 +493,8 @@ function createAwardCard(award: Award): HTMLDivElement {
 
     // Use image if available, otherwise use icon as SVG
     const iconHTML = award.image
-        ? `<img src="${award.image}" alt="${award.title}" class="award-image" loading="lazy" decoding="async">`
-        : `<img src="${award.icon}" alt="${award.title}" class="award-icon-svg" loading="lazy" decoding="async">`;
+        ? `<img src="${award.image}" alt="${award.title}" class="award-image" width="48" height="48" loading="lazy" decoding="async">`
+        : `<img src="${award.icon}" alt="${award.title}" class="award-icon-svg" width="48" height="48" loading="lazy" decoding="async">`;
 
     card.innerHTML = `
         ${iconHTML}

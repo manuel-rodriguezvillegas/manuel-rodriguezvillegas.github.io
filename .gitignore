@@ -1,3 +1,11 @@
 .claude
 .DS_Store
 node_modules/
+
+# LaTeX build artifacts (main.pdf is published)
+assets/CV/*.aux
+assets/CV/*.fdb_latexmk
+assets/CV/*.fls
+assets/CV/*.log
+assets/CV/*.out
+assets/CV/*.synctex.gz

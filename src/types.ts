@@ -59,9 +59,17 @@ export interface PortfolioData {
 export interface TimelineEvent {
     type: 'academic' | 'professional' | 'exchange';
     ref: string;
-    title: string;
-    institution: string;
+    /** Short label shown on the timeline node. */
+    label: string;
+    title?: string;
+    institution?: string;
     start: YearMonth;
     end: TimelineDate;
+}
+
+/** A timeline event with its details resolved from the referenced entry. */
+export interface ResolvedTimelineEvent extends TimelineEvent {
+    title: string;
+    institution: string;
     logo: string;
 }
