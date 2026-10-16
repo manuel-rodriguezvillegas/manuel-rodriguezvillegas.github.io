@@ -212,6 +212,11 @@
         </div>
     </footer>
 
-    <script type="module" src="dist/main.js?v=20261016"></script>
+    <!-- Version every module, including imports, so a new deploy never mixes
+         a fresh main.js with a cached content.js. Bump all v= values together. -->
+    <script type="importmap">
+    { "imports": { "./dist/content.js": "./dist/content.js?v=20261016b" } }
+    </script>
+    <script type="module" src="dist/main.js?v=20261016b"></script>
 </body>
 </html>

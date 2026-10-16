@@ -29,6 +29,10 @@ changes. Keeping the compiled files in the repository allows ordinary static
 hosting, including GitHub Pages, without a deployment build service. CI checks
 types and verifies that the generated files match their sources.
 
+When publishing changes, bump the `?v=` values in `index.html` (stylesheet,
+CV link, `main.js` and the import map entry for `content.js`) so browsers do
+not combine new files with cached ones.
+
 ## Website
 
 [manuel-rodriguezvillegas.github.io](https://manuel-rodriguezvillegas.github.io)
