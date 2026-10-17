@@ -80,6 +80,7 @@ export const portfolioData = {
             "location": "Madrid, Spain",
             "date": "Sep 2025 – Dec 2026",
             "description": "Class representative and member of the Academic Council. Coursework in generative models, probabilistic AI, MLOps, deep reinforcement learning, geometric deep learning and explainability. Won the 10th Smart Industry Hackathon.",
+            "honors": "Honors in Information Geometry.",
             "link": "https://www.comillas.edu/en/master-en-inteligencia-artificial-avanzada/",
             "logo": "assets/icons/education/comillas.png"
         },
@@ -143,7 +144,7 @@ export const portfolioData = {
         {
             "title": "Resource-Efficient LLM Fine-Tuning",
             "tech": "Mistral 7B · QLoRA · PEFT · NF4 · Hugging Face",
-            "description": "Fine-tuned Mistral-7B on a single 24 GB GPU using QLoRA and NF4 quantization, training just 0.29% of its parameters. The key lesson came from debugging unexpected model behaviour: tracing it back to how the training data and end-of-sequence masks were constructed.",
+            "description": "Fine-tuned Mistral-7B on a single 12 GB GPU using QLoRA and NF4 quantization, training just 0.29% of its parameters. The key lesson came from debugging unexpected model behaviour: tracing it back to how the training data and end-of-sequence masks were constructed.",
             "image": "assets/projects/llm_finetuning.jpg",
             "imageWebp": "assets/projects/llm_finetuning.webp",
             "imageWebpSrcset": "assets/projects/llm_finetuning_720.webp 720w, assets/projects/llm_finetuning.webp 1920w",
@@ -151,7 +152,7 @@ export const portfolioData = {
             "imageHeight": 1080,
             "imageAlt": "NVIDIA Jetson computing board and module on a dark background.",
             "category": "Language models",
-            "summary": "Fine-tuning Mistral 7B on a single 24 GB GPU while training only 0.29% of its parameters.",
+            "summary": "Fine-tuning Mistral 7B on a single 12 GB GPU while training only 0.29% of its parameters.",
             "imageId": "efficient-llm-finetuning",
             "imageCredit": {
                 "text": "Image: NVIDIA",
