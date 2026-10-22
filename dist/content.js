@@ -208,6 +208,7 @@ export const portfolioData = {
             "ROS 2",
             "Git",
             "Docker",
+            "Azure",
             "n8n"
         ],
         "Mathematics": [

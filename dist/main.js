@@ -407,6 +407,7 @@ const SKILL_ICONS = {
     "ros": "ros",
     "git": "git",
     "docker": "docker",
+    "azure": "azure",
     "n8n": "n8n"
 };
 const SKILL_ICON_PATH = 'assets/icons/tech';

@@ -419,6 +419,7 @@ const SKILL_ICONS = {
     "ros":         "ros",
     "git":         "git",
     "docker":      "docker",
+    "azure":       "azure",
     "n8n":         "n8n"
 };
 
