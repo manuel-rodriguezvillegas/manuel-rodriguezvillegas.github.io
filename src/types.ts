@@ -43,6 +43,8 @@ export interface Project {
     imageWebp?: string;
     imageWebpSrcset?: string;
     imageCredit?: { text: string; url: string };
+    /** Looping MP4 shown instead of the image; the image becomes its poster. */
+    video?: string;
     metrics?: Metric[];
 }
 

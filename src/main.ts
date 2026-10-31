@@ -357,6 +357,22 @@ function renderProjects(): void {
         card.classList.add('reveal');
         container.appendChild(card);
     });
+    playVideosWhenVisible(container);
+}
+
+// Play project videos only while on screen, and never under reduced motion,
+// where the poster frame stands in for the clip.
+function playVideosWhenVisible(root: HTMLElement): void {
+    const videos = root.querySelectorAll<HTMLVideoElement>('video');
+    if (!videos.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) video.play().catch(() => {});
+            else video.pause();
+        });
+    }, { threshold: 0.25 });
+    videos.forEach(video => observer.observe(video));
 }
 
 function createProjectCard(project: Project, index: number): HTMLElement {
@@ -375,12 +391,16 @@ function createProjectCard(project: Project, index: number): HTMLElement {
     const pictureHTML = project.imageWebp
         ? `<picture><source srcset="${project.imageWebpSrcset || project.imageWebp}" sizes="(max-width: 620px) calc(100vw - 2rem), 340px" type="image/webp">${imageHTML}</picture>`
         : imageHTML;
+    // Muted, looping and inline so browsers allow autoplay; the poster covers reduced motion.
+    const mediaHTML = project.video
+        ? `<video src="${project.video}" poster="${project.imageWebp ?? project.image}" width="${project.imageWidth}" height="${project.imageHeight}" muted loop playsinline preload="metadata" aria-label="${project.imageAlt}"></video>`
+        : pictureHTML;
     const creditHTML = project.imageCredit
         ? `<a class="work-credit" href="${project.imageCredit.url}" target="_blank" rel="noopener nofollow">${project.imageCredit.text}</a>`
         : '';
     card.innerHTML = `
         <figure class="work-figure">
-            <a class="work-image" href="${project.imageWebp ?? project.image}" target="_blank" rel="noopener" aria-label="Open image: ${project.title}">${pictureHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
+            <a class="work-image" href="${project.video ?? project.imageWebp ?? project.image}" target="_blank" rel="noopener" aria-label="${project.video ? 'Open video' : 'Open image'}: ${project.title}">${mediaHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
             ${creditHTML ? `<figcaption>${creditHTML}</figcaption>` : ''}
         </figure>
         <div class="work-content">

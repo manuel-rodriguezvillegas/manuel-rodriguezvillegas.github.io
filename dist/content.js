@@ -1,7 +1,7 @@
 // English portfolio content. All project and career entries are maintained here.
 export const siteContent = {
     "journey": {
-        "subtitle": "Where I’ve studied, worked and explored new ideas.",
+        "subtitle": "What my academic and professional paths look like so far.",
         "academic": "Academic",
         "professional": "Professional",
         "exchange": "Exchange / Abroad",
@@ -27,7 +27,7 @@ export const portfolioData = {
             "company": "Audi AG",
             "location": "Ingolstadt, Germany",
             "date": "Jul – Nov 2026",
-            "description": "Most of my time at Audi goes into an internal AI coworker for requirements engineers: an agent with an Azure backend that understands a huge graph database connecting many engineering platforms, with more than 500,000 entries. It answers questions over all of it fast, reliably and with very few tokens, and it also classifies requirements and detects conflicts and duplicates between them, using API integrations, bi-encoder models and fine-tuning. I also work on classifying 3D structures with deep learning.",
+            "description": "Most of my time at Audi goes into an internal AI coworker for requirements engineers: an agent with an Azure backend that understands a huge graph database connecting many engineering platforms, with more than 500,000 entries. It answers questions over all of it fast, reliably and with very few tokens, and it also classifies requirements and detects conflicts and duplicates between them, using API integrations, bi-encoder models and fine-tuning. I also work on 3D defect detection with deep learning.",
             "link": "https://www.audi.com/en.html",
             "logo": "assets/icons/experience/audi.png",
             "metrics": [
@@ -114,12 +114,13 @@ export const portfolioData = {
             "title": "Vision-Only Autonomous Drones with Differentiable Simulation",
             "tech": "JAX · Crazyflow · Gaussian Splatting · SHAC · Flax · CNN + GRU",
             "description": "My Master’s thesis asks whether a drone can learn to fly from its camera alone by backpropagating through the simulator itself. A model of our lab’s FPV quadrotor has to cross a 4 m wide corridor and dodge two randomly placed columns using only a 128×72 RGB image and its previous action: no IMU, no position. The corridor is built from gaussian splats, so every frame is differentiable with respect to the drone’s pose, while Crazyflow simulates the physics in JAX across hundreds of parallel worlds. Training uses SHAC: the reward’s gradient flows back through the physics and through the rendered pixels into a CNN + GRU policy, and a critic trained on privileged state covers the rest of the horizon. The central question is how much the gradient through the pixels helps, and how to keep it stable. In our latest run, the policy reaches 96.7% success on 1,024 unseen corridors after 2.7 hours on a single GPU. The next goal is flying it on the real drone.",
-            "image": "assets/projects/drone_corridor.png",
+            "image": "assets/projects/drone_corridor.jpg",
             "imageWebp": "assets/projects/drone_corridor.webp",
-            "imageWebpSrcset": "assets/projects/drone_corridor.webp 446w",
-            "imageWidth": 446,
-            "imageHeight": 334,
-            "imageAlt": "Gaussian-splat corridor seen from the drone’s camera: brick walls, tiled floor, a coloured column ahead and the purple goal wall at the end.",
+            "imageWebpSrcset": "assets/projects/drone_corridor.webp 960w",
+            "imageWidth": 960,
+            "imageHeight": 540,
+            "imageAlt": "The drone’s camera view as it flies a gaussian-splat corridor, dodging a cyan and a green column on the way to the purple goal wall; an inset shows the 128×72 network input.",
+            "video": "assets/projects/drone_flight.mp4",
             "category": "Master’s thesis · Differentiable simulation",
             "summary": "Training an FPV drone to dodge obstacles from camera pixels alone, backpropagating through differentiable physics and a gaussian-splat renderer.",
             "imageId": "vision-only-drones",
