@@ -2,7 +2,7 @@
 .DS_Store
 node_modules/
 
-# LaTeX build artifacts (main.pdf is published)
+# LaTeX build artifacts (cv.pdf is published)
 assets/CV/*.aux
 assets/CV/*.fdb_latexmk
 assets/CV/*.fls
