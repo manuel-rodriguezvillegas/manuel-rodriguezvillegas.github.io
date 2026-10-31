@@ -70,8 +70,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=20261031d">
-    <script src="dist/theme.js?v=20260930-typescript"></script>
+    <link rel="stylesheet" href="styles.css?v=dev">
+    <script src="dist/theme.js?v=dev"></script>
 </head>
 <body>
     <a class="skip-link" href="#projects">Skip to projects</a>
@@ -107,7 +107,7 @@
             <p class="hero-description">Outside of work, I enjoy football, running, novels and spending as much time outdoors as I can.</p>
 
             <div class="cta-buttons">
-                <a href="assets/CV/cv.pdf?v=20261031d" class="btn btn-secondary btn-cv" target="_blank" rel="noopener">View CV</a>
+                <a href="assets/CV/cv.pdf?v=dev" class="btn btn-secondary btn-cv" target="_blank" rel="noopener">View CV</a>
                 <a href="#projects" class="btn btn-secondary">View Projects</a>
             </div>
 
@@ -219,11 +219,11 @@
         </div>
     </footer>
 
-    <!-- Version every module, including imports, so a new deploy never mixes
-         a fresh main.js with a cached content.js. Bump all v= values together. -->
+    <!-- Every ?v= is stamped with the commit on deploy, so a new deploy never
+         mixes a fresh main.js with a cached content.js. Leave them as "dev". -->
     <script type="importmap">
-    { "imports": { "./dist/content.js": "./dist/content.js?v=20261031d" } }
+    { "imports": { "./dist/content.js": "./dist/content.js?v=dev" } }
     </script>
-    <script type="module" src="dist/main.js?v=20261031d"></script>
+    <script type="module" src="dist/main.js?v=dev"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+name: Deploy portfolio
+
+# Builds the site from source on every push to main and publishes it to GitHub Pages.
+# The compiled JavaScript is never committed: dist/ only exists inside this job.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deploy halfway; queue the next one instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp index.html styles.css _site/
+          cp -R dist assets _site/
+          # Sources and attribution notes stay in the repository, not on the site
+          rm -f _site/assets/CV/*.tex
+          find _site -name SOURCES.md -delete
+
+      # Every asset URL in index.html carries ?v=...; stamping it with the commit
+      # makes browsers fetch the new files after each deploy instead of cached ones.
+      - name: Stamp cache-busting versions
+        run: |
+          version="${GITHUB_SHA::8}"
+          sed -i -E "s/\?v=[A-Za-z0-9._-]+/?v=${version}/g" _site/index.html
+          grep -o "?v=[A-Za-z0-9]*" _site/index.html | sort | uniq -c
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

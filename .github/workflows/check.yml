@@ -1,6 +1,7 @@
 name: Check portfolio
 
-on: [push, pull_request]
+# Pushes to main are checked by the deploy workflow; this covers pull requests.
+on: [pull_request]
 
 permissions:
   contents: read
@@ -17,5 +18,3 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
-      - name: Verify generated JavaScript is current
-        run: test -z "$(git status --porcelain -- dist)"

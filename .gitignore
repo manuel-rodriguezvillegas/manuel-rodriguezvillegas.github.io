@@ -2,6 +2,9 @@
 .DS_Store
 node_modules/
 
+# Compiled by `npm run build` locally and by the deploy workflow
+dist/
+
 # LaTeX build artifacts (cv.pdf is published)
 assets/CV/*.aux
 assets/CV/*.fdb_latexmk

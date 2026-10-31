@@ -23,15 +23,20 @@ The website uses ES modules, so preview it through a server rather than opening
 - `src/theme.ts`: applies the theme before the first paint.
 - `styles.css` and `index.html`: presentation and static content.
 
-Run `npm run check` to check types without generating files. Run `npm run build`
-after editing TypeScript and include the generated `dist/` files with the source
-changes. Keeping the compiled files in the repository allows ordinary static
-hosting, including GitHub Pages, without a deployment build service. CI checks
-types and verifies that the generated files match their sources.
+Run `npm run check` to check types without generating files. `dist/` holds the
+compiled JavaScript for the local preview and is not committed.
 
-When publishing changes, bump the `?v=` values in `index.html` (stylesheet,
-CV link, `main.js` and the import map entry for `content.js`) so browsers do
-not combine new files with cached ones.
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which checks types,
+compiles the TypeScript and publishes the site to GitHub Pages (Settings → Pages
+→ Source: GitHub Actions). It also stamps every `?v=` in `index.html` with the
+commit, so browsers never combine new files with cached ones; keep them as
+`?v=dev` in the repository. If the build fails, the previous version stays live.
+Pull requests run the same checks through `.github/workflows/check.yml`.
+
+The CV is compiled locally (`latexmk -pdf cv.tex` in `assets/CV/`) and `cv.pdf`
+is committed.
 
 ## Website
 
