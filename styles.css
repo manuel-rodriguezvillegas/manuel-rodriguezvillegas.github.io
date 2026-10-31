@@ -948,6 +948,7 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 }
 .work-image:hover :is(img, video) { transform: scale(1.025); }
 /* A video has no intrinsic width to shrink-wrap, so it fills the column at 16:9. */
+.work-figure:has(video) { align-self: center; }
 .work-image:has(video) { display: flex; width: 100%; overflow: hidden; border-radius: 3px; }
 .work-image video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--bg-secondary); }
 .work-image-expand {
