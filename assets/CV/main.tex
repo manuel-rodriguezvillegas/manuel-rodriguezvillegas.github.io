@@ -86,7 +86,7 @@
 
 %-----------PROFILE-----------
 \section{Profile}
-AI engineer with international research and industry experience and a strong mathematical background. My approach starts with first-principles reasoning to turn complex problems into simple, efficient solutions. I bring energy and enjoy fast-paced environments where I can take ownership and meaningful responsibility.
+AI engineer with a strong mathematical background, building systems that see, learn and act: drones that fly from camera pixels, mapping robots and AI agents that assist engineers on their day-to-day work.
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -94,9 +94,6 @@ AI engineer with international research and industry experience and a strong mat
 \resumeSubheading
     {Comillas Pontifical University, ETSI ICAI}{Madrid, Spain}
     {Master's Degree in Artificial Intelligence; GPA: 9.08/10; Class Representative}{2025 -- 2026}
-    \resumeItemListStart
-      \resumeItem{Ongoing Master's thesis: Vision-only autonomous drones with differentiable physics.}
-    \resumeItemListEnd
     \vspace{2pt}
 
   \resumeSubheading
@@ -115,10 +112,10 @@ AI engineer with international research and industry experience and a strong mat
 \resumeSubHeadingListStart
 \resumeSubheading
     {AUDI AG}{Ingolstadt, Germany}
-    {AI Engineering Intern}{July -- Nov 2026}
+    {AI Engineering Intern}{Jul -- Nov 2026}
     \resumeItemListStart
+    \resumeItem{Building an internal AI coworker on Azure for requirements engineers: it queries a graph database of 500,000+ entries fast, reliably and with minimal tokens, classifies requirements and detects conflicts and duplicates.}
     \resumeItem{Developing 3D defect classification models under limited data and strong confounding.}
-    \resumeItem{Building AI agent skills that reason over a 500,000+ record requirements knowledge graph to extract requirements, classify them, and detect conflicts.}
   \resumeItemListEnd
 \resumeSubheading
     {Comillas Pontifical University}{Madrid, Spain}
@@ -131,14 +128,14 @@ AI engineer with international research and industry experience and a strong mat
     {Azzulei Technologies}{Madrid, Spain}
     {Computer Vision Intern}{Jun -- Aug 2025}
   \resumeItemListStart
-    \resumeItem{Built a real-time multi-object tracking pipeline (YOLOv8 + Optical Flow) for automated sports camera control, achieving robust performance at 30 FPS.}
+    \resumeItem{Built a real-time player-and-ball tracking pipeline (YOLOv8, ByteTrack, optical flow) for automated sports camera control, robust to a small, fast ball and occlusions.}
   \resumeItemListEnd
 
   \resumeSubheading
     {Imperial College London}{Remote (London, UK)}
     {Research Assistant}{Jun -- Aug 2024}
   \resumeItemListStart
-    \resumeItem{Reproduced nonlinear dynamical systems using Neural ODEs and PINNs (PyTorch), validating stability and trajectory accuracy against ground-truth simulations and different initial conditions.}
+    \resumeItem{Modelled nonlinear dynamical systems (Lotka--Volterra, SIR, Lorenz) with Neural ODEs and PINNs.}
   \resumeItemListEnd
 
   \resumeSubheading
@@ -153,7 +150,13 @@ AI engineer with international research and industry experience and a strong mat
 \section{Selected Research}
 \resumeSubHeadingListStart
   \resumeProjectHeading
-    {\href{https://github.com/manuel-rodriguezvillegas/topo_sigma}{\textbf{TopoSIGMA: Spectral Information-Geometric Mapping Architecture}}}{2026}
+    {\textbf{Master's Thesis: Vision-Only Autonomous Drones Trained with Differentiable Simulation}}{2026}
+  \resumeItemListStart
+    \resumeItem{Training an FPV drone to avoid obstacles from RGB images alone with SHAC, backpropagating through differentiable JAX physics and a gaussian-splat renderer into a CNN + GRU policy.}
+    \resumeItem{Reached 96.7\% success on 1,024 evaluation corridors after 2.7 hours of training on a single GPU.}
+  \resumeItemListEnd
+  \resumeProjectHeading
+    {\href{https://github.com/manuel-rodriguezvillegas/topo_sigma}{\textbf{TopoSIGMA: Spectral Information-Geometric Mapping Architecture}}}{2025}
   \resumeItemListStart
     \resumeItem{Designed an online, training-free ROS 2 mapping system separating spectral place discovery from covariance-aware loop closure, using DINOv2 descriptors and directional node distributions.}
     \resumeItem{Manuscript in preparation for submission to Robotics and Autonomous Systems.}
@@ -166,14 +169,11 @@ AI engineer with international research and industry experience and a strong mat
 \begin{itemize}[leftmargin=0.15in, label={}]
   \small{\item{
   \textbf{Software}{: Python (advanced), PyTorch, JAX, ROS 2, Git, Docker, K8S, Azure, LangGraph, n8n} \\
-  \textbf{AI \& ML}{: Deep Learning, Generative \& Agentic AI (MCP), Geometric AI, Computer Vision, NLP, MLOps, DRL} \\
-  \textbf{Mathematics}{: Linear Algebra, Probabilistic AI, Optimization, Differential Geometry, Statistics}
+  \textbf{AI \& ML}{: Agentic AI, Computer Vision, Geometric AI, Gaussian Splatting, Differentiable Simulation, NLP, DRL} \\
+  \textbf{Mathematics}{: Linear Algebra, Probabilistic AI, Optimization, Differential Geometry, Statistics} \\
+  \textbf{Languages}{: Spanish (Native), English (Fluent), German (Beginner)}
   }}
 \end{itemize}
-
-%-----------LANGUAGES-----------
-\section{Languages}
-Spanish (Native) \ $|$ \ English (Fluent) \ $|$ \ German (Beginner)
 
 %-----------HONORS & AWARDS-----------
 \section{Honors \& Awards}
@@ -182,8 +182,8 @@ Spanish (Native) \ $|$ \ English (Fluent) \ $|$ \ German (Beginner)
     {Bending Spoons Hackathon Winner}{Milan, Italy $|$ 2026}
     {Selected among Spain's top 20 tech students for First Ascent and winner of the event's hackathon.}
 \resumeAward
-    {Hackathon Winner}{Madrid, Spain $|$ 2025}
-    {Developed the winning project in the 10th Smart Industry Hackathon, featuring Kearney and CAF.}
+    {10th Smart Industry Hackathon Winner}{Madrid, Spain $|$ 2025}
+    {Built a virtual assistant with recommendations for train operators, in a hackathon featuring Kearney and CAF.}
   \resumeAward
     {UNIJES Social Tech Challenge Winner}{Bilbao, Spain $|$ 2024}
     {Voice-controlled wheelchair project}

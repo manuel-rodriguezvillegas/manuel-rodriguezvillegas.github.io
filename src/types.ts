@@ -1,6 +1,12 @@
 export type YearMonth = `${number}-${number}`;
 export type TimelineDate = YearMonth | 'present';
 
+/** A headline figure shown under a card's text, e.g. { value: '96.7%', label: 'success' }. */
+export interface Metric {
+    value: string;
+    label: string;
+}
+
 interface CareerEntry {
     id: string;
     location: string;
@@ -13,6 +19,7 @@ interface CareerEntry {
 export interface Experience extends CareerEntry {
     title: string;
     company: string;
+    metrics?: Metric[];
 }
 
 export interface Education extends CareerEntry {
@@ -36,6 +43,7 @@ export interface Project {
     imageWebp?: string;
     imageWebpSrcset?: string;
     imageCredit?: { text: string; url: string };
+    metrics?: Metric[];
 }
 
 export interface Award {

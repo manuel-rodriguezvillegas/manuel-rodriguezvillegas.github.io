@@ -1014,7 +1014,7 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
     --font-ui: Arial, Helvetica, sans-serif;
     --page-width: 1120px;
 }
-.nav-links, .subtitle, .btn, .social-links, .compact-label, .compact-axis,
+.nav-links, .subtitle, .metric-label, .btn, .social-links, .compact-label, .compact-axis,
 .compact-legend, .card-subtitle, .card-meta, .card-location, .card-date,
 .project-link, .skill-tag, .work-category, .work-details summary, .work-link,
 .work-private, .work-tech, .work-credit, .footer-links, .copyright, .skip-link {
@@ -1114,3 +1114,10 @@ img[src$="imperial-square.png"] { border-radius: 3px; }
 @media print {
     main, footer { margin-left: 0; }
 }
+
+/* Headline figures: quiet, inline, only on entries with one worth stating */
+.metrics { display: flex; flex-wrap: wrap; gap: .35rem 1.5rem; list-style: none; padding: 0; margin: 0 0 .75rem; }
+.metrics li { display: flex; align-items: baseline; gap: .4rem; }
+.metric-value { font-family: var(--font-editorial, Georgia, serif); font-size: 1.125rem; color: var(--accent-dark); font-variant-numeric: tabular-nums; }
+.metric-label { font-size: .75rem; color: var(--text-secondary); }
+.card .metrics { margin-top: .75rem; }

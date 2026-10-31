@@ -4,7 +4,7 @@ import type { PortfolioData, TimelineEvent } from "./types.js";
 
 export const siteContent = {
     "journey": {
-        "subtitle": "Where I’ve studied, worked and explored new ideas.",
+        "subtitle": "What my academic and professional paths look like so far.",
         "academic": "Academic",
         "professional": "Professional",
         "exchange": "Exchange / Abroad",
@@ -31,9 +31,12 @@ export const portfolioData: PortfolioData = {
             "company": "Audi AG",
             "location": "Ingolstadt, Germany",
             "date": "Jul – Nov 2026",
-            "description": "At Audi, I work on classifying 3D structures with deep learning and applying AI to requirements engineering, combining API integrations, bi-encoder models and fine-tuning to analyse and retrieve engineering requirements. I’m also developing several skills for an internal AI coworker, including one that queries a database with over 100,000 entries, focusing on high performance, low latency and minimal token usage.",
+            "description": "Most of my time at Audi goes into an internal AI coworker for requirements engineers: an agent with an Azure backend that understands a huge graph database connecting many engineering platforms, with more than 500,000 entries. It answers questions over all of it fast, reliably and with very few tokens, and it also classifies requirements and detects conflicts and duplicates between them, using API integrations, bi-encoder models and fine-tuning. I also work on 3D defect detection with deep learning.",
             "link": "https://www.audi.com/en.html",
-            "logo": "assets/icons/experience/audi.png"
+            "logo": "assets/icons/experience/audi.png",
+            "metrics": [
+                { "value": "500k+", "label": "graph entries" }
+            ]
         },
         {
             "id": "comillas-ta",
@@ -112,6 +115,24 @@ export const portfolioData: PortfolioData = {
     ],
     "projects": [
         {
+            "title": "Vision-Only Autonomous Drones with Differentiable Simulation",
+            "tech": "JAX · Crazyflow · Gaussian Splatting · SHAC · Flax · CNN + GRU",
+            "description": "My Master’s thesis asks whether a drone can learn to fly from its camera alone by backpropagating through the simulator itself. A model of our lab’s FPV quadrotor has to cross a 4 m wide corridor and dodge two randomly placed columns using only a 128×72 RGB image and its previous action: no IMU, no position. The corridor is built from gaussian splats, so every frame is differentiable with respect to the drone’s pose, while Crazyflow simulates the physics in JAX across hundreds of parallel worlds. Training uses SHAC: the reward’s gradient flows back through the physics and through the rendered pixels into a CNN + GRU policy, and a critic trained on privileged state covers the rest of the horizon. The central question is how much the gradient through the pixels helps, and how to keep it stable. In our latest run, the policy reaches 96.7% success on 1,024 unseen corridors after 2.7 hours on a single GPU. The next goal is flying it on the real drone.",
+            "image": "assets/projects/drone_corridor.png",
+            "imageWebp": "assets/projects/drone_corridor.webp",
+            "imageWebpSrcset": "assets/projects/drone_corridor.webp 446w",
+            "imageWidth": 446,
+            "imageHeight": 334,
+            "imageAlt": "Gaussian-splat corridor seen from the drone’s camera: brick walls, tiled floor, a coloured column ahead and the purple goal wall at the end.",
+            "category": "Master’s thesis · Differentiable simulation",
+            "summary": "Training an FPV drone to dodge obstacles from camera pixels alone, backpropagating through differentiable physics and a gaussian-splat renderer.",
+            "imageId": "vision-only-drones",
+            "metrics": [
+                { "value": "96.7%", "label": "success on unseen corridors" },
+                { "value": "2.7 h", "label": "training on one GPU" }
+            ]
+        },
+        {
             "title": "TopoSIGMA",
             "tech": "ROS 2 · DINOv2 · Computer Vision · Robotics · Information Geometry",
             "description": "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while uncertainty-aware loop closure connects them into a compact, queryable graph. The TopoSIGMA paper is being prepared for submission.",
@@ -140,6 +161,9 @@ export const portfolioData: PortfolioData = {
             "category": "Geometric deep learning",
             "summary": "Benchmarking five GNN architectures on QM9, with equivariant models nearly halving prediction error over a topology-only baseline.",
             "imageId": "molecular-gnn",
+            "metrics": [
+                { "value": "−49%", "label": "test error vs. topology-only baseline" }
+            ],
             "imageCredit": {
                 "text": "Image: TUM DAML",
                 "url": "https://www.cs.cit.tum.de/daml/fragment-biased-gnns/"
@@ -158,6 +182,9 @@ export const portfolioData: PortfolioData = {
             "category": "Language models",
             "summary": "Fine-tuning Mistral 7B on a single 12 GB GPU while training only 0.29% of its parameters.",
             "imageId": "efficient-llm-finetuning",
+            "metrics": [
+                { "value": "0.29%", "label": "of parameters trained, on one 12 GB GPU" }
+            ],
             "imageCredit": {
                 "text": "Image: NVIDIA",
                 "url": "https://nvidianews.nvidia.com/multimedia/autonomous-machines/jetson"

@@ -244,6 +244,14 @@ function formatMonthYear(ym) {
     const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return `${monthsEn[month - 1]} ${year}`;
 }
+function metricsHTML(metrics) {
+    if (!metrics?.length)
+        return '';
+    const items = metrics
+        .map(m => `<li><span class="metric-value">${m.value}</span> <span class="metric-label">${m.label}</span></li>`)
+        .join('');
+    return `<ul class="metrics">${items}</ul>`;
+}
 // ===================================
 // Render Experience Section
 // ===================================
@@ -280,6 +288,7 @@ function createExperienceCard(exp) {
             <div class="card-meta"><span class="card-date">${exp.date}</span><span class="card-location">${exp.location}</span></div>
         </div>
         <p class="card-description">${exp.description}</p>
+        ${metricsHTML(exp.metrics)}
         ${linkHTML}
     `;
     return card;
@@ -369,6 +378,7 @@ function createProjectCard(project, index) {
             <p class="work-category"><span class="work-number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>${project.category}</p>
             <h3 class="work-title" id="${project.imageId}-title">${titleHTML}</h3>
             <p class="work-deck">${project.summary}</p>
+            ${metricsHTML(project.metrics)}
             <div class="work-actions">
                 <details class="work-details">
                     <summary>${labels.about}<span aria-hidden="true">+</span></summary>

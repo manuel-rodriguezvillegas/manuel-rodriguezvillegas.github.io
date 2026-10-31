@@ -1,5 +1,5 @@
 import { portfolioData, siteContent, timelineData } from './content.js';
-import type { Award, Education, Experience, Project, ResolvedTimelineEvent, TimelineDate, TimelineEvent } from './types.js';
+import type { Award, Education, Experience, Metric, Project, ResolvedTimelineEvent, TimelineDate, TimelineEvent } from './types.js';
 
 function getElement<T extends HTMLElement = HTMLElement>(selector: string): T {
     const element = document.querySelector<T>(selector);
@@ -238,6 +238,14 @@ function formatMonthYear(ym: TimelineDate): string {
     return `${monthsEn[month - 1]} ${year}`;
 }
 
+function metricsHTML(metrics?: Metric[]): string {
+    if (!metrics?.length) return '';
+    const items = metrics
+        .map(m => `<li><span class="metric-value">${m.value}</span> <span class="metric-label">${m.label}</span></li>`)
+        .join('');
+    return `<ul class="metrics">${items}</ul>`;
+}
+
 // ===================================
 // Render Experience Section
 // ===================================
@@ -278,6 +286,7 @@ function createExperienceCard(exp: Experience): HTMLDivElement {
             <div class="card-meta"><span class="card-date">${exp.date}</span><span class="card-location">${exp.location}</span></div>
         </div>
         <p class="card-description">${exp.description}</p>
+        ${metricsHTML(exp.metrics)}
         ${linkHTML}
     `;
 
@@ -378,6 +387,7 @@ function createProjectCard(project: Project, index: number): HTMLElement {
             <p class="work-category"><span class="work-number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>${project.category}</p>
             <h3 class="work-title" id="${project.imageId}-title">${titleHTML}</h3>
             <p class="work-deck">${project.summary}</p>
+            ${metricsHTML(project.metrics)}
             <div class="work-actions">
                 <details class="work-details">
                     <summary>${labels.about}<span aria-hidden="true">+</span></summary>
