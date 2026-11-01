@@ -28,6 +28,14 @@ export interface Education extends CareerEntry {
     honors?: string;
 }
 
+export interface ProjectVideo {
+    src: string;
+    poster: string;
+    width: number;
+    height: number;
+    label: string;
+}
+
 export interface Project {
     title: string;
     tech: string;
@@ -43,8 +51,8 @@ export interface Project {
     imageWebp?: string;
     imageWebpSrcset?: string;
     imageCredit?: { text: string; url: string };
-    /** Looping MP4 shown instead of the image; the image becomes its poster. */
-    video?: string;
+    /** Looping clips shown instead of the image, stacked and kept in sync with the first. */
+    videos?: ProjectVideo[];
     metrics?: Metric[];
 }
 

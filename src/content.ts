@@ -117,20 +117,35 @@ export const portfolioData: PortfolioData = {
         {
             "title": "Vision-Only Autonomous Drones with Differentiable Simulation",
             "tech": "JAX · Crazyflow · Gaussian Splatting · SHAC · Flax · CNN + GRU",
-            "description": "My Master’s thesis asks whether a drone can learn to fly from its camera alone by backpropagating through the simulator itself. A model of our lab’s FPV quadrotor has to cross a 4 m wide corridor and avoid two randomly placed columns using only a 128×72 RGB image and its previous action: no IMU, no position. The corridor is built from gaussian splats, so every frame is differentiable with respect to the drone’s pose, while Crazyflow simulates the physics in JAX across hundreds of parallel worlds. Training uses SHAC: the reward’s gradient flows back through the physics and through the rendered pixels into a CNN + GRU policy, and a critic trained on privileged state covers the rest of the horizon. The central question is how much the gradient through the pixels helps, and how to keep it stable. In our latest run, the policy reaches 96.7% success on 1,024 unseen corridors after 2.7 hours on a single GPU. The next goal is flying it on the real drone.",
+            "description": "My Master’s thesis asks whether a drone can learn to fly from its camera alone by backpropagating through the simulator itself. A model of our lab’s FPV quadrotor has to cross a 4 m wide corridor and avoid three randomly placed columns using only a 128×72 RGB image and its previous action: no IMU, no position. The corridor is built from gaussian splats, so every frame is differentiable with respect to the drone’s pose, while Crazyflow simulates the physics in JAX across hundreds of parallel worlds. Training uses SHAC: the reward’s gradient flows back through the physics and through the rendered pixels into a CNN + GRU policy, and a critic trained on privileged state covers the rest of the horizon. The central question is how much the gradient through the pixels helps, and how to keep it stable. In our latest run, the policy flies at up to 5.5 m/s and reaches 92.5% success on 1,024 unseen corridors after just 0.9 hours of training on a single GPU. The next goal is flying it on the real drone.",
             "image": "assets/projects/drone_corridor.jpg",
             "imageWebp": "assets/projects/drone_corridor.webp",
             "imageWebpSrcset": "assets/projects/drone_corridor.webp 960w",
             "imageWidth": 960,
             "imageHeight": 540,
-            "imageAlt": "The drone’s camera view as it flies a gaussian-splat corridor, dodging a cyan and a green column on the way to the purple goal wall; an inset shows the 128×72 network input.",
-            "video": "assets/projects/drone_flight.mp4",
+            "imageAlt": "The drone’s camera view of a gaussian-splat corridor with a yellow, a blue and a green column before the purple goal wall; an inset shows the 128×72 network input.",
+            "videos": [
+                {
+                    "src": "assets/projects/drone_flight.mp4",
+                    "poster": "assets/projects/drone_corridor.webp",
+                    "width": 960,
+                    "height": 540,
+                    "label": "The drone’s camera view as it flies the corridor, dodging a yellow, a blue and a green column on the way to the purple goal wall; an inset shows the 128×72 network input."
+                },
+                {
+                    "src": "assets/projects/drone_map.mp4",
+                    "poster": "assets/projects/drone_map.webp",
+                    "width": 1600,
+                    "height": 396,
+                    "label": "Top-down map of the same flight, drawing the drone’s path between the three columns, with its time and speed."
+                }
+            ],
             "category": "Master’s thesis · Differentiable simulation",
             "summary": "Training an FPV drone to avoid obstacles from camera pixels alone, backpropagating through differentiable physics and a gaussian-splat renderer.",
             "imageId": "vision-only-drones",
             "metrics": [
-                { "value": "96.7%", "label": "success on unseen corridors" },
-                { "value": "2.7 h", "label": "training on one GPU" }
+                { "value": "92.5%", "label": "success on unseen corridors" },
+                { "value": "0.9 h", "label": "training on one GPU" }
             ]
         },
         {

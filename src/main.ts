@@ -361,18 +361,39 @@ function renderProjects(): void {
 }
 
 // Play project videos only while on screen, and never under reduced motion,
-// where the poster frame stands in for the clip.
+// where the poster frames stand in for the clips. Videos in one card form a
+// group led by the first, which the others follow.
 function playVideosWhenVisible(root: HTMLElement): void {
-    const videos = root.querySelectorAll<HTMLVideoElement>('video');
-    if (!videos.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const leads: HTMLVideoElement[] = [];
+    root.querySelectorAll<HTMLElement>('.work-image').forEach(group => {
+        const [lead, ...followers] = group.querySelectorAll<HTMLVideoElement>('video');
+        if (!lead) return;
+        followVideo(lead, followers);
+        leads.push(lead);
+    });
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const video = entry.target as HTMLVideoElement;
-            if (entry.isIntersecting) video.play().catch(() => {});
-            else video.pause();
+            const lead = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) lead.play().catch(() => {});
+            else lead.pause();
         });
     }, { threshold: 0.25 });
-    videos.forEach(video => observer.observe(video));
+    leads.forEach(lead => observer.observe(lead));
+}
+
+// Followers mirror the lead's play and pause, and jump back to its time when
+// they drift (each loop, a slow decode), so the clips show the same instant.
+function followVideo(lead: HTMLVideoElement, followers: HTMLVideoElement[]): void {
+    if (!followers.length) return;
+    const align = (): void => followers.forEach(video => {
+        if (Math.abs(video.currentTime - lead.currentTime) > 0.1) video.currentTime = lead.currentTime;
+        if (!lead.paused && video.paused) video.play().catch(() => {});
+    });
+    lead.addEventListener('play', align);
+    lead.addEventListener('seeked', align);
+    lead.addEventListener('timeupdate', align);
+    lead.addEventListener('pause', () => followers.forEach(video => video.pause()));
 }
 
 function createProjectCard(project: Project, index: number): HTMLElement {
@@ -391,16 +412,17 @@ function createProjectCard(project: Project, index: number): HTMLElement {
     const pictureHTML = project.imageWebp
         ? `<picture><source srcset="${project.imageWebpSrcset || project.imageWebp}" sizes="(max-width: 620px) calc(100vw - 2rem), 340px" type="image/webp">${imageHTML}</picture>`
         : imageHTML;
-    // Muted, looping and inline so browsers allow autoplay; the poster covers reduced motion.
-    const mediaHTML = project.video
-        ? `<video src="${project.video}" poster="${project.imageWebp ?? project.image}" width="${project.imageWidth}" height="${project.imageHeight}" muted loop playsinline preload="metadata" aria-label="${project.imageAlt}"></video>`
+    // Muted, looping and inline so browsers allow autoplay; the posters cover reduced motion.
+    const firstVideo = project.videos?.[0];
+    const mediaHTML = project.videos?.length
+        ? project.videos.map(v => `<video src="${v.src}" poster="${v.poster}" width="${v.width}" height="${v.height}" muted loop playsinline preload="metadata" aria-label="${v.label}"></video>`).join('')
         : pictureHTML;
     const creditHTML = project.imageCredit
         ? `<a class="work-credit" href="${project.imageCredit.url}" target="_blank" rel="noopener nofollow">${project.imageCredit.text}</a>`
         : '';
     card.innerHTML = `
         <figure class="work-figure">
-            <a class="work-image" href="${project.video ?? project.imageWebp ?? project.image}" target="_blank" rel="noopener" aria-label="${project.video ? 'Open video' : 'Open image'}: ${project.title}">${mediaHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
+            <a class="work-image" href="${firstVideo?.src ?? project.imageWebp ?? project.image}" target="_blank" rel="noopener" aria-label="${firstVideo ? 'Open video' : 'Open image'}: ${project.title}">${mediaHTML}<span class="work-image-expand" aria-hidden="true">↗</span></a>
             ${creditHTML ? `<figcaption>${creditHTML}</figcaption>` : ''}
         </figure>
         <div class="work-content">
