@@ -54,7 +54,7 @@ export const portfolioData: PortfolioData = {
             "company": "Azzulei Technologies",
             "location": "Madrid, Spain",
             "date": "Jun – Aug 2025",
-            "description": "Built a real-time multi-object tracking system (YOLO) that automates camera control for live sports broadcasts, replacing manual operation. Also prototyped an automated match commentary generator with open-source LLMs and text-to-speech models.",
+            "description": "Built a real time multi-object tracking system (YOLO) that automates camera control for live football broadcasts, replacing manual operation. Also prototyped an automated match commentary generator with open source LLMs and text-to-speech models.",
             "link": "https://azzulei.com/en/",
             "logo": "assets/icons/experience/azzulei.png"
         },
@@ -64,7 +64,7 @@ export const portfolioData: PortfolioData = {
             "company": "Imperial College London",
             "location": "Remote (London, UK)",
             "date": "Jun – Aug 2024",
-            "description": "Worked with an international team of PhD researchers during the UROP programme. Built PyTorch models using Neural ODEs and physics-informed neural networks to model dynamical systems, including Lotka–Volterra, SIR and Lorenz, across different initial conditions.",
+            "description": "Worked with an international team of PhD researchers during the UROP programme. Built PyTorch models using Neural ODEs and physics informed neural networks to model dynamical systems, including Lotka–Volterra, SIR and Lorenz, across different initial conditions.",
             "link": "https://www.imperial.ac.uk/urop/",
             "logo": "assets/icons/experience/imperial-square.png"
         },
@@ -74,7 +74,7 @@ export const portfolioData: PortfolioData = {
             "company": "Endesa",
             "location": "Madrid, Spain",
             "date": "Jun – Aug 2023",
-            "description": "Built regression and MLP models estimating daily Iberian ancillary-services costs with >90% accuracy, used for energy market forecasting at one of Spain's largest utilities.",
+            "description": "Built regression and MLP models estimating daily Iberian ancillary services costs with >90% accuracy, used for energy market forecasting at one of Spain's largest utilities.",
             "link": "https://www.endesa.com/en",
             "logo": "assets/icons/experience/endesa-square.png"
         }
@@ -107,7 +107,7 @@ export const portfolioData: PortfolioData = {
             "institution": "Comillas Pontifical University, ETSI ICAI",
             "location": "Madrid, Spain",
             "date": "2021 – 2025",
-            "description": "GPA: 8.75/10. Winner of UNIJES Social Tech Challenge for AI-powered autonomous wheelchair project. Strong foundation in mathematics and artificial intelligence.",
+            "description": "GPA: 8.75/10. Winner of UNIJES Social Tech Challenge for participating in the development of an autonomous wheelchair controlled with voice commands. Strong foundation in mathematics and artificial intelligence.",
             "honors": "Honors in Probability & Statistics, Dynamic Systems, Big Data Architectures, Differential Geometry, Cybersecurity, Advanced Mathematics, and Computer Vision II.",
             "link": "https://www.comillas.edu/en/degrees/bachelors-degree-in-engineering-mathematics-and-artificial-intelligence/",
             "logo": "assets/icons/education/comillas.png"
@@ -123,7 +123,7 @@ export const portfolioData: PortfolioData = {
             "imageWebpSrcset": "assets/projects/drone_corridor.webp 960w",
             "imageWidth": 960,
             "imageHeight": 540,
-            "imageAlt": "The drone’s camera view of a gaussian-splat corridor with a yellow, a blue and a green column before the purple goal wall; an inset shows the 128×72 network input.",
+            "imageAlt": "The drone’s camera view of a gaussian splat corridor with a yellow, a blue and a green column before the purple goal wall; an inset shows the 128×72 network input.",
             "videos": [
                 {
                     "src": "assets/projects/drone_flight.mp4",
@@ -141,7 +141,7 @@ export const portfolioData: PortfolioData = {
                 }
             ],
             "category": "Master’s thesis · Differentiable simulation",
-            "summary": "Training an FPV drone to avoid obstacles from camera pixels alone, backpropagating through differentiable physics and a gaussian-splat renderer.",
+            "summary": "Training an FPV drone to avoid obstacles from camera pixels alone, backpropagating through differentiable physics and a gaussian splat renderer.",
             "imageId": "vision-only-drones",
             "metrics": [
                 { "value": "92.5%", "label": "success on unseen corridors" },
@@ -151,22 +151,22 @@ export const portfolioData: PortfolioData = {
         {
             "title": "TopoSIGMA",
             "tech": "ROS 2 · DINOv2 · Computer Vision · Robotics · Information Geometry",
-            "description": "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while uncertainty-aware loop closure connects them into a compact, queryable graph. The TopoSIGMA paper is being prepared for submission.",
+            "description": "A visual mapping system that builds a map from RGB images and wheel odometry, without additional training. DINOv2 descriptors help it discover places and recognise revisits, while loop closure, informed by caovariance, connects them into a compact, queryable graph. The TopoSIGMA paper is being prepared for submission.",
             "link": "https://github.com/manuel-rodriguezvillegas/topo_sigma",
             "image": "assets/projects/toposigma.png",
             "imageWebp": "assets/projects/toposigma.webp",
             "imageWebpSrcset": "assets/projects/toposigma_720.webp 720w, assets/projects/toposigma.webp 1569w",
             "imageWidth": 1569,
             "imageHeight": 1137,
-            "imageAlt": "Visual topological graph of an indoor route, with places grouped by room and loop-closure edges highlighted.",
+            "imageAlt": "Visual topological graph of an indoor route, with places grouped by room and loop closure edges highlighted.",
             "category": "Robotics & visual mapping",
-            "summary": "Visual mapping from RGB images and wheel odometry, with place recognition and uncertainty-aware loop closure.",
+            "summary": "Visual mapping from RGB images and wheel odometry, with place recognition and loop closure.",
             "imageId": "toposigma"
         },
         {
             "title": "Geometric GNNs for Molecular Property Prediction",
             "tech": "PyTorch Geometric · GIN · EGNN · QM9",
-            "description": "I benchmarked five graph neural network architectures on four QM9 properties, with matched parameter budgets and three random seeds per model. EGNN reduced average normalised test MAE by 49% over the topology-only baseline. Noise augmentation preserved its clean-data accuracy while substantially improving robustness to coordinate perturbations. Curvature analysis controlling for molecule size found only weak evidence of over-squashing.",
+            "description": "I benchmarked five graph neural network architectures on four QM9 properties, with matched parameter budgets and three random seeds per model. EGNN reduced average normalised test MAE by 49% over the baseline that only used topology. Noise augmentation preserved its clean data accuracy while substantially improving robustness to coordinate perturbations. Curvature analysis controlling for molecule size found only weak evidence of over-squashing.",
             "link": "https://github.com/manuel-rodriguezvillegas/molecular_prediction",
             "image": "assets/projects/molecular_gnn.png",
             "imageWebp": "assets/projects/molecular_gnn.webp",
@@ -175,7 +175,7 @@ export const portfolioData: PortfolioData = {
             "imageHeight": 1805,
             "imageAlt": "Molecular graph illustrating messages exchanged between atoms and functional groups.",
             "category": "Geometric deep learning",
-            "summary": "Benchmarking five GNN architectures on QM9, with equivariant models nearly halving prediction error over a topology-only baseline.",
+            "summary": "Benchmarking five GNN architectures on QM9, with equivariant models nearly halving prediction error over a baseline that only uses topology.",
             "imageId": "molecular-gnn",
             "metrics": [
                 { "value": "−49%", "label": "test error vs. topology-only baseline" }
@@ -188,7 +188,7 @@ export const portfolioData: PortfolioData = {
         {
             "title": "Resource-Efficient LLM Fine-Tuning",
             "tech": "Mistral 7B · QLoRA · PEFT · NF4 · Hugging Face",
-            "description": "Fine-tuned Mistral-7B on a single 12 GB GPU using QLoRA and NF4 quantization, training just 0.29% of its parameters. The key lesson came from debugging unexpected model behaviour: tracing it back to how the training data and end-of-sequence masks were constructed.",
+            "description": "Fine-tuned Mistral-7B on a single 12 GB GPU using QLoRA and NF4 quantization for instruction following, training just 0.29% of its parameters. The project involved doing extensive research on models, datasets, PEFT techniques, and alignment options",
             "image": "assets/projects/llm_finetuning.jpg",
             "imageWebp": "assets/projects/llm_finetuning.webp",
             "imageWebpSrcset": "assets/projects/llm_finetuning_720.webp 720w, assets/projects/llm_finetuning.webp 1920w",
@@ -209,7 +209,7 @@ export const portfolioData: PortfolioData = {
         {
             "title": "Multi-Object Tracking System",
             "tech": "YOLOv8 · Optical Flow · PyTorch · ONNX",
-            "description": "A real-time multi-object tracking system for automated sports-camera control, combining YOLOv8 detection with optical flow and ONNX deployment. It also includes a prototype match-commentary pipeline using open-source LLMs and text-to-speech. Developed at Azzulei Technologies.",
+            "description": "A real time multi-object tracking system for automated control of a football camera, combining YOLOv8 detection with optical flow and ONNX deployment. It also includes a prototype commentary of the match using open source LLMs and text-to-speech models. Developed at Azzulei Technologies.",
             "link": "https://github.com/manuel-rodriguezvillegas/ai_camera",
             "image": "assets/projects/azzulei.png",
             "imageWebp": "assets/projects/azzulei.webp",
@@ -294,7 +294,7 @@ export const portfolioData: PortfolioData = {
             "title": "Winner of UNIJES Social Tech Challenge",
             "year": "2024",
             "location": "Bilbao, Spain",
-            "description": "Developed a voice-controlled wheelchair.",
+            "description": "Took part in the development of an autonomous wheelchair controlled with voice commands.",
             "icon": "assets/icons/awards/trophy.png",
             "link": "https://socialtech-challenge.org"
         },
