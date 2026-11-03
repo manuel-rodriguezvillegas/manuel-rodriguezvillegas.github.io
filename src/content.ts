@@ -31,22 +31,12 @@ export const portfolioData: PortfolioData = {
             "company": "Audi AG",
             "location": "Ingolstadt, Germany",
             "date": "Jul – Nov 2026",
-            "description": "Most of my time at Audi goes into an internal AI coworker for requirements engineers: an agent with an Azure backend that understands a huge graph database connecting many engineering platforms, with more than 500,000 entries. It answers questions over all of it fast, reliably and with very few tokens, and it also classifies requirements and detects conflicts and duplicates between them, using API integrations, bi-encoder models and fine-tuning. I also work on 3D defect detection with deep learning.",
+            "description": "Most of my time at Audi goes into an internal AI coworker for requirements engineers: an agent with an Azure backend that understands a huge graph database connecting many engineering platforms, with more than 500,000 entries. It answers questions over all of it fast, reliably and with very few tokens, and it also classifies requirements and detects conflicts and duplicates between them, using API integrations, bi-encoder models and fine-tuning. I also work on 3D defect classification: deep learning models that read the geometry of car parts and classify them by defects and manufacturability. The hard part is learning from limited data with strong confounding, so that the models pick up real defects and not shortcuts in the data.",
             "link": "https://www.audi.com/en.html",
             "logo": "assets/icons/experience/audi.png",
             "metrics": [
                 { "value": "500k+", "label": "graph entries" }
             ]
-        },
-        {
-            "id": "comillas-ta",
-            "title": "Teaching Assistant",
-            "company": "Comillas Pontifical University",
-            "location": "Madrid, Spain",
-            "date": "Sep 2025 – Apr 2026",
-            "description": "Helped design and deploy a GPU cluster now used by AI students for their deep learning coursework.",
-            "link": "https://www.comillas.edu/en/",
-            "logo": "assets/icons/education/comillas.png"
         },
         {
             "id": "azzulei",
@@ -103,7 +93,7 @@ export const portfolioData: PortfolioData = {
         },
         {
             "id": "bsc-math-ai",
-            "degree": "Bachelor’s Degree in Mathematical Engineering and AI",
+            "degree": "Bachelor’s Degree in Mathematical Engineering and Artificial Intelligence",
             "institution": "Comillas Pontifical University, ETSI ICAI",
             "location": "Madrid, Spain",
             "date": "2021 – 2025",
@@ -367,14 +357,6 @@ export const timelineData: { events: TimelineEvent[] } = {
             "label": "Azzulei",
             "start": "2025-06",
             "end": "2025-08"
-        },
-        {
-            "type": "professional",
-            "ref": "comillas-ta",
-            "label": "Comillas ICAI",
-            "institution": "Comillas ICAI",
-            "start": "2025-09",
-            "end": "2026-04"
         },
         {
             "type": "professional",
